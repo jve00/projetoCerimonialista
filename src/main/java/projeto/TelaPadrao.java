@@ -22,7 +22,7 @@ public abstract class TelaPadrao extends JFrame {
 		configurarComponentes();
 
 	}
-
+// 1,2,3 testando
 	public abstract void configurarComponentes();
 
 	public ImagemDeFundo configImagemFundo(String caminho) {
