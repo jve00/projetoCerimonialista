@@ -124,5 +124,4 @@ public class TelaLogin extends TelaPadrao {
 		new TelaLogin("Login");
 		
 	}
-
 }
