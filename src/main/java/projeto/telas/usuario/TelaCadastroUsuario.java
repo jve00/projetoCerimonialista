@@ -34,16 +34,22 @@ public class TelaCadastroUsuario extends TelaPadrao{
 	private void configurarTela() {
 		int x = 15;
 		Color cor = new Color(0,0,0);
-		JLabel LbNome = FabricaJLabel.criarJLabel("NOME:",x,10,100,20,cor,12);
-		JTextField TxNome = FabricaJText.criarJTextField(x, 30, 630, 40, getForeground(), cor, 12);
-		JLabel LbEmail = FabricaJLabel.criarJLabel("EMAIL:",x,75,100,20,cor,12);
-		JTextField TxEmail = FabricaJText.criarJTextField(x, 100, 630, 40, getForeground(), cor, 12);
+		JLabel lbNome = FabricaJLabel.criarJLabel("NOME:",x,10,100,20,cor,12);
+		JTextField txNome = FabricaJText.criarJTextField(x, 30, 630, 40, getForeground(), cor, 12);
+		JLabel lbEmail = FabricaJLabel.criarJLabel("EMAIL:",x,75,100,20,cor,12);
+		JTextField txEmail = FabricaJText.criarJTextField(x, 100, 630, 40, getForeground(), cor, 12);
+		JLabel lbSenha = FabricaJLabel.criarJLabel("SENHA:", x, 145, 100, 20, cor, 12);
+		JTextField txSenha = FabricaJText.criarJTextField(x, 170, 630, 40, getForeground(), cor, 12);
+		JLabel lbConfirmacaoDeSenha = FabricaJLabel.criarJLabel("CONFIRME SUA SENHA:", x, 215, 200, 20, cor, 12);
 		
 		
-		this.add(LbNome);
-		this.add(LbEmail);
-		this.add(TxNome);
-		this.add(TxEmail);
+		this.add(lbNome);
+		this.add(lbEmail);
+		this.add(txNome);
+		this.add(txEmail);
+		this.add(lbSenha);
+		this.add(txSenha);
+		this.add(lbConfirmacaoDeSenha);
 	}
 
 	@Override

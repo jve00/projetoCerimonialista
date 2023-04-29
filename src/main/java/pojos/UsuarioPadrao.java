@@ -10,17 +10,18 @@ public abstract class UsuarioPadrao {
 	private LocalDate dataDeNascimento;
 	private Sexo sexo;
 	private String id;
+	private String senha;
 	
-	public UsuarioPadrao(String nome, String tipo, String email, LocalDate idade, String sexo) {
+	public UsuarioPadrao(String nome, String tipo, String email, LocalDate idade, String sexo, String senha) {
 	
 	this.nome = nome;
 	this.tipo = TipoDeConta.valueOf(tipo);
 	this.email = email;
 	dataDeNascimento = idade;
 	this.sexo = Sexo.valueOf(sexo);
+	this.senha = senha;
 	
 	}
-	
 	
 	public String getNome() {
 		return nome;
@@ -45,7 +46,6 @@ public abstract class UsuarioPadrao {
 		return dataDeNascimento;
 	}
 
-
 	public void setDataDeNascimento(LocalDate dataDeNascimento) {
 		this.dataDeNascimento = dataDeNascimento;
 	}
@@ -62,6 +62,15 @@ public abstract class UsuarioPadrao {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 	
 	
