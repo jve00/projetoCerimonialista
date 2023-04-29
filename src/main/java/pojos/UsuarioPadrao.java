@@ -1,13 +1,27 @@
 package pojos;
 
+import java.time.LocalDate;
+
 public abstract class UsuarioPadrao {
 
 	private String nome;
 	private TipoDeConta tipo;
 	private String email;
-	private int idade;
+	private LocalDate dataDeNascimento;
 	private Sexo sexo;
 	private String id;
+	
+	public UsuarioPadrao(String nome, String tipo, String email, LocalDate idade, String sexo) {
+	
+	this.nome = nome;
+	this.tipo = TipoDeConta.valueOf(tipo);
+	this.email = email;
+	dataDeNascimento = idade;
+	this.sexo = Sexo.valueOf(sexo);
+	
+	}
+	
+	
 	public String getNome() {
 		return nome;
 	}
@@ -26,12 +40,17 @@ public abstract class UsuarioPadrao {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getIdade() {
-		return idade;
+
+	public LocalDate getDataDeNascimento() {
+		return dataDeNascimento;
 	}
-	public void setIdade(int idade) {
-		this.idade = idade;
+
+
+	public void setDataDeNascimento(LocalDate dataDeNascimento) {
+		this.dataDeNascimento = dataDeNascimento;
 	}
+
+	
 	public Sexo getSexo() {
 		return sexo;
 	}

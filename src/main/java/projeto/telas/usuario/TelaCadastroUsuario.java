@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 
 import projeto.TelaPadrao;
 import ultilidades.fabricas.FabricaJLabel;
+import ultilidades.fabricas.FabricaJText;
 
 public class TelaCadastroUsuario extends TelaPadrao{
 
@@ -31,9 +32,18 @@ public class TelaCadastroUsuario extends TelaPadrao{
 	}
 	
 	private void configurarTela() {
-		Color corTxtField = new Color(179, 177, 177, 110);
-		JLabel txNome = FabricaJLabel.criarJLabel("Nome Completo",100, 100, 100, 100, corTxtField, 25);
+		int x = 15;
+		Color cor = new Color(0,0,0);
+		JLabel LbNome = FabricaJLabel.criarJLabel("NOME:",x,10,100,20,cor,12);
+		JTextField TxNome = FabricaJText.criarJTextField(x, 30, 630, 40, getForeground(), cor, 12);
+		JLabel LbEmail = FabricaJLabel.criarJLabel("EMAIL:",x,75,100,20,cor,12);
+		JTextField TxEmail = FabricaJText.criarJTextField(x, 100, 630, 40, getForeground(), cor, 12);
 		
+		
+		this.add(LbNome);
+		this.add(LbEmail);
+		this.add(TxNome);
+		this.add(TxEmail);
 	}
 
 	@Override
@@ -43,5 +53,79 @@ public class TelaCadastroUsuario extends TelaPadrao{
 	public static void main(String[] args) {
 		new TelaCadastroUsuario();
 	}
+
+	public JComboBox<String> getCbTipoUsuario() {
+		return cbTipoUsuario;
+	}
+
+	public void setCbTipoUsuario(JComboBox<String> cbTipoUsuario) {
+		this.cbTipoUsuario = cbTipoUsuario;
+	}
+
+	public JButton getBtCriarConta() {
+		return btCriarConta;
+	}
+
+	public void setBtCriarConta(JButton btCriarConta) {
+		this.btCriarConta = btCriarConta;
+	}
+
+	public JButton getBtCancelar() {
+		return btCancelar;
+	}
+
+	public void setBtCancelar(JButton btCancelar) {
+		this.btCancelar = btCancelar;
+	}
+
+	public JTextField getInputNome() {
+		return inputNome;
+	}
+
+	public void setInputNome(JTextField inputNome) {
+		this.inputNome = inputNome;
+	}
+
+	public JTextField getInputEmail() {
+		return inputEmail;
+	}
+
+	public void setInputEmail(JTextField inputEmail) {
+		this.inputEmail = inputEmail;
+	}
+
+	public JPasswordField getInputSenha() {
+		return inputSenha;
+	}
+
+	public void setInputSenha(JPasswordField inputSenha) {
+		this.inputSenha = inputSenha;
+	}
+
+	public JPasswordField getInputConfirmacaoSenha() {
+		return inputConfirmacaoSenha;
+	}
+
+	public void setInputConfirmacaoSenha(JPasswordField inputConfirmacaoSenha) {
+		this.inputConfirmacaoSenha = inputConfirmacaoSenha;
+	}
+
+	public JFormattedTextField getInputDataDeNascimento() {
+		return inputDataDeNascimento;
+	}
+
+	public void setInputDataDeNascimento(JFormattedTextField inputDataDeNascimento) {
+		this.inputDataDeNascimento = inputDataDeNascimento;
+	}
+
+	public JComboBox<String> getCbSexo() {
+		return cbSexo;
+	}
+
+	public void setCbSexo(JComboBox<String> cbSexo) {
+		this.cbSexo = cbSexo;
+	}
+	
+	
 	
 }
