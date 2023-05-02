@@ -16,7 +16,6 @@ public abstract class UsuarioPadrao {
 	private String senha;
 
 	public UsuarioPadrao(String nome, String tipo, String email, LocalDate idade, String sexo, String senha) {
-
 		this.nome = nome;
 		this.tipo = TipoDeConta.valueOf(tipo);
 		this.email = email;
