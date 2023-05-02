@@ -3,6 +3,7 @@ package ultilidades.fabricas;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -15,7 +16,7 @@ public abstract class FabricaJText {
 	    txt.setBounds(x, y, largura, altura);
 	    txt.setBackground(corFundo);
 	    txt.setForeground(corLetra);
-	    txt.setBorder(null);
+	    txt.setBorder(BorderFactory.createLineBorder(corLetra));
 	    txt.setFont(new Font("Arial", 1, tamanhoLetra));
 	    
 	    return txt;
@@ -28,7 +29,7 @@ public abstract class FabricaJText {
 		pass.setBounds(x, y, largura, altura);
 		pass.setBackground(corFundo);
 		pass.setForeground(corLetra);
-		pass.setBorder(null);
+		pass.setBorder(BorderFactory.createLineBorder(corLetra));
 		pass.setFont(new Font("Arial", 1, tamanhoLetra));
 	    
 		return pass;
