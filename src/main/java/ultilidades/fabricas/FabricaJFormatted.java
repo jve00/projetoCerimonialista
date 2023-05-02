@@ -21,5 +21,4 @@ public abstract class FabricaJFormatted {
       return null;
     }
   }
-
 }

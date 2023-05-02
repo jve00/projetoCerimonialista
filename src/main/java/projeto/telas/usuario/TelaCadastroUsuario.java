@@ -19,6 +19,7 @@ import ultilidades.fabricas.FabricaJText;
 
 public class TelaCadastroUsuario extends TelaPadrao {
 
+	
 	private JComboBox<String> cbTipoUsuario;
 	private JButton btCriarConta;
 	private JButton btCancelar;
@@ -37,12 +38,10 @@ public class TelaCadastroUsuario extends TelaPadrao {
 		configImagemFundo();
 		setVisible(true);
 	}
-
 	private void configImagemFundo() {
 		background = super.configImagemFundo("imgTelaUsuario.png");
 		this.add(background);
 	}
-
 	public void configurarComponentes() {
 		int x = 10;
 		Color cor = new Color(0, 0, 0);
@@ -58,12 +57,11 @@ public class TelaCadastroUsuario extends TelaPadrao {
 
 		JLabel lblDataNascimento = FabricaJLabel.criarJLabel("Data de Nascimento", 20, 315, 460, 40, Color.white, 25);
 		try {
-			txtData = FabricaJFormatted.criarJFormatted(x, 350, 460, 40, new MaskFormatter("##/##/####"), corTxtField,
+			txtData = FabricaJFormatted.criarJFormatted(x, 290, 350, 40, new MaskFormatter("##/##/####"), corTxtField,
 					cor, 12);
 		} catch (Exception e) {
 		}
-		JButton btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 170, 450, 150, 45, Color.white, Color.black,
-				28);
+		JButton btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 170, 450, 150, 45, Color.white, Color.black, 8);
 
 		this.add(btnCadastrar);
 		this.add(txtData);
@@ -76,43 +74,33 @@ public class TelaCadastroUsuario extends TelaPadrao {
 		this.add(lbConfirmacaoDeSenha);
 		this.add(txConfirmacaoDeSenha);
 	}
-
 	public static void main(String[] args) {
 		new TelaCadastroUsuario();
 	}
-
 	public JComboBox<String> getCbTipoUsuario() {
 		return cbTipoUsuario;
 	}
-
 	public void setCbTipoUsuario(JComboBox<String> cbTipoUsuario) {
 		this.cbTipoUsuario = cbTipoUsuario;
 	}
-
 	public JButton getBtCriarConta() {
 		return btCriarConta;
 	}
-
 	public void setBtCriarConta(JButton btCriarConta) {
 		this.btCriarConta = btCriarConta;
 	}
-
 	public JButton getBtCancelar() {
 		return btCancelar;
 	}
-
 	public void setBtCancelar(JButton btCancelar) {
 		this.btCancelar = btCancelar;
 	}
-
 	public JTextField getInputNome() {
 		return inputNome;
 	}
-
 	public void setInputNome(JTextField inputNome) {
 		this.inputNome = inputNome;
 	}
-
 	public JTextField getInputEmail() {
 		return inputEmail;
 	}
