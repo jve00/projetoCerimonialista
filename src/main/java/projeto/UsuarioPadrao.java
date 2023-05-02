@@ -1,10 +1,13 @@
-package projeto.modelos;
+package projeto;
 
 import java.time.LocalDate;
 
 import projeto.modelos.enuns.Sexo;
 import projeto.modelos.enuns.TipoDeConta;
 
+
+//Classe criada com o intuito de diminuir o codigo duplicado, pois os clientes, pessoas fisicas 
+// e as pessoas juridicas iram ter os mesmo atributos.
 public abstract class UsuarioPadrao {
 
 	private String nome;

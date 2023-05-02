@@ -8,13 +8,16 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
+import projeto.ImagemDeFundo;
 import projeto.TelaPadrao;
+import ultilidades.fabricas.FabricaJButton;
+import ultilidades.fabricas.FabricaJFormatted;
 import ultilidades.fabricas.FabricaJLabel;
 import ultilidades.fabricas.FabricaJText;
-import ultilidades.fabricas.FabricaJTextArea;
 
-public class TelaCadastroUsuario extends TelaPadrao{
+public class TelaCadastroUsuario extends TelaPadrao {
 
 	private JComboBox<String> cbTipoUsuario;
 	private JButton btCriarConta;
@@ -25,25 +28,45 @@ public class TelaCadastroUsuario extends TelaPadrao{
 	private JPasswordField inputConfirmacaoSenha;
 	private JFormattedTextField inputDataDeNascimento;
 	private JComboBox<String> cbSexo;
-	
+	private ImagemDeFundo background;;
+	private JFormattedTextField txtData;
+
 	public TelaCadastroUsuario() {
 		super("Tela de Cadastro");
 		configurarComponentes();
+		configImagemFundo();
 		setVisible(true);
+	}
+
+	private void configImagemFundo() {
+		background = super.configImagemFundo("imgTelaUsuario.png");
+		this.add(background);
 	}
 
 	public void configurarComponentes() {
 		int x = 10;
-		Color cor = new Color(0,0,0);
-		JLabel lbNome = FabricaJLabel.criarJLabel("NOME COMPLETO:",x,20,134,20,cor,12);
-		JTextField txNome = FabricaJText.criarJTextField(x, 40, 350, 30, getForeground(), cor, 12);
-		JLabel lbEmail = FabricaJLabel.criarJLabel("EMAIL:",x,75,134,20,cor,12);
-		JTextField txEmail = FabricaJText.criarJTextField(x, 95, 350, 30, getForeground(), cor, 12);
-		JLabel lbSenha = FabricaJLabel.criarJLabel("SENHA:", x, 130, 134, 20, cor, 12);
-		JTextField txSenha = FabricaJText.criarJPasswordField(x, 150, 350, 30, getForeground(), cor, 12);
-		JLabel lbConfirmacaoDeSenha = FabricaJLabel.criarJLabel("CONFIRME SUA SENHA:", x, 185, 170, 20, cor, 12);
-		JTextField txConfirmacaoDeSenha = FabricaJText.criarJPasswordField(x, 210, 350, 30, getForeground(), cor, 12);
-		
+		Color cor = new Color(0, 0, 0);
+		Color corTxtField = new Color(179, 177, 177, 50);
+		JLabel lbNome = FabricaJLabel.criarJLabel("NOME COMPLETO:", x, 60, 134, 20, cor, 12);
+		JTextField txNome = FabricaJText.criarJTextField(x, 80, 350, 30, corTxtField, cor, 17);
+		JLabel lbEmail = FabricaJLabel.criarJLabel("EMAIL:", x, 115, 134, 20, cor, 12);
+		JTextField txEmail = FabricaJText.criarJTextField(x, 135, 350, 30, corTxtField, cor, 17);
+		JLabel lbSenha = FabricaJLabel.criarJLabel("SENHA:", x, 165, 134, 20, cor, 12);
+		JTextField txSenha = FabricaJText.criarJPasswordField(x, 185, 350, 30, corTxtField, cor, 12);
+		JLabel lbConfirmacaoDeSenha = FabricaJLabel.criarJLabel("CONFIRME SUA SENHA:", x, 225, 170, 20, cor, 12);
+		JTextField txConfirmacaoDeSenha = FabricaJText.criarJPasswordField(x, 245, 350, 30, corTxtField, cor, 17);
+
+		JLabel lblDataNascimento = FabricaJLabel.criarJLabel("Data de Nascimento", 20, 315, 460, 40, Color.white, 25);
+		try {
+			txtData = FabricaJFormatted.criarJFormatted(x, 350, 460, 40, new MaskFormatter("##/##/####"), corTxtField,
+					cor, 12);
+		} catch (Exception e) {
+		}
+		JButton btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 170, 450, 150, 45, Color.white, Color.black,
+				28);
+
+		this.add(btnCadastrar);
+		this.add(txtData);
 		this.add(lbNome);
 		this.add(lbEmail);
 		this.add(txNome);
@@ -53,7 +76,7 @@ public class TelaCadastroUsuario extends TelaPadrao{
 		this.add(lbConfirmacaoDeSenha);
 		this.add(txConfirmacaoDeSenha);
 	}
-	
+
 	public static void main(String[] args) {
 		new TelaCadastroUsuario();
 	}

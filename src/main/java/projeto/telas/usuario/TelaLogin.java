@@ -29,10 +29,6 @@ public class TelaLogin extends TelaPadrao {
 		background = super.configImagemFundo("background.jpg");
 		add(background);
 	}
-
-	//Teste de comit
-	
-	
 	public TelaLogin(String titulo) {
 		super(titulo);
 		setVisible(true);
@@ -71,6 +67,8 @@ public class TelaLogin extends TelaPadrao {
 		
 		btnEntrar.addActionListener(new OuvinteBotaoEntrarTelaLogin(this));
 		btnEntrar.addMouseListener(ouvinteBotaoPadrao);
+		btnCadastrese.addActionListener(ouvinte);
+		btnCadastrese.addMouseListener(ouvinteBotaoPadrao);
 		
 		
 		background.add(btnResetSenha);
