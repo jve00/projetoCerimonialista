@@ -1,4 +1,4 @@
-package pojos;
+package projeto.modelos;
 
 public enum TipoDeConta {
 
