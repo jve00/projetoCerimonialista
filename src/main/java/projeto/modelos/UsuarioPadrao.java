@@ -2,6 +2,9 @@ package projeto.modelos;
 
 import java.time.LocalDate;
 
+import projeto.modelos.enuns.Sexo;
+import projeto.modelos.enuns.TipoDeConta;
+
 public abstract class UsuarioPadrao {
 
 	private String nome;
@@ -11,33 +14,38 @@ public abstract class UsuarioPadrao {
 	private Sexo sexo;
 	private String id;
 	private String senha;
-	
+
 	public UsuarioPadrao(String nome, String tipo, String email, LocalDate idade, String sexo, String senha) {
-	
-	this.nome = nome;
-	this.tipo = TipoDeConta.valueOf(tipo);
-	this.email = email;
-	dataDeNascimento = idade;
-	this.sexo = Sexo.valueOf(sexo);
-	this.senha = senha;
-	
+
+		this.nome = nome;
+		this.tipo = TipoDeConta.valueOf(tipo);
+		this.email = email;
+		dataDeNascimento = idade;
+		this.sexo = Sexo.valueOf(sexo);
+		this.senha = senha;
+
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public TipoDeConta getTipo() {
 		return tipo;
 	}
+
 	public void setTipo(TipoDeConta tipo) {
 		this.tipo = tipo;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -50,16 +58,18 @@ public abstract class UsuarioPadrao {
 		this.dataDeNascimento = dataDeNascimento;
 	}
 
-	
 	public Sexo getSexo() {
 		return sexo;
 	}
+
 	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
 	}
+
 	public String getId() {
 		return id;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -68,10 +78,8 @@ public abstract class UsuarioPadrao {
 		return senha;
 	}
 
-
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
-	
+
 }
