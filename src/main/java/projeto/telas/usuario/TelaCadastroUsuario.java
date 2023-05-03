@@ -17,52 +17,71 @@ import ultilidades.fabricas.FabricaJFormatted;
 import ultilidades.fabricas.FabricaJLabel;
 import ultilidades.fabricas.FabricaJText;
 
+//Classe da Tela de cadastro
 public class TelaCadastroUsuario extends TelaPadrao {
-
 	
-	private JComboBox<String> cbTipoUsuario;
-	private JButton btCriarConta;
-	private JButton btCancelar;
-	private JTextField inputNome;
-	private JTextField inputEmail;
-	private JPasswordField inputSenha;
-	private JPasswordField inputConfirmacaoSenha;
-	private JFormattedTextField inputDataDeNascimento;
-	private JComboBox<String> cbSexo;
+	//Atributos unicos para a Tela de cadastro
 	private ImagemDeFundo background;;
 	private JFormattedTextField txtData;
 
+	//Instanciação da tela
 	public TelaCadastroUsuario() {
 		super("Tela de Cadastro");
 		configurarComponentes();
 		configImagemFundo();
 		setVisible(true);
 	}
+	
+	//Função para adicionar uma imagem de fundo (background)
 	private void configImagemFundo() {
 		background = super.configImagemFundo("imgTelaUsuario.png");
 		this.add(background);
 	}
+	
+	//Função para configurar e adicionar os componentes a tela
 	public void configurarComponentes() {
+		//valor padrão para alinhamento dos objetos
 		int x = 10;
+		
+		//valor padrão para cor
 		Color cor = new Color(0, 0, 0);
+		
+		//valor padrão de cor
 		Color corTxtField = new Color(179, 177, 177, 50);
+		
+		//Adesivo "Nome Completo" e caixa para armazenar string
 		JLabel lbNome = FabricaJLabel.criarJLabel("NOME COMPLETO:", x, 60, 134, 20, cor, 12);
 		JTextField txNome = FabricaJText.criarJTextField(x, 80, 350, 30, corTxtField, cor, 17);
+		
+		//Adesivo "Email" e caixa para armazenar
 		JLabel lbEmail = FabricaJLabel.criarJLabel("EMAIL:", x, 115, 134, 20, cor, 12);
 		JTextField txEmail = FabricaJText.criarJTextField(x, 135, 350, 30, corTxtField, cor, 17);
+		
+		//Adesivo "Senha" e caixa para armazenar
 		JLabel lbSenha = FabricaJLabel.criarJLabel("SENHA:", x, 165, 134, 20, cor, 12);
 		JTextField txSenha = FabricaJText.criarJPasswordField(x, 185, 350, 30, corTxtField, cor, 12);
+		
+		//Adesivo "Confirmar senha" e caixa para armazenar
 		JLabel lbConfirmacaoDeSenha = FabricaJLabel.criarJLabel("CONFIRME SUA SENHA:", x, 225, 170, 20, cor, 12);
 		JTextField txConfirmacaoDeSenha = FabricaJText.criarJPasswordField(x, 245, 350, 30, corTxtField, cor, 17);
 
-		JLabel lblDataNascimento = FabricaJLabel.criarJLabel("Data de Nascimento", 20, 315, 460, 40, Color.white, 25);
+		//Adesivo "Data de nascimento" e o lugar para armazenar
+		JLabel lblDataNascimento = FabricaJLabel.criarJLabel("DATA DE NASCIMENTO:", x, 280, 170, 20, cor, 12);
+		
+		//Criação da caixa para armazenar a data em formato DD/MM/YYYY
 		try {
-			txtData = FabricaJFormatted.criarJFormatted(x, 290, 350, 40, new MaskFormatter("##/##/####"), corTxtField,
+			txtData = FabricaJFormatted.criarJFormatted(x, 305, 120, 40, new MaskFormatter("##/##/####"), corTxtField,
 					cor, 12);
 		} catch (Exception e) {
 		}
-		JButton btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 170, 450, 150, 45, Color.white, Color.black, 8);
+		
+		//Botão cadastrar
+		JButton btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 170, 390, 150, 45, Color.white, Color.black, 12);
 
+		//Botão cancelar
+		JButton btnCancelar = FabricaJButton.criarJButton("Cancelar", 370, 390, 150, 45, Color.white, Color.black, 12);
+		
+		//adicionando os elemnetos a tela
 		this.add(btnCadastrar);
 		this.add(txtData);
 		this.add(lbNome);
@@ -73,71 +92,15 @@ public class TelaCadastroUsuario extends TelaPadrao {
 		this.add(txSenha);
 		this.add(lbConfirmacaoDeSenha);
 		this.add(txConfirmacaoDeSenha);
+		this.add(lblDataNascimento);
+		this.add(btnCadastrar);
+		this.add(btnCancelar);
 	}
+	
+	//Teste de tela
+	
 	public static void main(String[] args) {
 		new TelaCadastroUsuario();
 	}
-	public JComboBox<String> getCbTipoUsuario() {
-		return cbTipoUsuario;
-	}
-	public void setCbTipoUsuario(JComboBox<String> cbTipoUsuario) {
-		this.cbTipoUsuario = cbTipoUsuario;
-	}
-	public JButton getBtCriarConta() {
-		return btCriarConta;
-	}
-	public void setBtCriarConta(JButton btCriarConta) {
-		this.btCriarConta = btCriarConta;
-	}
-	public JButton getBtCancelar() {
-		return btCancelar;
-	}
-	public void setBtCancelar(JButton btCancelar) {
-		this.btCancelar = btCancelar;
-	}
-	public JTextField getInputNome() {
-		return inputNome;
-	}
-	public void setInputNome(JTextField inputNome) {
-		this.inputNome = inputNome;
-	}
-	public JTextField getInputEmail() {
-		return inputEmail;
-	}
-
-	public void setInputEmail(JTextField inputEmail) {
-		this.inputEmail = inputEmail;
-	}
-
-	public JPasswordField getInputSenha() {
-		return inputSenha;
-	}
-
-	public void setInputSenha(JPasswordField inputSenha) {
-		this.inputSenha = inputSenha;
-	}
-
-	public JPasswordField getInputConfirmacaoSenha() {
-		return inputConfirmacaoSenha;
-	}
-
-	public void setInputConfirmacaoSenha(JPasswordField inputConfirmacaoSenha) {
-		this.inputConfirmacaoSenha = inputConfirmacaoSenha;
-	}
-
-	public JFormattedTextField getInputDataDeNascimento() {
-		return inputDataDeNascimento;
-	}
-
-	public void setInputDataDeNascimento(JFormattedTextField inputDataDeNascimento) {
-		this.inputDataDeNascimento = inputDataDeNascimento;
-	}
-
-	public JComboBox<String> getCbSexo() {
-		return cbSexo;
-	}
-
-	public void setCbSexo(JComboBox<String> cbSexo) {
-		this.cbSexo = cbSexo;
-	}
+	
 }
