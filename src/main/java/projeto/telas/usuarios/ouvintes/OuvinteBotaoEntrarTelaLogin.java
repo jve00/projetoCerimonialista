@@ -3,6 +3,7 @@ package projeto.telas.usuarios.ouvintes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import projeto.telas.usuario.TelaCadastroUsuario;
 import projeto.telas.usuario.TelaLogin;
 
 //Classe para implementar os ouvintes a tela de login
@@ -19,6 +20,9 @@ public class OuvinteBotaoEntrarTelaLogin implements ActionListener{
 	//Metodo para atribuir ouvintes 
 	public void actionPerformed(ActionEvent e) {
 		Object componente = e.getSource();
+		if(componente == tela.getBtnEntrar()) {
+			new TelaCadastroUsuario();
+		}
 		
 	}
 
