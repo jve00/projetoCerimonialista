@@ -15,24 +15,24 @@ import projeto.telas.usuarios.ouvintes.OuvinteTelaLogin;
 import ultilidades.fabricas.FabricaJButton;
 import ultilidades.fabricas.FabricaJLabel;
 import ultilidades.fabricas.FabricaJText;
+import ultilidades.fabricas.FabricasColors;
+import ultilidades.fabricas.FabricasDeVariaveis;
 
 //classe da Tela de login
 public class TelaLogin extends TelaPadrao {
 
 	// Atributos unicos da tela login
 	private JTextField txtEmail;
-	private JPasswordField txtSenha;
-	private ImagemDeFundo background;;
+	private JPasswordField txtSenha;;
 	private JButton btnResetSenha;
 	private JButton btnEntrar;
 	private JButton btnCadastrese;
 
 	// metodo para configurar uma imagem de fundo(background)
 	private void configImagemFundo() {
-		background = super.configImagemFundo("background.png");
-		add(background);
+		FabricasDeVariaveis.background = super.configImagemFundo("background.png");
+		add(FabricasDeVariaveis.background);
 	}
-
 	// Construtor da Tela de login
 	public TelaLogin(String titulo) {
 		super(titulo);
@@ -49,32 +49,29 @@ public class TelaLogin extends TelaPadrao {
 	// metodo para criar e adicionar os elementos da tela
 	private void configFormLogin() {
 
-		// cor padr�o para os elementos
-		Color corTxtField = new Color(179, 177, 177, 110);
-		Color corLabel = new Color(255, 255, 255);
-
-		// Adesivo Tipo de usuario
-		JLabel lblTipo = FabricaJLabel.criarJLabel("Tipo do usuario", 100, 20, 460, 40, corLabel, 25);
-
 		// Adesivo Email
-		JLabel lblEmail = FabricaJLabel.criarJLabel("Email", 100, 100, 460, 40, corLabel, 25);
+		JLabel lblEmail = FabricaJLabel.criarJLabel("Email", 100, 100, 460, 40, FabricasColors.corLabelBranca, 25);
 
 		// Adesivo Senha
-		JLabel lblSenha = FabricaJLabel.criarJLabel("Senha", 100, 180, 460, 40, corLabel, 25);
-
+		JLabel lblSenha = FabricaJLabel.criarJLabel("Senha", 100, 180, 460, 40, FabricasColors.corLabelBranca, 25);
+		
+		JLabel lblTitulo = FabricaJLabel.criarJLabel("Party Helper", 225, 40, 460, 40, FabricasColors.corLabelBranca, 40);
+		
 		// Campo para armazenar o email
-		txtEmail = FabricaJText.criarJTextField(100, 135, 460, 40, corTxtField, corLabel, 16);
+		txtEmail = FabricaJText.criarJTextField(100, 135, 460, 40, FabricasColors.corTxtField,
+				FabricasColors.corLabelBranca, 16);
 
 		// Campo para armazenar a senha
-		txtSenha = FabricaJText.criarJPasswordField(100, 220, 460, 40, corTxtField, corLabel, 20);
+		txtSenha = FabricaJText.criarJPasswordField(100, 220, 460, 40, FabricasColors.corTxtField,
+				FabricasColors.corLabelBranca, 20);
 
 		// Bot�o esqueceu a senha
-		btnResetSenha = FabricaJButton.criarJButton("Esqueceu a senha?", 430, 270, 120, 20, Color.gray,
-				Color.black, 12);
+		btnResetSenha = FabricaJButton.criarJButton("Esqueceu a senha?", 430, 270, 120, 20, new Color(255, 255, 255),
+				new Color(121, 107, 207), 12);
 
 		// Bot�o Entrar
-		btnEntrar = FabricaJButton.criarJButton("Entrar", 270, 320, 120, 45, Color.GRAY, Color.black,
-				30);
+		btnEntrar = FabricaJButton.criarJButton("Entrar", 270, 320, 120, 45, new Color(255, 255, 255),
+				new Color(121, 107, 207), 30);
 
 		// Ouvinte para a tela
 		OuvinteTelaLogin ouvinte = new OuvinteTelaLogin(this);
@@ -89,20 +86,20 @@ public class TelaLogin extends TelaPadrao {
 		// senha
 		btnResetSenha.addMouseListener(ouvinteBotaoPadrao);
 
-		// Adicionando um ouvinte ao bot�o entrar
+		// Adicionando um ouvinte ao botao entrar
 		btnEntrar.addActionListener(new OuvinteBotaoEntrarTelaLogin(this));
 
 		// Adicionando um ouvinte para identificar o click do mouse ao bot�o entrar
 		btnEntrar.addMouseListener(ouvinteBotaoPadrao);
 
 		// Adicionando os elementos citados acima a tela
-		background.add(btnResetSenha);
-		background.add(btnEntrar);
-		background.add(lblTipo);
-		background.add(lblEmail);
-		background.add(lblSenha);
-		background.add(txtEmail);
-		background.add(txtSenha);
+		FabricasDeVariaveis.background .add(lblTitulo);
+		FabricasDeVariaveis.background.add(btnResetSenha);
+		FabricasDeVariaveis.background.add(btnEntrar);
+		FabricasDeVariaveis.background.add(lblEmail);
+		FabricasDeVariaveis.background.add(lblSenha);
+		FabricasDeVariaveis.background.add(txtEmail);
+		FabricasDeVariaveis.background.add(txtSenha);
 	}
 
 	// gets e sets do atributos de telaLogin

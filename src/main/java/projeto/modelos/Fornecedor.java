@@ -3,6 +3,7 @@ package projeto.modelos;
 import java.time.LocalDate;
 
 import projeto.UsuarioPadrao;
+import projeto.modelos.enuns.TipoDeServico;
 
 public class Fornecedor extends UsuarioPadrao {
 

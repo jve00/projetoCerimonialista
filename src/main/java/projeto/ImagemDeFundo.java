@@ -28,5 +28,6 @@ public class ImagemDeFundo extends JPanel {
 	public void setCaminho(String caminho) {
 		this.caminho = caminho;
 	}
+	
 
 }

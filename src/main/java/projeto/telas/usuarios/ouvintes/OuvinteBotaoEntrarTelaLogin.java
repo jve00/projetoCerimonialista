@@ -21,7 +21,7 @@ public class OuvinteBotaoEntrarTelaLogin implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Object componente = e.getSource();
 		if(componente == tela.getBtnEntrar()) {
-			new TelaCadastroUsuario();
+			tela.dispose();
 		}
 		
 	}

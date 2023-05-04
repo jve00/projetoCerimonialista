@@ -2,6 +2,9 @@ package projeto;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import ultilidades.fabricas.FabricasColors;
+
 import java.awt.*;
 
 public class OuvinteBotaoFundoPreto implements MouseListener{
@@ -16,7 +19,7 @@ public class OuvinteBotaoFundoPreto implements MouseListener{
   }
 
   public void mouseExited(MouseEvent e) {
-    e.getComponent().setForeground(Color.WHITE);
+    e.getComponent().setForeground(FabricasColors.Corroxo);
 		e.getComponent().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
   }
  
