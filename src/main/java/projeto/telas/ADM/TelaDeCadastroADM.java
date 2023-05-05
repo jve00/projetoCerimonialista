@@ -1,4 +1,4 @@
-package projeto.telas.usuario;
+package projeto.telas.ADM;
 
 import java.awt.Color;
 
@@ -11,7 +11,7 @@ import javax.swing.text.MaskFormatter;
 
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
-import projeto.telas.usuarios.ouvintes.OuvinteBotaoCadastrarTelaADM;
+import projeto.telas.ADM.ouvintes.OuvinteBotaoCadastrarTelaADM;
 import ultilidades.fabricas.FabricaJButton;
 import ultilidades.fabricas.FabricaJFormatted;
 import ultilidades.fabricas.FabricaJLabel;

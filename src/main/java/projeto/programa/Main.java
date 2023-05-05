@@ -1,7 +1,7 @@
 package projeto.programa;
 
-import projeto.telas.usuario.TelaDeCadastroADM;
-import projeto.telas.usuario.TelaLogin;
+import projeto.telas.ADM.TelaDeCadastroADM;
+import projeto.telas.ADM.TelaLogin;
 import ulitilidades.persistencia.Persistencia;
 import ultilidades.reporsitorio.CentralDeInformacoes;
 

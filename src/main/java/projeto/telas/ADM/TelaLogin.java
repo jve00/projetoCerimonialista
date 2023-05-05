@@ -1,4 +1,4 @@
-package projeto.telas.usuario;
+package projeto.telas.ADM;
 
 import java.awt.Color;
 
@@ -10,8 +10,9 @@ import javax.swing.JTextField;
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
-import projeto.telas.usuarios.ouvintes.OuvinteBotaoEntrarTelaLogin;
-import projeto.telas.usuarios.ouvintes.OuvinteTelaLogin;
+import projeto.telas.ADM.ouvintes.OuvinteBotaoEntrarTelaLogin;
+import projeto.telas.ADM.ouvintes.OuvinteBotaoEsqueceuSenhaTelaLogin;
+import projeto.telas.ADM.ouvintes.OuvinteTelaLogin;
 import ultilidades.fabricas.FabricaJButton;
 import ultilidades.fabricas.FabricaJLabel;
 import ultilidades.fabricas.FabricaJText;
@@ -75,12 +76,13 @@ public class TelaLogin extends TelaPadrao {
 
 		// Ouvinte para a tela
 		OuvinteTelaLogin ouvinte = new OuvinteTelaLogin(this);
+		OuvinteBotaoEsqueceuSenhaTelaLogin ouvinteSenha = new OuvinteBotaoEsqueceuSenhaTelaLogin(this);
 
 		// Ouvinte padr�o para os bot�es
 		OuvinteBotaoFundoPreto ouvinteBotaoPadrao = new OuvinteBotaoFundoPreto();
 
 		// Adicionando um ouvinte para o bot�o esqueceu a senha
-		btnResetSenha.addActionListener(ouvinte);
+		btnResetSenha.addActionListener(ouvinteSenha);
 
 		// Adicionando um ouvinte para identificar o click do mouse ao bot�o esqueceu a
 		// senha

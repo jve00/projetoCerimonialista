@@ -1,10 +1,10 @@
-package projeto.telas.usuarios.ouvintes;
+package projeto.telas.ADM.ouvintes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import projeto.telas.usuario.TelaCadastroUsuario;
-import projeto.telas.usuario.TelaLogin;
+import projeto.telas.ADM.TelaCadastroUsuario;
+import projeto.telas.ADM.TelaLogin;
 
 //Classe para implementar os ouvintes a tela de login
 public class OuvinteBotaoEntrarTelaLogin implements ActionListener{
