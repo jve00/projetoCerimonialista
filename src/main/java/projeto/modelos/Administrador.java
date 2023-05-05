@@ -1,13 +1,15 @@
 package projeto.modelos;
 
-import java.sql.Date;
+import java.time.LocalDate;
+
+import javax.swing.JFormattedTextField;
 
 public class Administrador {
 	private String login;
 	private String senha;
-	private Date dataDeNascimento;
+	private LocalDate dataDeNascimento;
 	
-	public Administrador(String login, String senha, Date dataDeNascimento) {
+	public Administrador(String login, String senha, LocalDate dataDeNascimento) {
 		super();
 		this.login = login;
 		this.senha = senha;
@@ -25,10 +27,10 @@ public class Administrador {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public Date getDataDeNascimento() {
+	public LocalDate getDataDeNascimento() {
 		return dataDeNascimento;
 	}
-	public void setDataDeNascimento(Date dataDeNascimento) {
+	public void setDataDeNascimento(LocalDate dataDeNascimento) {
 		this.dataDeNascimento = dataDeNascimento;
 	}
 

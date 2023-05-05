@@ -16,6 +16,7 @@ import ultilidades.fabricas.FabricaJButton;
 import ultilidades.fabricas.FabricaJFormatted;
 import ultilidades.fabricas.FabricaJLabel;
 import ultilidades.fabricas.FabricaJText;
+import ultilidades.fabricas.FabricasColors;
 
 //Classe da Tela de cadastro
 public class TelaCadastroUsuario extends TelaPadrao {
@@ -24,7 +25,7 @@ public class TelaCadastroUsuario extends TelaPadrao {
 	private ImagemDeFundo background;;
 	private JFormattedTextField txtData;
 
-	//Instanciação da tela
+	//Instanciaï¿½ï¿½o da tela
 	public TelaCadastroUsuario() {
 		super("Tela de Cadastro");
 		configurarComponentes();
@@ -32,21 +33,21 @@ public class TelaCadastroUsuario extends TelaPadrao {
 		setVisible(true);
 	}
 	
-	//Função para adicionar uma imagem de fundo (background)
+	//Funï¿½ï¿½o para adicionar uma imagem de fundo (background)
 	private void configImagemFundo() {
 		background = super.configImagemFundo("imgTelaUsuario.png");
 		this.add(background);
 	}
 	
-	//Função para configurar e adicionar os componentes a tela
+	//Funï¿½ï¿½o para configurar e adicionar os componentes a tela
 	public void configurarComponentes() {
-		//valor padrão para alinhamento dos objetos
+		//valor padrï¿½o para alinhamento dos objetos
 		int x = 10;
 		
-		//valor padrão para cor
+		//valor padrï¿½o para cor
 		Color cor = new Color(0, 0, 0);
 		
-		//valor padrão de cor
+		//valor padrï¿½o de cor
 		Color corTxtField = new Color(179, 177, 177, 50);
 		
 		//Adesivo "Nome Completo" e caixa para armazenar string
@@ -68,17 +69,17 @@ public class TelaCadastroUsuario extends TelaPadrao {
 		//Adesivo "Data de nascimento" e o lugar para armazenar
 		JLabel lblDataNascimento = FabricaJLabel.criarJLabel("DATA DE NASCIMENTO:", x, 280, 170, 20, cor, 12);
 		
-		//Criação da caixa para armazenar a data em formato DD/MM/YYYY
+		//Criaï¿½ï¿½o da caixa para armazenar a data em formato DD/MM/YYYY
 		try {
-			txtData = FabricaJFormatted.criarJFormatted(x, 305, 120, 40, new MaskFormatter("##/##/####"), corTxtField,
-					cor, 12);
+			txtData = FabricaJFormatted.criarJFormatted(x, 305, 120, 40, new MaskFormatter("##/##/####"), FabricasColors.corTxtField,
+					FabricasColors.corLabelBranca);
 		} catch (Exception e) {
 		}
 		
-		//Botão cadastrar
+		//Botï¿½o cadastrar
 		JButton btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 170, 390, 150, 45, Color.white, Color.black, 12);
 
-		//Botão cancelar
+		//Botï¿½o cancelar
 		JButton btnCancelar = FabricaJButton.criarJButton("Cancelar", 370, 390, 150, 45, Color.white, Color.black, 12);
 		
 		//adicionando os elemnetos a tela

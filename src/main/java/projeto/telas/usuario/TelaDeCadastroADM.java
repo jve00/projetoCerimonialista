@@ -1,14 +1,19 @@
 package projeto.telas.usuario;
 
+import java.awt.Color;
+
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.telas.usuarios.ouvintes.OuvinteBotaoCadastrarTelaADM;
 import ultilidades.fabricas.FabricaJButton;
+import ultilidades.fabricas.FabricaJFormatted;
 import ultilidades.fabricas.FabricaJLabel;
 import ultilidades.fabricas.FabricaJText;
 import ultilidades.fabricas.FabricasColors;
@@ -19,6 +24,7 @@ public class TelaDeCadastroADM extends TelaPadrao {
 	private JTextField txtEmail;
 	private JPasswordField txtSenha;;
 	private JButton btnCadastrar;
+	private JFormattedTextField txtData;
 
 	public TelaDeCadastroADM(String titulo) {
 		super(titulo);
@@ -42,8 +48,8 @@ public class TelaDeCadastroADM extends TelaPadrao {
 		JLabel lblEmail = FabricaJLabel.criarJLabel("Email", 100, 100, 460, 40, FabricasColors.corLabelBranca, 25);
 		JLabel lblSenha = FabricaJLabel.criarJLabel("Senha", 100, 180, 460, 40, FabricasColors.corLabelBranca, 25);
 
-		 btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 270, 320, 120, 45,
-				FabricasColors.corLabelBranca, FabricasColors.Corroxo, 20);
+		btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 270, 350, 120, 45, FabricasColors.corLabelBranca,
+				FabricasColors.Corroxo, 20);
 		// Campo para armazenar o email
 		txtEmail = FabricaJText.criarJTextField(100, 135, 460, 40, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, 16);
@@ -52,23 +58,38 @@ public class TelaDeCadastroADM extends TelaPadrao {
 		txtSenha = FabricaJText.criarJPasswordField(100, 220, 460, 40, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, 20);
 
+		JLabel lblDataNascimento = FabricaJLabel.criarJLabel("Data de Nascimento", 100, 260, 460, 40, Color.white, 20);
+		try {
+			txtData = FabricaJFormatted.criarJFormatted(100, 295, 130, 40, new MaskFormatter("##/##/####"),
+					FabricasColors.corTxtField, FabricasColors.corLabelBranca);
+		} catch (Exception e) {
+		}
+
 		OuvinteBotaoCadastrarTelaADM ouvinte = new OuvinteBotaoCadastrarTelaADM(this);
 
 		// Ouvinte padroes para os botoes
 		OuvinteBotaoFundoPreto ouvinteFundoPreto = new OuvinteBotaoFundoPreto();
-
 		btnCadastrar.addActionListener(ouvinte);
 		btnCadastrar.addMouseListener(ouvinteFundoPreto);
-		
-	 FabricasDeVariaveis.background.add(btnCadastrar);
-	 FabricasDeVariaveis.background.add(lblTitulo);
-	 FabricasDeVariaveis.background.add(lblEmail);
-	 FabricasDeVariaveis.background.add(txtEmail);
-	 FabricasDeVariaveis.background.add(lblSenha);
-	 FabricasDeVariaveis.background.add(txtSenha);
-	 
+
+		FabricasDeVariaveis.background.add(lblDataNascimento);
+		FabricasDeVariaveis.background.add(txtData);
+		FabricasDeVariaveis.background.add(btnCadastrar);
+		FabricasDeVariaveis.background.add(lblTitulo);
+		FabricasDeVariaveis.background.add(lblEmail);
+		FabricasDeVariaveis.background.add(txtEmail);
+		FabricasDeVariaveis.background.add(lblSenha);
+		FabricasDeVariaveis.background.add(txtSenha);
+
 	}
-	
+
+	public JFormattedTextField getTxtData() {
+		return txtData;
+	}
+
+	public void setTxtData(JFormattedTextField txtData) {
+		this.txtData = txtData;
+	}
 
 	public JButton getBtnCadastrar() {
 		return btnCadastrar;

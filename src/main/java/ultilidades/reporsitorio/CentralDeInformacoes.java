@@ -5,10 +5,14 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+import projeto.exceptions.DataInvalidaException;
 import projeto.modelos.Administrador;
 import projeto.modelos.Cliente;
 import projeto.modelos.Evento;
-import ulitilidades.persistencia.Persistencia;
+import projeto.telas.usuario.TelaCadastroUsuario;
+import projeto.telas.usuarios.ouvintes.OuvinteBotaoCadastrarTelaADM;
+import ulitlidades.data.ServicoData;
+import ultilidades.fabricas.FabricaJOptionPane;
 
 public class CentralDeInformacoes {
 
@@ -30,14 +34,9 @@ public class CentralDeInformacoes {
 		return true;
 	}
 
-	public boolean checarSeTemAdmnistrador() {
-		Persistencia persistencia = new Persistencia();
-		CentralDeInformacoes central = persistencia.recuperarCentral("central");
-		if (central == null) {
-			return true;
-		}
-		return false;
-	}
+//	public boolean checarSeTemAdmnistrador() {
+//	
+//	}
 
 	public LocalDateTime retornardataEHora(String data, String hora) {
 		LocalDate date = LocalDate.parse(data);
