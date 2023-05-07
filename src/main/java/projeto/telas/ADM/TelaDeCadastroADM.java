@@ -9,6 +9,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.telas.ADM.ouvintes.OuvinteBotaoCadastrarTelaADM;
@@ -25,6 +26,7 @@ public class TelaDeCadastroADM extends TelaPadrao {
 	private JPasswordField txtSenha;;
 	private JButton btnCadastrar;
 	private JFormattedTextField txtData;
+	private ImagemDeFundo background;
 
 	public TelaDeCadastroADM(String titulo) {
 		super(titulo);
@@ -32,10 +34,9 @@ public class TelaDeCadastroADM extends TelaPadrao {
 	}
 
 	public void configImagemFundo() {
-		FabricasDeVariaveis.background = super.configImagemFundo("background.png");
-		add(FabricasDeVariaveis.background);
+		background = super.configImagemFundo("background.png");
+		add(background);
 	}
-
 	public void configurarComponentes() {
 		configImagemFundo();
 		configFormLogin();
@@ -49,7 +50,7 @@ public class TelaDeCadastroADM extends TelaPadrao {
 		JLabel lblSenha = FabricaJLabel.criarJLabel("Senha", 100, 180, 460, 40, FabricasColors.corLabelBranca, 25);
 
 		btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 270, 350, 120, 45, FabricasColors.corLabelBranca,
-				FabricasColors.Corroxo, 20);
+				FabricasColors.CorRoxo, 20);
 		// Campo para armazenar o email
 		txtEmail = FabricaJText.criarJTextField(100, 135, 460, 40, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, 16);
@@ -72,14 +73,14 @@ public class TelaDeCadastroADM extends TelaPadrao {
 		btnCadastrar.addActionListener(ouvinte);
 		btnCadastrar.addMouseListener(ouvinteFundoPreto);
 
-		FabricasDeVariaveis.background.add(lblDataNascimento);
-		FabricasDeVariaveis.background.add(txtData);
-		FabricasDeVariaveis.background.add(btnCadastrar);
-		FabricasDeVariaveis.background.add(lblTitulo);
-		FabricasDeVariaveis.background.add(lblEmail);
-		FabricasDeVariaveis.background.add(txtEmail);
-		FabricasDeVariaveis.background.add(lblSenha);
-		FabricasDeVariaveis.background.add(txtSenha);
+		background.add(lblDataNascimento);
+		background.add(txtData);
+		background.add(btnCadastrar);
+		background.add(lblTitulo);
+		background.add(lblEmail);
+		background.add(txtEmail);
+		background.add(lblSenha);
+		background.add(txtSenha);
 
 	}
 

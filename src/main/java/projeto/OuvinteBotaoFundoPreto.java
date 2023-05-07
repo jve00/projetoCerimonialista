@@ -19,7 +19,7 @@ public class OuvinteBotaoFundoPreto implements MouseListener{
   }
 
   public void mouseExited(MouseEvent e) {
-    e.getComponent().setForeground(FabricasColors.Corroxo);
+    e.getComponent().setForeground(FabricasColors.CorRoxo);
 		e.getComponent().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
   }
  

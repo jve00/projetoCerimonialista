@@ -5,14 +5,10 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-import projeto.exceptions.DataInvalidaException;
+import projeto.exceptions.UsuarioNaoExisteException;
 import projeto.modelos.Administrador;
 import projeto.modelos.Cliente;
 import projeto.modelos.Evento;
-import projeto.telas.ADM.TelaCadastroUsuario;
-import projeto.telas.ADM.ouvintes.OuvinteBotaoCadastrarTelaADM;
-import ulitlidades.data.ServicoData;
-import ultilidades.fabricas.FabricaJOptionPane;
 
 public class CentralDeInformacoes {
 
@@ -23,7 +19,12 @@ public class CentralDeInformacoes {
 	public CentralDeInformacoes() {
 
 	}
-
+	public boolean verificarEmailAdm(String email) throws UsuarioNaoExisteException {
+		if (getAdministrador().getLogin().equals(email)) {
+			return true;
+		}
+		return false;
+	}
 	public boolean adicionarEvento(Evento evento) {
 		for (Evento e : todosOsEventos) {
 			if (e.equals(evento)) {
@@ -33,10 +34,6 @@ public class CentralDeInformacoes {
 		todosOsEventos.add(evento);
 		return true;
 	}
-
-//	public boolean checarSeTemAdmnistrador() {
-//	
-//	}
 
 	public LocalDateTime retornardataEHora(String data, String hora) {
 		LocalDate date = LocalDate.parse(data);

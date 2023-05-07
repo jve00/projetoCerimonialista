@@ -28,15 +28,17 @@ public class TelaLogin extends TelaPadrao {
 	private JButton btnResetSenha;
 	private JButton btnEntrar;
 	private JButton btnCadastrese;
+	private ImagemDeFundo background;
 
 	// metodo para configurar uma imagem de fundo(background)
 	private void configImagemFundo() {
-		FabricasDeVariaveis.background = super.configImagemFundo("background.png");
-		add(FabricasDeVariaveis.background);
+		background = super.configImagemFundo("background.png");
+		add(background);
 	}
 	// Construtor da Tela de login
 	public TelaLogin(String titulo) {
 		super(titulo);
+		configurarComponentes();
 		setVisible(true);
 	}
 
@@ -49,7 +51,6 @@ public class TelaLogin extends TelaPadrao {
 
 	// metodo para criar e adicionar os elementos da tela
 	private void configFormLogin() {
-
 		// Adesivo Email
 		JLabel lblEmail = FabricaJLabel.criarJLabel("Email", 100, 100, 460, 40, FabricasColors.corLabelBranca, 25);
 
@@ -95,13 +96,13 @@ public class TelaLogin extends TelaPadrao {
 		btnEntrar.addMouseListener(ouvinteBotaoPadrao);
 
 		// Adicionando os elementos citados acima a tela
-		FabricasDeVariaveis.background .add(lblTitulo);
-		FabricasDeVariaveis.background.add(btnResetSenha);
-		FabricasDeVariaveis.background.add(btnEntrar);
-		FabricasDeVariaveis.background.add(lblEmail);
-		FabricasDeVariaveis.background.add(lblSenha);
-		FabricasDeVariaveis.background.add(txtEmail);
-		FabricasDeVariaveis.background.add(txtSenha);
+		background.add(lblTitulo);
+		background.add(btnResetSenha);
+		background.add(btnEntrar);
+		background.add(lblEmail);
+		background.add(lblSenha);
+		background.add(txtEmail);
+		background.add(txtSenha);
 	}
 
 	// gets e sets do atributos de telaLogin

@@ -35,10 +35,9 @@ public class TelaCadastroUsuario extends TelaPadrao {
 	
 	//Fun��o para adicionar uma imagem de fundo (background)
 	private void configImagemFundo() {
-		background = super.configImagemFundo("imgTelaUsuario.png");
-		this.add(background);
+		background = super.configImagemFundo("background.png");
+		add(background);
 	}
-	
 	//Fun��o para configurar e adicionar os componentes a tela
 	public void configurarComponentes() {
 		//valor padr�o para alinhamento dos objetos
@@ -56,7 +55,7 @@ public class TelaCadastroUsuario extends TelaPadrao {
 		
 		//Adesivo "Email" e caixa para armazenar
 		JLabel lbEmail = FabricaJLabel.criarJLabel("EMAIL:", x, 115, 134, 20, cor, 12);
-		JTextField txEmail = FabricaJText.criarJTextField(x, 135, 350, 30, corTxtField, cor, 17);
+		JTextField txtEmail = FabricaJText.criarJTextField(x, 135, 350, 30, corTxtField, cor, 17);
 		
 		//Adesivo "Senha" e caixa para armazenar
 		JLabel lbSenha = FabricaJLabel.criarJLabel("SENHA:", x, 165, 134, 20, cor, 12);
@@ -88,7 +87,7 @@ public class TelaCadastroUsuario extends TelaPadrao {
 		this.add(lbNome);
 		this.add(lbEmail);
 		this.add(txNome);
-		this.add(txEmail);
+		this.add(txtEmail);
 		this.add(lbSenha);
 		this.add(txSenha);
 		this.add(lbConfirmacaoDeSenha);
