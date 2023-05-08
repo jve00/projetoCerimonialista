@@ -53,7 +53,7 @@ public class TelaDeCadastroADM extends TelaPadrao {
 				FabricasColors.CorRoxo, 20);
 		// Campo para armazenar o email
 		txtEmail = FabricaJText.criarJTextField(100, 135, 460, 40, FabricasColors.corTxtField,
-				FabricasColors.corLabelBranca, 16);
+				FabricasColors.corLabelBranca, 20);
 
 		// Campo para armazenar a senha
 		txtSenha = FabricaJText.criarJPasswordField(100, 220, 460, 40, FabricasColors.corTxtField,

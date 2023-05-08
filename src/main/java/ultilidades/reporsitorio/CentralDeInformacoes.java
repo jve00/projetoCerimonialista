@@ -9,6 +9,7 @@ import projeto.exceptions.UsuarioNaoExisteException;
 import projeto.modelos.Administrador;
 import projeto.modelos.Cliente;
 import projeto.modelos.Evento;
+import ulitilidades.persistencia.Persistencia;
 
 public class CentralDeInformacoes {
 
@@ -19,12 +20,21 @@ public class CentralDeInformacoes {
 	public CentralDeInformacoes() {
 
 	}
+
 	public boolean verificarEmailAdm(String email) throws UsuarioNaoExisteException {
 		if (getAdministrador().getLogin().equals(email)) {
 			return true;
 		}
 		return false;
 	}
+
+	public boolean verificarSenha(String senha) {
+		if (getAdministrador().getSenha().equals(senha)) {
+			return true;
+		}
+		return false;
+	}
+
 	public boolean adicionarEvento(Evento evento) {
 		for (Evento e : todosOsEventos) {
 			if (e.equals(evento)) {

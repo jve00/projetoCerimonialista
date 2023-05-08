@@ -7,6 +7,7 @@ import projeto.exceptions.UsuarioNaoExisteException;
 import projeto.exceptions.ValidacaoExceptionEmail;
 import projeto.telas.ADM.TelaCodigo;
 import projeto.telas.ADM.TelaLogin;
+import projeto.telas.ADM.TelaTrocarSenhaADM;
 import ulitilidades.persistencia.Persistencia;
 import ulitlidades.email.Mensageiro;
 import ulitlidades.validacao.Validador;
@@ -34,9 +35,8 @@ public class OuvinteBotaoEnviarTelaCodigo implements ActionListener {
 				String codigoDigitado = FabricaJOptionPane.criarInput("Digite o codigo recebido por email");
 				String codigoMensageiro = String.valueOf(codigo);
 				if (codigoMensageiro.equals(codigoDigitado)) {
-					System.out.println("entrou aqui");
 					tela.dispose();
-					new TelaLogin("Login");
+					new TelaTrocarSenhaADM("Trocar de Senha");
 				} else {
 					FabricaJOptionPane.criarMsg("esse Codigo e invalido!");
 					tela.getTxtEmail().setText("");

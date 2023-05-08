@@ -38,7 +38,6 @@ public class TelaLogin extends TelaPadrao {
 	// Construtor da Tela de login
 	public TelaLogin(String titulo) {
 		super(titulo);
-		configurarComponentes();
 		setVisible(true);
 	}
 

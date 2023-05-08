@@ -7,13 +7,14 @@ import javax.swing.JTextField;
 
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
+import projeto.TelaPadrao;
 import projeto.telas.ADM.ouvintes.OuvinteTelaTrocarSenhaADM;
 import ultilidades.fabricas.FabricaJButton;
 import ultilidades.fabricas.FabricaJLabel;
 import ultilidades.fabricas.FabricaJText;
 import ultilidades.fabricas.FabricasColors;
 
-public class TelaTrocarSenhaADM extends TelaLogin {
+public class TelaTrocarSenhaADM extends TelaPadrao {
 
 	private ImagemDeFundo background;
 	private JTextField txtEmail;
