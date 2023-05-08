@@ -1,6 +1,7 @@
 package projeto.telas.ADM;
 
 import java.awt.Color;
+import java.awt.Graphics;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -38,6 +39,7 @@ public class TelaCadastroUsuario extends TelaPadrao {
 		background = super.configImagemFundo("background.png");
 		add(background);
 	}
+	
 	//Fun��o para configurar e adicionar os componentes a tela
 	public void configurarComponentes() {
 		//valor padr�o para alinhamento dos objetos

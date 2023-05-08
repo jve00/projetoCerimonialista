@@ -44,6 +44,8 @@ public class TelaDeCadastroADM extends TelaPadrao {
 
 	// metodo para criar e adicionar os elementos da tela
 	private void configFormLogin() {
+		OuvinteBotaoCadastrarTelaADM ouvinte = new OuvinteBotaoCadastrarTelaADM(this);
+		
 		JLabel lblTitulo = FabricaJLabel.criarJLabel("Olá Administrador.", 175, 40, 460, 40,
 				FabricasColors.corLabelBranca, 40);
 		JLabel lblEmail = FabricaJLabel.criarJLabel("Email", 100, 100, 460, 40, FabricasColors.corLabelBranca, 25);
@@ -66,12 +68,12 @@ public class TelaDeCadastroADM extends TelaPadrao {
 		} catch (Exception e) {
 		}
 
-		OuvinteBotaoCadastrarTelaADM ouvinte = new OuvinteBotaoCadastrarTelaADM(this);
 
 		// Ouvinte padroes para os botoes
 		OuvinteBotaoFundoPreto ouvinteFundoPreto = new OuvinteBotaoFundoPreto();
 		btnCadastrar.addActionListener(ouvinte);
 		btnCadastrar.addMouseListener(ouvinteFundoPreto);
+			
 
 		background.add(lblDataNascimento);
 		background.add(txtData);
@@ -81,6 +83,7 @@ public class TelaDeCadastroADM extends TelaPadrao {
 		background.add(txtEmail);
 		background.add(lblSenha);
 		background.add(txtSenha);
+
 
 	}
 

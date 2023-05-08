@@ -27,7 +27,7 @@ public class Mensageiro {
 		email.setSSLOnConnect(true);
 		try {
 			email.setFrom(remetente);
-			email.setSubject("O seu codigo para a mudanca de Senha.");
+			email.setSubject("Codigo para a mudanca de Senha.");
 			codigo = new Random().nextInt((max - min) + 1) + min;
 			email.setMsg("Seu Codigo: " + codigo);
 			email.addTo(emailCodigo);

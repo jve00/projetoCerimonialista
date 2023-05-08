@@ -12,12 +12,10 @@ import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.telas.ADM.ouvintes.OuvinteBotaoEntrarTelaLogin;
 import projeto.telas.ADM.ouvintes.OuvinteBotaoEsqueceuSenhaTelaLogin;
-import projeto.telas.ADM.ouvintes.OuvinteTelaLogin;
 import ultilidades.fabricas.FabricaJButton;
 import ultilidades.fabricas.FabricaJLabel;
 import ultilidades.fabricas.FabricaJText;
 import ultilidades.fabricas.FabricasColors;
-import ultilidades.fabricas.FabricasDeVariaveis;
 
 //classe da Tela de login
 public class TelaLogin extends TelaPadrao {
@@ -30,15 +28,16 @@ public class TelaLogin extends TelaPadrao {
 	private JButton btnCadastrese;
 	private ImagemDeFundo background;
 
-	// metodo para configurar uma imagem de fundo(background)
-	private void configImagemFundo() {
-		background = super.configImagemFundo("background.png");
-		add(background);
-	}
 	// Construtor da Tela de login
 	public TelaLogin(String titulo) {
 		super(titulo);
 		setVisible(true);
+	}
+
+	// metodo para configurar uma imagem de fundo(background)
+	private void configImagemFundo() {
+		background = super.configImagemFundo("background.png");
+		add(background);
 	}
 
 	// metodo para configurar os componentes da tela
@@ -55,9 +54,10 @@ public class TelaLogin extends TelaPadrao {
 
 		// Adesivo Senha
 		JLabel lblSenha = FabricaJLabel.criarJLabel("Senha", 100, 180, 460, 40, FabricasColors.corLabelBranca, 25);
-		
-		JLabel lblTitulo = FabricaJLabel.criarJLabel("Party Helper", 225, 40, 460, 40, FabricasColors.corLabelBranca, 40);
-		
+
+		JLabel lblTitulo = FabricaJLabel.criarJLabel("Party Helper", 225, 40, 460, 40, FabricasColors.corLabelBranca,
+				40);
+
 		// Campo para armazenar o email
 		txtEmail = FabricaJText.criarJTextField(100, 135, 460, 40, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, 16);
@@ -75,9 +75,8 @@ public class TelaLogin extends TelaPadrao {
 				new Color(121, 107, 207), 30);
 
 		// Ouvinte para a tela
-		OuvinteTelaLogin ouvinte = new OuvinteTelaLogin(this);
 		OuvinteBotaoEsqueceuSenhaTelaLogin ouvinteSenha = new OuvinteBotaoEsqueceuSenhaTelaLogin(this);
-
+		OuvinteBotaoEntrarTelaLogin ouvinteTelaLogin = new OuvinteBotaoEntrarTelaLogin(this);
 		// Ouvinte padr�o para os bot�es
 		OuvinteBotaoFundoPreto ouvinteBotaoPadrao = new OuvinteBotaoFundoPreto();
 
@@ -89,7 +88,7 @@ public class TelaLogin extends TelaPadrao {
 		btnResetSenha.addMouseListener(ouvinteBotaoPadrao);
 
 		// Adicionando um ouvinte ao botao entrar
-		btnEntrar.addActionListener(new OuvinteBotaoEntrarTelaLogin(this));
+		btnEntrar.addActionListener(ouvinteTelaLogin);
 
 		// Adicionando um ouvinte para identificar o click do mouse ao bot�o entrar
 		btnEntrar.addMouseListener(ouvinteBotaoPadrao);

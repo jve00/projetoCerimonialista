@@ -18,14 +18,14 @@ import ultilidades.reporsitorio.CentralDeInformacoes;
 
 public class OuvinteBotaoCadastrarTelaADM implements ActionListener {
 	private TelaDeCadastroADM tela;
-	private Persistencia persistencia = new Persistencia();
-	private CentralDeInformacoes central = persistencia.recuperarCentral("central");
-
+	
 	public OuvinteBotaoCadastrarTelaADM(TelaDeCadastroADM tela) {
 		this.tela = tela;
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		Persistencia persistencia = new Persistencia();
+		CentralDeInformacoes central = persistencia.recuperarCentral("central");
 		String login = tela.getTxtEmail().getText();
 		String senha = String.valueOf(tela.getTxtSenha().getPassword());
 		String dataDeNascimento = tela.getTxtData().getText();
