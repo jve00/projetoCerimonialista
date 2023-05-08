@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import ultilidades.imagens.Imagens;
+
 public abstract class TelaPadrao extends JFrame {
 
 	public TelaPadrao(String titulo) {

@@ -11,7 +11,6 @@ import projeto.telas.ADM.TelaLogin;
 import ulitilidades.persistencia.Persistencia;
 import ulitlidades.validacao.Validador;
 import ultilidades.fabricas.FabricaJOptionPane;
-import ultilidades.fabricas.FabricasDeVariaveis;
 import ultilidades.reporsitorio.CentralDeInformacoes;
 
 //Classe para implementar os ouvintes a tela de login

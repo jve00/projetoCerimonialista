@@ -1,4 +1,4 @@
-package projeto.telas.ADM.ouvintes;
+ package projeto.telas.ADM.ouvintes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,25 +27,34 @@ public class OuvinteBotaoEnviarTelaCodigo implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String email = tela.getTxtEmail().getText();
 		Object componente = e.getSource();
-		try {
-			central.verificarEmailAdm(email);
-			boolean valido = Validador.validarEmail(email);
-			if (valido) {
-				int codigo = Mensageiro.enviarCodigo(email);
-				String codigoDigitado = FabricaJOptionPane.criarInput("Digite o codigo recebido por email");
-				String codigoMensageiro = String.valueOf(codigo);
-				if (codigoMensageiro.equals(codigoDigitado)) {
-					tela.dispose();
-					new TelaTrocarSenhaADM("Trocar de Senha");
-				} else {
-					FabricaJOptionPane.criarMsg("esse Codigo e invalido!");
-					tela.getTxtEmail().setText("");
+
+		if (componente == tela.getBtnSeta()) {
+			tela.dispose();
+			new TelaLogin("Tela Login");
+		} else if (componente == tela.getBtnEnviar()) {
+			try {
+				central.verificarEmailAdm(email);
+				boolean valido = Validador.validarEmail(email);
+
+				if (valido) {
+					int codigo = Mensageiro.enviarCodigo(email);
+					System.out.println(codigo);
+					String codigoDigitado = FabricaJOptionPane.criarInput("Digite o codigo recebido por email");
+					String codigoMensageiro = String.valueOf(codigo);
+					System.out.println(codigoMensageiro);
+					if (codigoMensageiro.equals(codigoDigitado)) {
+						tela.dispose();
+						new TelaTrocarSenhaADM("Trocar de Senha");
+					} else {
+						FabricaJOptionPane.criarMsg("esse Codigo e invalido!");
+						tela.getTxtEmail().setText("");
+					}
 				}
+			} catch (ValidacaoExceptionEmail e1) {
+				FabricaJOptionPane.criarMsgErro(e1.getMessage());
+			} catch (UsuarioNaoExisteException erro) {
+				FabricaJOptionPane.criarMsgErro(erro.getMessage());
 			}
-		} catch (ValidacaoExceptionEmail e1) {
-			FabricaJOptionPane.criarMsgErro(e1.getMessage());
-		} catch (UsuarioNaoExisteException erro) {
-			FabricaJOptionPane.criarMsgErro(erro.getMessage());
 		}
 
 	}

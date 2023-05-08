@@ -11,15 +11,15 @@ import ultilidades.reporsitorio.CentralDeInformacoes;
 
 public class Mensageiro {
 
-	private Persistencia persistencia = new Persistencia();
-	private CentralDeInformacoes central = persistencia.recuperarCentral("central");
-
 	public static int enviarCodigo(String emailCodigo) {
-		String remetente = "partyhelper0@gmail.com";
-		String senha = "cchtkkrzptehwbph";
+		Persistencia persistencia = new Persistencia();
+		CentralDeInformacoes central = persistencia.recuperarCentral("central");
+
+		String remetente = "projetop2.2023@gmail.com";
+		String senha = "jhpfqczusnvpjxdp";
 		int min = 1239;
 		int max = 9999;
-		int codigo = 0;
+
 		MultiPartEmail email = new MultiPartEmail();
 		email.setHostName("smtp.gmail.com");
 		email.setSmtpPort(465);
@@ -28,15 +28,19 @@ public class Mensageiro {
 		try {
 			email.setFrom(remetente);
 			email.setSubject("Codigo para a mudanca de Senha.");
-			codigo = new Random().nextInt((max - min) + 1) + min;
+			int codigo = new Random().nextInt((max - min) + 1) + min;
+			System.out.println(codigo);
 			email.setMsg("Seu Codigo: " + codigo);
 			email.addTo(emailCodigo);
 			email.send();
 
+			return codigo;
+
 		} catch (Exception e) {
 			FabricaJOptionPane.criarMsgErro("Erro ao enviar o codigo");
 		}
-		return codigo;
+		return 0;
+
 	}
 
 }

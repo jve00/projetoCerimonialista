@@ -34,7 +34,6 @@ public class OuvinteBotaoCadastrarTelaADM implements ActionListener {
 			if (componente == tela.getBtnCadastrar()) {
 				LocalDate data = ServicoData.retornarData(dataDeNascimento);
 				boolean valido = Validador.validarCadastro(login, senha, data);
-	
 				if (valido) {
 					central.setAdministrador(new Administrador(login, senha, data));
 					persistencia.salvarCentral(central, "central");

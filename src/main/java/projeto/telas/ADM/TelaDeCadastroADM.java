@@ -18,7 +18,6 @@ import ultilidades.fabricas.FabricaJFormatted;
 import ultilidades.fabricas.FabricaJLabel;
 import ultilidades.fabricas.FabricaJText;
 import ultilidades.fabricas.FabricasColors;
-import ultilidades.fabricas.FabricasDeVariaveis;
 
 public class TelaDeCadastroADM extends TelaPadrao {
 
