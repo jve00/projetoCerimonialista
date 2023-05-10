@@ -5,18 +5,15 @@ import java.awt.event.ActionListener;
 
 import projeto.telas.ADM.TelaMenuADM;
 
-public class OuvinteBotaoFornecedoresTelaMenuADM implements ActionListener {
-
+public class OuvinteBotaoCadastrarFornecedorTelaMenu implements ActionListener {
+	
+	
 	private TelaMenuADM tela;
 
-	public OuvinteBotaoFornecedoresTelaMenuADM(TelaMenuADM tela) {
+	public OuvinteBotaoCadastrarFornecedorTelaMenu(TelaMenuADM tela) {
 		this.tela = tela;
-
 	}
 	public void actionPerformed(ActionEvent e) {
 		Object componente = e.getSource();
-		tela.dispose();
-
 	}
-
 }

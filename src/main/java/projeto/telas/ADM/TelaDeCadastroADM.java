@@ -53,7 +53,7 @@ public class TelaDeCadastroADM extends TelaPadrao {
 
 		btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 270, 350, 120, 45, FabricasColors.corLabelBranca,
 				FabricasColors.CorRoxo,"Clique aqui para confimar o seu cadastro", 20);
-		;
+		
 		// Campo para armazenar o email
 		txtEmail = FabricaJText.criarJTextField(100, 135, 460, 40, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o seu email aqui", 20);

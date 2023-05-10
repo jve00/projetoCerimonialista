@@ -15,6 +15,12 @@ public class OuvinteBotaoCadastrosTelaMenuADM implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		Object componente = e.getSource();
+		tela.getBtnCadastrarFornecedor().setVisible(true);
+		tela.getBtnCadastrarFornecedor().setEnabled(true);
+		tela.getBtnCadastrarCliente().setVisible(true);
+		tela.getBtnCadastrarCliente().setEnabled(true);
+		
+	
 
 	}
 
