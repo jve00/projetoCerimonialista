@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 public abstract class FabricaJText {
 
 	public static JTextField criarJTextField(int x, int y, int largura, int altura,
-		Color corFundo, Color corLetra, int tamanhoLetra) {
+		Color corFundo, Color corLetra,  String msgTexto, int tamanhoLetra) {
 		
 		JTextField txt = new JTextField();
 	    txt.setBounds(x, y, largura, altura);
@@ -18,12 +18,13 @@ public abstract class FabricaJText {
 	    txt.setForeground(corLetra);
 	    txt.setBorder(BorderFactory.createLineBorder(corLetra));
 	    txt.setFont(new Font("Arial", 1, tamanhoLetra));
+	    txt.setToolTipText(msgTexto);
 	    
 	    return txt;
 	}
 	
 	public static JPasswordField criarJPasswordField(int x, int y, int largura, int altura,
-			Color corFundo, Color corLetra, int tamanhoLetra) {
+			Color corFundo, Color corLetra, String msgTexto, int tamanhoLetra) {
 		
 		JPasswordField pass = new JPasswordField();
 		pass.setBounds(x, y, largura, altura);
@@ -31,6 +32,7 @@ public abstract class FabricaJText {
 		pass.setForeground(corLetra);
 		pass.setBorder(BorderFactory.createLineBorder(corLetra));
 		pass.setFont(new Font("Arial", 1, tamanhoLetra));
+		pass.setToolTipText(msgTexto);
 	    
 		return pass;
 	}

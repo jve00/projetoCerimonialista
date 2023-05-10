@@ -60,19 +60,19 @@ public class TelaLogin extends TelaPadrao {
 
 		// Campo para armazenar o email
 		txtEmail = FabricaJText.criarJTextField(100, 135, 460, 40, FabricasColors.corTxtField,
-				FabricasColors.corLabelBranca, 16);
+				FabricasColors.corLabelBranca,"Digite o seu email aqui", 16);
 
 		// Campo para armazenar a senha
 		txtSenha = FabricaJText.criarJPasswordField(100, 220, 460, 40, FabricasColors.corTxtField,
-				FabricasColors.corLabelBranca, 20);
+				FabricasColors.corLabelBranca,"Digite a sua senha aqui", 20);
 
 		// Bot�o esqueceu a senha
 		btnResetSenha = FabricaJButton.criarJButton("Esqueceu a senha?", 430, 270, 120, 20, new Color(255, 255, 255),
-				new Color(121, 107, 207), 12);
+				new Color(121, 107, 207)," clique aqui se voce esqueceu sua senha", 12);
 
 		// Bot�o Entrar
 		btnEntrar = FabricaJButton.criarJButton("Entrar", 270, 320, 120, 45, new Color(255, 255, 255),
-				new Color(121, 107, 207), 30);
+				new Color(121, 107, 207),"clique aqui para logar ", 30);
 
 		// Ouvinte para a tela
 		OuvinteBotaoEsqueceuSenhaTelaLogin ouvinteSenha = new OuvinteBotaoEsqueceuSenhaTelaLogin(this);

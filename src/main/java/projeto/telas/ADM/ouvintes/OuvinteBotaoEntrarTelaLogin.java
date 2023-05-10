@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 import projeto.exceptions.UsuarioNaoExisteException;
 import projeto.exceptions.ValidacaoException;
 import projeto.exceptions.ValidacaoExceptionEmail;
-import projeto.telas.ADM.TelaCadastroUsuario;
 import projeto.telas.ADM.TelaLogin;
+import projeto.telas.ADM.TelaMenuADM;
 import ulitilidades.persistencia.Persistencia;
 import ulitlidades.validacao.Validador;
 import ultilidades.fabricas.FabricaJOptionPane;
@@ -41,7 +41,7 @@ public class OuvinteBotaoEntrarTelaLogin implements ActionListener {
 
 			if (valido && validarSenha && verificarEmail && VerificarSenha) {
 				tela.dispose();
-				new TelaCadastroUsuario();
+				new TelaMenuADM("Menu");
 			}else {
 				FabricaJOptionPane.criarMsgErro("Email ou senha Invalido");
 			}

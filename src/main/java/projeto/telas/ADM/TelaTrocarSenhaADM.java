@@ -47,11 +47,11 @@ public class TelaTrocarSenhaADM extends TelaPadrao {
 				FabricasColors.corLabelBranca, 20);
 
 		txtNovaSenha = FabricaJText.criarJPasswordField(110, 160, 460, 40, FabricasColors.corTxtField,
-				FabricasColors.corLabelBranca, 20);
+				FabricasColors.corLabelBranca,"Digite sua nova senha aqui", 20);
 		txtConfirmarSenha = FabricaJText.criarJPasswordField(110, 245, 460, 40, FabricasColors.corTxtField,
-				FabricasColors.corLabelBranca, 20);
+				FabricasColors.corLabelBranca,"confirme sua senha aqui", 20);
 		btnConfirmar = FabricaJButton.criarJButton("Confirmar", 270, 320, 120, 45, FabricasColors.corLabelBranca,
-				FabricasColors.CorRoxo, 20);
+				FabricasColors.CorRoxo,"Confirmar para alterar sua senha", 20);
 
 		OuvinteTelaTrocarSenhaADM ouvinteSenha = new OuvinteTelaTrocarSenhaADM(this);
 		OuvinteBotaoFundoPreto ouvinteBotaoPadrao = new OuvinteBotaoFundoPreto();

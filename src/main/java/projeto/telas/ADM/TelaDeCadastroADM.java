@@ -36,6 +36,7 @@ public class TelaDeCadastroADM extends TelaPadrao {
 		background = super.configImagemFundo("background.png");
 		add(background);
 	}
+
 	public void configurarComponentes() {
 		configImagemFundo();
 		configFormLogin();
@@ -44,35 +45,34 @@ public class TelaDeCadastroADM extends TelaPadrao {
 	// metodo para criar e adicionar os elementos da tela
 	private void configFormLogin() {
 		OuvinteBotaoCadastrarTelaADM ouvinte = new OuvinteBotaoCadastrarTelaADM(this);
-		
+
 		JLabel lblTitulo = FabricaJLabel.criarJLabel("Olá Administrador.", 175, 40, 460, 40,
 				FabricasColors.corLabelBranca, 40);
 		JLabel lblEmail = FabricaJLabel.criarJLabel("Email", 100, 100, 460, 40, FabricasColors.corLabelBranca, 25);
 		JLabel lblSenha = FabricaJLabel.criarJLabel("Senha", 100, 180, 460, 40, FabricasColors.corLabelBranca, 25);
 
 		btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 270, 350, 120, 45, FabricasColors.corLabelBranca,
-				FabricasColors.CorRoxo, 20);
+				FabricasColors.CorRoxo,"Clique aqui para confimar o seu cadastro", 20);
+		;
 		// Campo para armazenar o email
 		txtEmail = FabricaJText.criarJTextField(100, 135, 460, 40, FabricasColors.corTxtField,
-				FabricasColors.corLabelBranca, 20);
+				FabricasColors.corLabelBranca, "Digite o seu email aqui", 20);
 
 		// Campo para armazenar a senha
 		txtSenha = FabricaJText.criarJPasswordField(100, 220, 460, 40, FabricasColors.corTxtField,
-				FabricasColors.corLabelBranca, 20);
+				FabricasColors.corLabelBranca, "Digite a sua senha aqui", 20);
 
 		JLabel lblDataNascimento = FabricaJLabel.criarJLabel("Data de Nascimento", 100, 260, 460, 40, Color.white, 20);
 		try {
 			txtData = FabricaJFormatted.criarJFormatted(100, 295, 130, 40, new MaskFormatter("##/##/####"),
-					FabricasColors.corTxtField, FabricasColors.corLabelBranca);
+				FabricasColors.corTxtField, FabricasColors.corLabelBranca, "Digite a sua data de nascimento aqui");
 		} catch (Exception e) {
 		}
-
 
 		// Ouvinte padroes para os botoes
 		OuvinteBotaoFundoPreto ouvinteFundoPreto = new OuvinteBotaoFundoPreto();
 		btnCadastrar.addActionListener(ouvinte);
 		btnCadastrar.addMouseListener(ouvinteFundoPreto);
-			
 
 		background.add(lblDataNascimento);
 		background.add(txtData);
@@ -82,7 +82,6 @@ public class TelaDeCadastroADM extends TelaPadrao {
 		background.add(txtEmail);
 		background.add(lblSenha);
 		background.add(txtSenha);
-
 
 	}
 

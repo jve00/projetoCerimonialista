@@ -42,15 +42,15 @@ public class TelaCodigo extends TelaPadrao {
 		OuvinteBotaoFundoPreto ouvinteBotaoPadrao = new OuvinteBotaoFundoPreto();
 		OuvinteBotaoEnviarTelaCodigo ouvinte = new OuvinteBotaoEnviarTelaCodigo(this);
 //		a seta n esta aparecendo na tela, concertar isso ai
-		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
+		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50,50, "clique aqui para voltar");
 		btnSeta.addMouseListener(ouvinteBotaoPadrao);
 		btnSeta.addActionListener(ouvinte);
 		
 		txtEmail = FabricaJText.criarJTextField(120, 300, 460, 40, FabricasColors.corTxtField,
-				FabricasColors.corLabelBranca, 16);
+				FabricasColors.corLabelBranca,"Digite o seu email aqui", 16);
 		txtEmail.setToolTipText("digite o seu email aqui");
 		btnEnviar = FabricaJButton.criarJButton("Enviar", 295, 360, 120, 45, FabricasColors.corLabelBranca,
-				FabricasColors.CorRoxo, 20);
+				FabricasColors.CorRoxo,"clique aqui para enviar o codigo", 20);
 		btnEnviar.addActionListener(ouvinte);
 		btnEnviar.addMouseListener(ouvinteBotaoPadrao);
 

@@ -39,28 +39,29 @@ public class TelaMenuADM extends TelaPadrao {
 		OuvinteBotaoServicosTelaMenuADM ouvinteServicos = new OuvinteBotaoServicosTelaMenuADM(this);
 		OuvinteBotaoFornecedoresTelaMenuADM ouvinteFornecedores = new OuvinteBotaoFornecedoresTelaMenuADM(this);
 		OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
-		btnCadastros = FabricaJButton.criarJButton("", Imagens.CADASTROS, 200, -70, 300, 300);
-		btnCadastros.setToolTipText("Olhar clientes cadastrados");
+		btnCadastros = FabricaJButton.criarJButton("", Imagens.CADASTROS, 200, -70, 300, 300, 
+				"clique aqui para abrir os cadastros");
 		btnCadastros.addActionListener(ouvinteCadastros);
 		btnCadastros.addMouseListener(ouvinte);
 	
 		
-		btnFornecedores = FabricaJButton.criarJButton("", Imagens.FORNECEDORES, 200, 75, 300, 300);
-		btnFornecedores.setToolTipText("Olhar fornecedores cadastrados");
+		btnFornecedores = FabricaJButton.criarJButton("", Imagens.FORNECEDORES, 200, 75, 300, 300,
+				"clique aqui para olhar os fornecedores");
 		btnFornecedores.addActionListener(ouvinteFornecedores);
 		btnFornecedores.addMouseListener(ouvinte);
 		
 		
-		btnServicos = FabricaJButton.criarJButton("", Imagens.SERVICOS, 200, 220, 300, 300);
-		btnServicos.setToolTipText("Olhar servicos disponiveis");
+		btnServicos = FabricaJButton.criarJButton("", Imagens.SERVICOS, 200, 220, 300, 300,
+				"clique aqui para olhar os tipos de servicos");
+
 		btnServicos.addActionListener(ouvinteServicos);
 		btnServicos.addMouseListener(ouvinte);
 
 		background.add(btnCadastros);
 		background.add(btnFornecedores);
 		background.add(btnServicos);
+		
 	}
-
 	public JButton getBtnServicos() {
 		return btnServicos;
 	}

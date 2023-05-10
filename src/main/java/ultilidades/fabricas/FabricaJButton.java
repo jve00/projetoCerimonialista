@@ -11,7 +11,7 @@ public abstract class FabricaJButton {
 
 	//metodo estatico para criar um JButton recebendo os paramentros (texto, posi��o eixo x, posi��o eixo y, a largura, a altura, a cor de fundo,  )
 	public static JButton criarJButton(String texto, int x, int y, int largura, int altura, Color corFundo,
-			Color corLetra, int tamanhoLetra) {
+			Color corLetra, String msgTexto,  int tamanhoLetra) {
 
 		
 		JButton btn = new JButton(texto);
@@ -22,11 +22,12 @@ public abstract class FabricaJButton {
 		btn.setFocusable(false);
 		btn.setBorder(null);
 		btn.setOpaque(true);
+		btn.setToolTipText(msgTexto);
 
 		return btn;
 	}
 
-	public static JButton criarJButton(String texto, ImageIcon img, int x, int y, int largura, int altura) {
+	public static JButton criarJButton(String texto, ImageIcon img, int x, int y, int largura, int altura, String msgTexto) {
 
 		JButton btn = new JButton();
 		btn.setBounds(x, y, largura, altura);
@@ -36,6 +37,7 @@ public abstract class FabricaJButton {
 		btn.setFocusable(false);
 		btn.setBorder(null);
 		btn.setOpaque(false);
+		btn.setToolTipText(msgTexto);
 
 		return btn;
 	}
