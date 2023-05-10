@@ -9,8 +9,11 @@ import javax.swing.JCheckBox;
 
 import projeto.exceptions.ValidacaoException;
 import projeto.exceptions.ValidacaoExceptionEmail;
-import ultilidades.fabricas.FabricaJOptionPane;
-import ultilidades.fabricas.FabricaJPanel;
+import projeto.exceptions.ValidarCheckBoxException;
+import projeto.exceptions.ValidarCnpjException;
+import projeto.exceptions.ValidarCpfException;
+import projeto.exceptions.ValidarNomeException;
+import projeto.exceptions.ValidarTelefoneException;
 
 public abstract class Validador {
 
@@ -25,33 +28,56 @@ public abstract class Validador {
 		return false;
 	}
 
-//	public static boolean validarCadastro(String nomeCompleto, String email, String senha, LocalDate data,
-//			JCheckBox cbFeminino, JCheckBox cbMasculino) throws ValidacaoException {
-//		boolean nomeValido = validarNome(nomeCompleto);
-//		boolean emailValido = validarEmail(email);
-//		boolean senhaValida = validarSenha(senha);
-//		boolean dataValida = idadeValida(data);
-//
-//		if (nomeValido && emailValido && senhaValida && dataValida)
-//			return true;
-//		return false;
-//	}
+	public static boolean validarCadastro(String nomeCompleto, String telefone, String email, JCheckBox cbfisica, JCheckBox cbJuridica, 
+			String CNPJ, String CPF)
+			throws ValidarNomeException, ValidacaoExceptionEmail, ValidarTelefoneException,ValidarCpfException, ValidarCnpjException, ValidarCheckBoxException {
+		boolean nomeValido = validarNome(nomeCompleto);
+		boolean telefoneValido = validarTelefone(telefone);
+		boolean emailValido = validarEmail(email);
+		boolean cbValido = validarCheckBox(cbJuridica, cbfisica);
+		boolean cnpjValido = validarCNPJ(CNPJ);
+		boolean cpfValido = validarCpf(CPF);
+		
+		if (nomeValido && telefoneValido && emailValido && cbValido && cnpjValido && cpfValido ) {
+			return true;
+		}
+		return false;
+	}
 
-//	public static boolean validarSexo(JCheckBox cbFeminino, JCheckBox cbMasculino) throws SexoInvalidoException {
-//		boolean selecionouFeminino = cbFeminino.isSelected();
-//		boolean selecionouMasculino = cbMasculino.isSelected();
-//		if (selecionouFeminino && selecionouMasculino) {
-//			throw new SexoInvalidoException();
-//		}
-//		if (!selecionouFeminino && !selecionouMasculino) {
-//			throw new SexoInvalidoException("Selecione um tipo de sexo");
-//		}
-//		return true;
-//	}
+	public static boolean validarCpf(String CPF) throws ValidarCpfException {
+		if (CPF.length() < 11 || CPF.isBlank()) {
+			throw new ValidarCpfException();
+		}
 
-	public static boolean validarNome(String nome) throws ValidacaoExceptionEmail {
-		if (nome.isEmpty()) {
-			throw new ValidacaoExceptionEmail("");
+		return true;
+	}
+
+	public static boolean validarCNPJ(String CNPJ) throws ValidarCnpjException {
+		if (CNPJ.length() < 14 &&  CNPJ.isEmpty()) {
+			throw new ValidarCnpjException();
+		}
+		return true;
+	}
+
+	public static boolean validarCheckBox(JCheckBox cbJuridica, JCheckBox cbFisica) throws ValidarCheckBoxException {
+		boolean juridica = cbJuridica.isSelected();
+		boolean fisica = cbFisica.isSelected();
+		if (!juridica && !fisica) {
+			throw new ValidarCheckBoxException();
+		}
+		return true;
+	}
+
+	public static boolean validarNome(String nome) throws ValidarNomeException {
+		if (nome.isEmpty() || nome.length() < 8) {
+			throw new ValidarNomeException();
+		}
+		return true;
+	}
+
+	public static boolean validarTelefone(String telefone) throws ValidarTelefoneException {
+		if (telefone.isBlank()) {
+			throw new ValidarTelefoneException();
 		}
 		return true;
 	}

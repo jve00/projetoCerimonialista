@@ -1,7 +1,5 @@
 package projeto.modelos;
 
-import java.time.LocalDate;
-
 import projeto.UsuarioPadrao;
 import projeto.modelos.enuns.TipoDeServico;
 
@@ -9,9 +7,9 @@ public class Fornecedor extends UsuarioPadrao {
 
 	private TipoDeServico tipoDeServico;
 
-	public Fornecedor(String nome, String tipo, String email, LocalDate idade, String sexo, String senha,
+	public Fornecedor(String nome, String tipo, String email, String senha,
 			TipoDeServico tipoDeServico) {
-		super(nome, tipo, email, idade, sexo, senha);
+		super(nome, tipo, email, senha);
 		this.tipoDeServico = tipoDeServico;
 
 	}
