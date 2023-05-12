@@ -28,32 +28,31 @@ public abstract class Validador {
 		return false;
 	}
 
-	public static boolean validarCadastro(String nomeCompleto, String telefone, String email, JCheckBox cbfisica, JCheckBox cbJuridica, 
-			String CNPJ, String CPF)
-			throws ValidarNomeException, ValidacaoExceptionEmail, ValidarTelefoneException,ValidarCpfException, ValidarCnpjException, ValidarCheckBoxException {
+	public static boolean validarCadastro(String nomeCompleto, String telefone, String email, JCheckBox cbfisica,
+			JCheckBox cbJuridica, String CNPJ, String CPF) throws ValidarNomeException, ValidacaoExceptionEmail,
+			ValidarTelefoneException, ValidarCpfException, ValidarCnpjException, ValidarCheckBoxException {
 		boolean nomeValido = validarNome(nomeCompleto);
 		boolean telefoneValido = validarTelefone(telefone);
 		boolean emailValido = validarEmail(email);
 		boolean cbValido = validarCheckBox(cbJuridica, cbfisica);
 		boolean cnpjValido = validarCNPJ(CNPJ);
 		boolean cpfValido = validarCpf(CPF);
-		
-		if (nomeValido && telefoneValido && emailValido && cbValido && cnpjValido && cpfValido ) {
+
+		if (nomeValido && telefoneValido && emailValido && cbValido && cnpjValido && cpfValido) {
 			return true;
 		}
 		return false;
 	}
 
 	public static boolean validarCpf(String CPF) throws ValidarCpfException {
-		if (CPF.length() < 11 || CPF.isBlank()) {
+		if (CPF.length() != 11 || CPF.isBlank()) {
 			throw new ValidarCpfException();
 		}
-
 		return true;
 	}
 
 	public static boolean validarCNPJ(String CNPJ) throws ValidarCnpjException {
-		if (CNPJ.length() < 14 &&  CNPJ.isEmpty()) {
+		if (CNPJ.isBlank() || CNPJ.length() != 14) {
 			throw new ValidarCnpjException();
 		}
 		return true;

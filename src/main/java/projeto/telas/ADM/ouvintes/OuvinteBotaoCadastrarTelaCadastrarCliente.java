@@ -34,10 +34,15 @@ public class OuvinteBotaoCadastrarTelaCadastrarCliente implements ActionListener
 		String email = tela.getTxtEmail().getText();
 		JCheckBox pessoaFisica = tela.getJcbPessoaFisica();
 		JCheckBox pessoaJuridica = tela.getJcbPessoaJuridica();
-		String cpf = tela.getTxtCPF().getText();
-		String cnpj = tela.getTxtCNPJ().getText();
 		Object componente = e.getSource();
+		String cpf = "";
+		String cnpj = "";
 
+		if (pessoaJuridica.isSelected()) {
+			cnpj = tela.getTxtCNPJ().getText();
+		} else {
+			cpf = tela.getTxtCPF().getText();
+		}
 		try {
 			boolean valido = Validador.validarCadastro(nome, telefone, email, pessoaFisica, pessoaJuridica, cpf, cnpj);
 			if (valido) {
@@ -47,17 +52,12 @@ public class OuvinteBotaoCadastrarTelaCadastrarCliente implements ActionListener
 					System.out.println("salvo");
 					persistencia.salvarCentral(central, "central");
 				} else {
-					central.adicionarCliente(new Cliente(nome, telefone, email, cnpj));					persistencia.salvarCentral(central, "central");
+					central.adicionarCliente(new Cliente(nome, telefone, email, cnpj));
+					persistencia.salvarCentral(central, "central");
 				}
-
 			}
-		} catch (ValidarNomeException | ValidacaoExceptionEmail | ValidarTelefoneException e1) {
+		} catch (Exception e1) {
 			FabricaJOptionPane.criarMsgErro(e1.getMessage());
-		} catch (ValidarCheckBoxException e1) {
-			FabricaJOptionPane.criarMsgErro(e1.getMessage());
-		} catch (ValidarCnpjException | ValidarCpfException e1) {
-			FabricaJOptionPane.criarMsgErro(e1.getMessage());
-		
 		}
 	}
 
