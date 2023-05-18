@@ -1,9 +1,9 @@
-package projeto.telas.ADM.ouvintes;
+package projeto.telas.MenuAdm.ouvintes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import projeto.telas.ADM.TelaMenuADM;
+import projeto.telas.MenuAdm.TelaMenuADM;
 
 public class OuvinteBotaoCadastrosTelaMenuADM implements ActionListener {
 
@@ -16,9 +16,8 @@ public class OuvinteBotaoCadastrosTelaMenuADM implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object componente = e.getSource();
 		tela.getBtnCadastrarFornecedor().setVisible(true);
-		tela.getBtnCadastrarFornecedor().setEnabled(true);
 		tela.getBtnCadastrarCliente().setVisible(true);
-		tela.getBtnCadastrarCliente().setEnabled(true);
+
 		
 	
 

@@ -6,7 +6,7 @@ import projeto.UsuarioPadrao;
 public class Cliente extends UsuarioPadrao {
 
 	//Construto para facilitar a cria��o da classe passando todos os atributos
-	public Cliente(String nome, String tipo, String email, String senha) {
-		super(nome, tipo, email, senha);
+	public Cliente(String nome,String telefone,  String email, String tipo) {
+		super(nome, telefone, email, tipo);
 	}
 }

@@ -1,9 +1,9 @@
-package projeto.telas.ADM.ouvintes;
+package projeto.telas.MenuAdm.ouvintes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import projeto.telas.ADM.TelaMenuADM;
+import projeto.telas.MenuAdm.TelaMenuADM;
 
 public class OuvinteBotaoCadastrarFornecedorTelaMenu implements ActionListener {
 	

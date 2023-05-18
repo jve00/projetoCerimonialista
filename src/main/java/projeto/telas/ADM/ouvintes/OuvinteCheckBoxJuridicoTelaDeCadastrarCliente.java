@@ -20,14 +20,23 @@ public class OuvinteCheckBoxJuridicoTelaDeCadastrarCliente implements ActionList
 		boolean JuridicaSelecionada = tela.getJcbPessoaJuridica().isSelected();
 		boolean FisicaSelecionada = tela.getJcbPessoaFisica().isSelected();
 		ButtonGroup button = new ButtonGroup();
-// logica a ser feita
-//			tela.getJcbPessoaFisica().setEnabled(false);
-//			tela.getLblCPF().setVisible(true);
-//			tela.getTxtCNPJ().setVisible(true);
-//			tela.getLblCNPJ().setVisible(true);
-//			tela.getTxtCPF().setVisible(true);
+		tela.getLblCPF().setVisible(false);
+		tela.getTxtCNPJ().setVisible(false);
+		tela.getLblCNPJ().setVisible(false);
+		tela.getTxtCPF().setVisible(false);
+
+		button.add(tela.getJcbPessoaFisica());
+		button.add(tela.getJcbPessoaJuridica());
+
+		if (JuridicaSelecionada) {
+			tela.getLblCNPJ().setVisible(true);
+			tela.getTxtCNPJ().setVisible(true);
+		} else {
+			tela.getTxtCPF().setVisible(true);
+			tela.getLblCPF().setVisible(true);
+		}
 //	
 //			button.
 	}
-//
+
 }

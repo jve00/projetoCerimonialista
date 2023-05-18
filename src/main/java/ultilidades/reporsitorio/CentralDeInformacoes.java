@@ -1,28 +1,23 @@
 package ultilidades.reporsitorio;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
+import projeto.exceptions.ClienteJaExisteException;
 import projeto.exceptions.UsuarioNaoExisteException;
 import projeto.modelos.Administrador;
 import projeto.modelos.Cliente;
 import projeto.modelos.Evento;
-import ulitilidades.persistencia.Persistencia;
+import ultilidades.fabricas.FabricaJOptionPane;
 
 public class CentralDeInformacoes {
 
 	private ArrayList<Cliente> todosOsCliente = new ArrayList<Cliente>();
 	private ArrayList<Evento> todosOsEventos = new ArrayList<Evento>();
-	private Administrador Administrador;
+	private Administrador administrador;
 
-	public CentralDeInformacoes() {
-
-	}
-
-	public boolean verificarEmailAdm(String email) throws UsuarioNaoExisteException {
-		if (getAdministrador().getLogin().equals(email)) {
+	public boolean adicionarEvento(Evento evento) {
+		if (recuperarEventoPeloId(evento.getId()) == null) {
+			todosOsEventos.add(evento);
 			return true;
 		}
 		return false;
@@ -35,33 +30,22 @@ public class CentralDeInformacoes {
 		return false;
 	}
 
-	public boolean adicionarEvento(Evento evento) {
-		for (Evento e : todosOsEventos) {
-			if (e.equals(evento)) {
-				return false;
-			}
+	public boolean verificarEmailAdm(String email) throws UsuarioNaoExisteException {
+		if (getAdministrador().getLogin().equals(email)) {
+			return true;
 		}
-		todosOsEventos.add(evento);
-		return true;
-	}
-
-	public LocalDateTime retornardataEHora(String data, String hora) {
-		LocalDate date = LocalDate.parse(data);
-		LocalTime time = LocalTime.parse(hora);
-
-		return LocalDateTime.of(date, time);
+		return false;
 	}
 
 	public ArrayList<Evento> recuperarEventosCliente(String email) {
 		ArrayList<Evento> eventoDoCliente = new ArrayList<Evento>();
-		for (Cliente c : todosOsCliente) {
-			if (c.getEmail().equals(email)) {
-				for (Evento e : todosOsEventos) {
-					if (e.getClienteAssociado().equals(c)) {
-						eventoDoCliente.add(e);
-					}
+		Cliente c = recuperarClientePorEmail(email);
+		if (c != null) {
+			for (Evento e : todosOsEventos) {
+				if (e.getClienteAssociado().equals(c)) {
+					eventoDoCliente.add(e);
+					return eventoDoCliente;
 				}
-				return eventoDoCliente;
 			}
 		}
 		return null;
@@ -76,10 +60,11 @@ public class CentralDeInformacoes {
 		return null;
 	}
 
-	public boolean adicionarCliente(Cliente cliente) {
+	public boolean adicionarCliente(Cliente cliente) throws ClienteJaExisteException {
 		for (Cliente c : todosOsCliente) {
-			if (c.equals(cliente))
-				return false;
+			if (c.equals(recuperarClientePorEmail(cliente.getEmail()))) {
+				throw new ClienteJaExisteException();
+			}
 		}
 		todosOsCliente.add(cliente);
 		return true;
@@ -111,11 +96,11 @@ public class CentralDeInformacoes {
 	}
 
 	public Administrador getAdministrador() {
-		return Administrador;
+		return administrador;
 	}
 
 	public void setAdministrador(Administrador administrador) {
-		Administrador = administrador;
+		this.administrador = administrador;
 	}
 
 }

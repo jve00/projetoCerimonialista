@@ -1,24 +1,23 @@
 package projeto.modelos;
 
-import projeto.UsuarioPadrao;
-
 //Classe para representar pessoa fisica
-public class PessoaFisica extends UsuarioPadrao {
+public class PessoaFisica extends Cliente {
 
-	//Atributos unicos de PessoaFisica
-	private int CPF;
+	// Atributos unicos de PessoaFisica
+	private long CPF;
 
-	//Construto para facilitar a cria��o passando todos os atributos 
-	public PessoaFisica(String nome, String tipo, String email, String senha, int CPF) {
-		super(nome, tipo, email, senha);
+	// Construto para facilitar a cria��o passando todos os atributos
+	public PessoaFisica(String nome, String telefone, String tipo, String email, long CPF) {
+		super(nome, telefone, tipo, email);
 		this.CPF = CPF;
 	}
 
-	//gets e sets dos atributos unicos
-	public int getCPF() {
+	// gets e sets dos atributos unicos
+	public long getCPF() {
 		return CPF;
 	}
-	public void setCPF(int CPF) {
+
+	public void setCPF(long CPF) {
 		this.CPF = CPF;
 	}
 

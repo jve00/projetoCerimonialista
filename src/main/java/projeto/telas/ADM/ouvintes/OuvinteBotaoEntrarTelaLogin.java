@@ -7,7 +7,7 @@ import projeto.exceptions.UsuarioNaoExisteException;
 import projeto.exceptions.ValidacaoException;
 import projeto.exceptions.ValidacaoExceptionEmail;
 import projeto.telas.ADM.TelaLogin;
-import projeto.telas.ADM.TelaMenuADM;
+import projeto.telas.MenuAdm.TelaMenuADM;
 import ulitilidades.persistencia.Persistencia;
 import ulitlidades.validacao.Validador;
 import ultilidades.fabricas.FabricaJOptionPane;

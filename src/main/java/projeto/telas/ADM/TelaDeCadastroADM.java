@@ -1,8 +1,10 @@
 package projeto.telas.ADM;
 
 import java.awt.Color;
+import java.awt.Font;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
@@ -26,6 +28,7 @@ public class TelaDeCadastroADM extends TelaPadrao {
 	private JButton btnCadastrar;
 	private JFormattedTextField txtData;
 	private ImagemDeFundo background;
+	
 
 	public TelaDeCadastroADM(String titulo) {
 		super(titulo);
@@ -73,7 +76,7 @@ public class TelaDeCadastroADM extends TelaPadrao {
 		OuvinteBotaoFundoPreto ouvinteFundoPreto = new OuvinteBotaoFundoPreto();
 		btnCadastrar.addActionListener(ouvinte);
 		btnCadastrar.addMouseListener(ouvinteFundoPreto);
-
+	
 		background.add(lblDataNascimento);
 		background.add(txtData);
 		background.add(btnCadastrar);
@@ -82,6 +85,7 @@ public class TelaDeCadastroADM extends TelaPadrao {
 		background.add(txtEmail);
 		background.add(lblSenha);
 		background.add(txtSenha);
+	
 
 	}
 

@@ -1,7 +1,6 @@
 package ulitlidades.validacao;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,24 +20,20 @@ public abstract class Validador {
 			throws ValidacaoException, ValidacaoExceptionEmail {
 		boolean emailValido = validarEmail(email);
 		boolean senhaValida = validarSenha(senha);
-		boolean dataValida = idadeValida(data);
 
-		if (emailValido && senhaValida && dataValida)
+		if (emailValido && senhaValida)
 			return true;
 		return false;
 	}
 
 	public static boolean validarCadastro(String nomeCompleto, String telefone, String email, JCheckBox cbfisica,
-			JCheckBox cbJuridica, String CNPJ, String CPF) throws ValidarNomeException, ValidacaoExceptionEmail,
-			ValidarTelefoneException, ValidarCpfException, ValidarCnpjException, ValidarCheckBoxException {
+			JCheckBox cbJuridica) throws Exception {
 		boolean nomeValido = validarNome(nomeCompleto);
 		boolean telefoneValido = validarTelefone(telefone);
 		boolean emailValido = validarEmail(email);
 		boolean cbValido = validarCheckBox(cbJuridica, cbfisica);
-		boolean cnpjValido = validarCNPJ(CNPJ);
-		boolean cpfValido = validarCpf(CPF);
 
-		if (nomeValido && telefoneValido && emailValido && cbValido && cnpjValido && cpfValido) {
+		if (nomeValido && telefoneValido && emailValido && cbValido) {
 			return true;
 		}
 		return false;
@@ -68,7 +63,7 @@ public abstract class Validador {
 	}
 
 	public static boolean validarNome(String nome) throws ValidarNomeException {
-		if (nome.isEmpty() || nome.length() < 8) {
+		if (nome.isEmpty() || nome.length() < 10) {
 			throw new ValidarNomeException();
 		}
 		return true;
@@ -108,14 +103,4 @@ public abstract class Validador {
 			throw new ValidacaoException("A senha deve conter ao menos um caracter especial");
 		return true;
 	}
-
-	public static boolean idadeValida(LocalDate dataNascimento) throws ValidacaoException {
-		LocalDate dataNasc = dataNascimento;
-		LocalDate dataAtual = LocalDate.now();
-		Period periodo = Period.between(dataNasc, dataAtual);
-		if (periodo.getYears() >= 18)
-			return true;
-		throw new ValidacaoException("Data de nascimento invalida");
-	}
-
 }

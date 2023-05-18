@@ -30,6 +30,7 @@ public class TelaCadastrarCliente extends TelaPadrao {
 	private JButton btnCadastrar;
 	private JLabel lblCNPJ;
 	private JLabel lblCPF;
+	
 
 	public TelaCadastrarCliente(String titulo) {
 		super(titulo);
@@ -41,12 +42,10 @@ public class TelaCadastrarCliente extends TelaPadrao {
 		configTela();
 
 	}
-
 	public void configImagemFundo() {
 		background = super.configImagemFundo("background.png");
 		add(background);
 	}
-
 	public void configTela() {
 		OuvinteBotaoCadastrarTelaCadastrarCliente ouvinteCadastrarCliente = new OuvinteBotaoCadastrarTelaCadastrarCliente(
 				this);
@@ -60,11 +59,11 @@ public class TelaCadastrarCliente extends TelaPadrao {
 		JLabel lblTelefone = FabricaJLabel.criarJLabel("Email", 100, 180, 460, 40, FabricasColors.corLabelBranca, 25);
 		// Campo para armazenar o email
 		lblCNPJ = FabricaJLabel.criarJLabel("CNPJ", 100, 280, 460, 40, FabricasColors.corLabelBranca, 20);
-		lblCNPJ.setEnabled(false);
+
 		lblCNPJ.setVisible(false);
 
 		lblCPF = FabricaJLabel.criarJLabel("CPF", 100, 340, 460, 40, FabricasColors.corLabelBranca, 20);
-		lblCPF.setEnabled(false);
+
 		lblCPF.setVisible(false);
 
 		btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 300, 300, 90, 40, FabricasColors.corLabelBranca,
@@ -75,38 +74,32 @@ public class TelaCadastrarCliente extends TelaPadrao {
 		JcbPessoaJuridica = FabricaJCheckBox.criarJCheckBox(430, 264, 80, 30, "juridica", FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "clique aqui para selecionar o cliente como pessoa juridica");
 
-
-
 		txtNome = FabricaJText.criarJTextField(100, 60, 460, 40, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o seu Nome aqui", 20);
-		
+
 		txtTelefone = FabricaJText.criarJTextField(100, 135, 460, 40, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o seu Telefone aqui", 20);
-		
+
 		txtEmail = FabricaJText.criarJTextField(100, 220, 460, 40, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o seu Email aqui", 20);
 
 		txtCNPJ = FabricaJText.criarJTextField(100, 315, 190, 30, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o seu CNPJ aqui", 20);
-		txtCNPJ.setEnabled(false);
+
 		txtCNPJ.setVisible(false);
 
-		
 		txtCPF = FabricaJText.criarJTextField(100, 375, 190, 30, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o seu CPF aqui", 20);
-		txtCPF.setEnabled(false);
+
 		txtCPF.setVisible(false);
 
-		
 		btnCadastrar.addActionListener(ouvinteCadastrarCliente);
 		btnCadastrar.addMouseListener(ouvinte);
 		JcbPessoaFisica.addActionListener(ouvinteCheckBox);
 		JcbPessoaFisica.addMouseListener(ouvinteBranco);
 		JcbPessoaJuridica.addActionListener(ouvinteCheckBox);
 		JcbPessoaJuridica.addMouseListener(ouvinteBranco);
-	
-		
-		
+
 		background.add(lblTelefone);
 		background.add(lblEmail);
 		background.add(lblCNPJ);
@@ -205,6 +198,9 @@ public class TelaCadastrarCliente extends TelaPadrao {
 	public void setLblCPF(JLabel lblCPF) {
 		this.lblCPF = lblCPF;
 	}
-	
+
+	public ImagemDeFundo getMeuBackground() {
+		return background;
+	}
 
 }

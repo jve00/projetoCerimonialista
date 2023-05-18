@@ -1,9 +1,10 @@
-package projeto.telas.ADM.ouvintes;
+package projeto.telas.MenuAdm.ouvintes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import projeto.telas.ADM.TelaMenuADM;
+import projeto.telas.ADM.TelaCadastrarCliente;
+import projeto.telas.MenuAdm.TelaMenuADM;
 
 public class OuvinteBotaoCadastrarClienteTelaMenu implements ActionListener{
 	
@@ -14,6 +15,8 @@ public class OuvinteBotaoCadastrarClienteTelaMenu implements ActionListener{
 		}
 		public void actionPerformed(ActionEvent e) {
 			Object componente = e.getSource();
+			tela.dispose();
+			new TelaCadastrarCliente("Cadastrar Cliente");
 	
 		
 	}

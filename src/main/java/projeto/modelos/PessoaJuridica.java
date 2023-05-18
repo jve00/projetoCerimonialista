@@ -1,15 +1,13 @@
 package projeto.modelos;
 
-import projeto.UsuarioPadrao;
-
-public class PessoaJuridica extends UsuarioPadrao {
+public class PessoaJuridica extends Cliente {
 
 	// Atributos unicos de pessoa juridica
 	private long CNPJ;
 
 	// construtor feito para iniciar todos os atributos
-	public PessoaJuridica(String nome, String tipo, String email, String senha, long CNPJ) {
-		super(nome, tipo, email, senha);
+	public PessoaJuridica(String nome,String telefone,  String email, String tipo, long CNPJ) {
+		super(nome, telefone, email, tipo);
 		this.CNPJ = CNPJ;
 	}
 

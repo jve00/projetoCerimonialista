@@ -7,9 +7,9 @@ public class Fornecedor extends UsuarioPadrao {
 
 	private TipoDeServico tipoDeServico;
 
-	public Fornecedor(String nome, String tipo, String email, String senha,
+	public Fornecedor(String nome,String telefone, String tipo, String email, String senha,
 			TipoDeServico tipoDeServico) {
-		super(nome, tipo, email, senha);
+		super(nome,telefone, tipo, email);
 		this.tipoDeServico = tipoDeServico;
 
 	}

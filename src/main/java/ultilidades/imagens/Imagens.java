@@ -12,7 +12,9 @@ public class Imagens {
   public static final ImageIcon SETA = (ImageIcon) Imagens.importarImagem("img/seta.png");
   public static final ImageIcon CADASTROS = (ImageIcon) Imagens.importarImagem("img/btnCadastrar.png");
   public static final ImageIcon FORNECEDORES = (ImageIcon) Imagens.importarImagem("img/btnFornecedores.png");
-  public static final ImageIcon SERVICOS = (ImageIcon) Imagens.importarImagem("img/btnEditarServicos.png");
+  public static final ImageIcon SERVICOS = (ImageIcon) Imagens.importarImagem("img/btnListarServicos.png");
+  public static final ImageIcon ORCAMENTOS = (ImageIcon) Imagens.importarImagem("img/btnOrcamentos.png");
+  public static final ImageIcon PACOTES = (ImageIcon) Imagens.importarImagem("img/btnPacotes.png");
 
 }
  
