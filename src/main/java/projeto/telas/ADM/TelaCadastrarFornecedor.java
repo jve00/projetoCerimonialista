@@ -1,7 +1,11 @@
 package projeto.telas.ADM;
 
+import java.awt.Color;
+import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -27,10 +31,16 @@ public class TelaCadastrarFornecedor extends TelaPadrao{
 	private JButton btnCadastrar;
 	private JLabel lblCNPJ;
 	private JLabel lblCPF;
+	private JCheckBox JcbBuffet;
+	private JCheckBox JcbMusica;
+	private JCheckBox JcbDecoracao;
+	private JCheckBox JcbEquipamentosDeEstrutura;
+	private JCheckBox JcbLocalDeEvento;
 	
 	
 	public TelaCadastrarFornecedor(String titulo) {
 		super(titulo);
+		configTela();
 		setVisible(true);
 	
 	}
@@ -45,30 +55,31 @@ public class TelaCadastrarFornecedor extends TelaPadrao{
 		JLabel lblNome = FabricaJLabel.criarJLabel("Nome", 100, 20, 460, 40, FabricasColors.corLabelBranca, 25);
 		JLabel lblEmail = FabricaJLabel.criarJLabel("Telefone", 100, 100, 460, 40, FabricasColors.corLabelBranca, 25);
 		JLabel lblTelefone = FabricaJLabel.criarJLabel("Email", 100, 180, 460, 40, FabricasColors.corLabelBranca, 25);
+		JLabel lbTiposDeServico = FabricaJLabel.criarJLabel("Tipos de Serviços", 100, 270, 460, 40, FabricasColors.corLabelBranca, 18);
+		
+		lblCNPJ = FabricaJLabel.criarJLabel("CNPJ", 430, 280, 460, 40, FabricasColors.corLabelBranca, 20);
 
-		lblCNPJ = FabricaJLabel.criarJLabel("CNPJ", 100, 280, 460, 40, FabricasColors.corLabelBranca, 20);
+		lblCNPJ.setVisible(true);
 
-		lblCNPJ.setVisible(false);
+		lblCPF = FabricaJLabel.criarJLabel("CPF", 430, 340, 460, 40, FabricasColors.corLabelBranca, 20);
 
-		lblCPF = FabricaJLabel.criarJLabel("CPF", 100, 340, 460, 40, FabricasColors.corLabelBranca, 20);
+		lblCPF.setVisible(true);
 
-		lblCPF.setVisible(false);
-
-		txtCNPJ = FabricaJText.criarJTextField(100, 315, 190, 30, FabricasColors.corTxtField,
+		txtCNPJ = FabricaJText.criarJTextField(430, 315, 190, 30, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o seu CNPJ aqui", 20);
 
-		txtCNPJ.setVisible(false);
+		txtCNPJ.setVisible(true);
 
-		txtCPF = FabricaJText.criarJTextField(100, 375, 190, 30, FabricasColors.corTxtField,
+		txtCPF = FabricaJText.criarJTextField(430, 375, 190, 30, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o seu CPF aqui", 20);
-		txtCPF.setVisible(false);
+		txtCPF.setVisible(true);
 
 		JcbPessoaFisica = FabricaJCheckBox.criarJCheckBox(500, 264, 80, 30, "Fisica", FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "clique aqui para selecionar o cliente como pessoa fisica");
 		JcbPessoaJuridica = FabricaJCheckBox.criarJCheckBox(430, 264, 80, 30, "juridica", FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "clique aqui para selecionar o cliente como pessoa juridica");
 
-		btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 300, 300, 90, 40, FabricasColors.corLabelBranca,
+		btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 300, 400, 90, 40, FabricasColors.corLabelBranca,
 				FabricasColors.CorRoxo, "Clique aqui para confimar o seu cadastro", 16);
 		txtNome = FabricaJText.criarJTextField(100, 60, 460, 40, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o seu Nome aqui", 20);
@@ -78,8 +89,21 @@ public class TelaCadastrarFornecedor extends TelaPadrao{
 
 		txtEmail = FabricaJText.criarJTextField(100, 220, 460, 40, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o seu Email aqui", 20);
-
 		
+		JcbBuffet = FabricaJCheckBox.criarJCheckBox(100, 300, 100, 30, "Buffet", FabricasColors.corTxtField,
+				FabricasColors.corLabelBranca, "clique aqui para selecionar o serviço de buffet");
+		
+		JcbDecoracao = FabricaJCheckBox.criarJCheckBox(100, 335, 100, 30, "Decoração", FabricasColors.corTxtField,
+				FabricasColors.corLabelBranca, "clique aqui para selecionar o serviço de decoração");
+		
+		JcbEquipamentosDeEstrutura = FabricaJCheckBox.criarJCheckBox(100, 365, 100, 30, "Estruturação", FabricasColors.corTxtField,
+				FabricasColors.corLabelBranca, "clique aqui para selecionar o serviço de equipamentos de estrutura");
+		
+		JcbLocalDeEvento = FabricaJCheckBox.criarJCheckBox(100, 400, 180, 30, "Local de Evento", FabricasColors.corTxtField,
+				FabricasColors.corLabelBranca, "clique aqui para selecionar o serviço de fornecedor de local");
+		
+		JcbMusica = FabricaJCheckBox.criarJCheckBox(100, 435, 100, 30, "Musica", FabricasColors.corTxtField,
+				FabricasColors.corLabelBranca, "clique aqui para selecionar o serviço de musica");
 
 		background.add(JcbPessoaFisica);
 		background.add(JcbPessoaJuridica);
@@ -94,7 +118,13 @@ public class TelaCadastrarFornecedor extends TelaPadrao{
 		background.add(txtEmail);
 		background.add(txtTelefone);
 		background.add(btnCadastrar);
-	
+		background.add(JcbBuffet);
+		background.add(JcbDecoracao);
+		background.add(JcbEquipamentosDeEstrutura);
+		background.add(JcbLocalDeEvento);
+		background.add(JcbMusica);
+
+		background.add(lbTiposDeServico);
 	}
 
 	public void configImagemFundo() {

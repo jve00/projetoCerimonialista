@@ -3,7 +3,7 @@ package projeto.modelos.enuns;
 public enum TipoDeServico {
 	BUFFET,
 	MUSICA,
-	DERCORACAO,
+	DECORACAO,
 	EQUIPAMENTOS_DE_ESTRUTURA,
 	LOCAL_DO_EVENTO;
 }
