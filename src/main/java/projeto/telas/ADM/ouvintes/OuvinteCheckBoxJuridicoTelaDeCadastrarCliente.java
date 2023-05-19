@@ -35,8 +35,6 @@ public class OuvinteCheckBoxJuridicoTelaDeCadastrarCliente implements ActionList
 			tela.getTxtCPF().setVisible(true);
 			tela.getLblCPF().setVisible(true);
 		}
-//	
-//			button.
 	}
 
 }

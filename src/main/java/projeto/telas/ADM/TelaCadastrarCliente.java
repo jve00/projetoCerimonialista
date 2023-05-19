@@ -30,7 +30,6 @@ public class TelaCadastrarCliente extends TelaPadrao {
 	private JButton btnCadastrar;
 	private JLabel lblCNPJ;
 	private JLabel lblCPF;
-	
 
 	public TelaCadastrarCliente(String titulo) {
 		super(titulo);
@@ -39,13 +38,19 @@ public class TelaCadastrarCliente extends TelaPadrao {
 
 	public void configurarComponentes() {
 		configImagemFundo();
+		configTipoCliente();
 		configTela();
 
 	}
+
 	public void configImagemFundo() {
 		background = super.configImagemFundo("background.png");
 		add(background);
 	}
+
+	public void configTipoCliente() {
+	}
+
 	public void configTela() {
 		OuvinteBotaoCadastrarTelaCadastrarCliente ouvinteCadastrarCliente = new OuvinteBotaoCadastrarTelaCadastrarCliente(
 				this);
@@ -53,11 +58,10 @@ public class TelaCadastrarCliente extends TelaPadrao {
 				this);
 		OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
 		OuvinteBotaoFundoBranco ouvinteBranco = new OuvinteBotaoFundoBranco();
-
 		JLabel lblNome = FabricaJLabel.criarJLabel("Nome", 100, 20, 460, 40, FabricasColors.corLabelBranca, 25);
 		JLabel lblEmail = FabricaJLabel.criarJLabel("Telefone", 100, 100, 460, 40, FabricasColors.corLabelBranca, 25);
 		JLabel lblTelefone = FabricaJLabel.criarJLabel("Email", 100, 180, 460, 40, FabricasColors.corLabelBranca, 25);
-		// Campo para armazenar o email
+
 		lblCNPJ = FabricaJLabel.criarJLabel("CNPJ", 100, 280, 460, 40, FabricasColors.corLabelBranca, 20);
 
 		lblCNPJ.setVisible(false);
@@ -66,14 +70,22 @@ public class TelaCadastrarCliente extends TelaPadrao {
 
 		lblCPF.setVisible(false);
 
-		btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 300, 300, 90, 40, FabricasColors.corLabelBranca,
-				FabricasColors.CorRoxo, "Clique aqui para confimar o seu cadastro", 16);
+		txtCNPJ = FabricaJText.criarJTextField(100, 315, 190, 30, FabricasColors.corTxtField,
+				FabricasColors.corLabelBranca, "Digite o seu CNPJ aqui", 20);
+
+		txtCNPJ.setVisible(false);
+
+		txtCPF = FabricaJText.criarJTextField(100, 375, 190, 30, FabricasColors.corTxtField,
+				FabricasColors.corLabelBranca, "Digite o seu CPF aqui", 20);
+		txtCPF.setVisible(false);
 
 		JcbPessoaFisica = FabricaJCheckBox.criarJCheckBox(500, 264, 80, 30, "Fisica", FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "clique aqui para selecionar o cliente como pessoa fisica");
 		JcbPessoaJuridica = FabricaJCheckBox.criarJCheckBox(430, 264, 80, 30, "juridica", FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "clique aqui para selecionar o cliente como pessoa juridica");
 
+		btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 300, 300, 90, 40, FabricasColors.corLabelBranca,
+				FabricasColors.CorRoxo, "Clique aqui para confimar o seu cadastro", 16);
 		txtNome = FabricaJText.criarJTextField(100, 60, 460, 40, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o seu Nome aqui", 20);
 
@@ -83,16 +95,6 @@ public class TelaCadastrarCliente extends TelaPadrao {
 		txtEmail = FabricaJText.criarJTextField(100, 220, 460, 40, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o seu Email aqui", 20);
 
-		txtCNPJ = FabricaJText.criarJTextField(100, 315, 190, 30, FabricasColors.corTxtField,
-				FabricasColors.corLabelBranca, "Digite o seu CNPJ aqui", 20);
-
-		txtCNPJ.setVisible(false);
-
-		txtCPF = FabricaJText.criarJTextField(100, 375, 190, 30, FabricasColors.corTxtField,
-				FabricasColors.corLabelBranca, "Digite o seu CPF aqui", 20);
-
-		txtCPF.setVisible(false);
-
 		btnCadastrar.addActionListener(ouvinteCadastrarCliente);
 		btnCadastrar.addMouseListener(ouvinte);
 		JcbPessoaFisica.addActionListener(ouvinteCheckBox);
@@ -100,18 +102,18 @@ public class TelaCadastrarCliente extends TelaPadrao {
 		JcbPessoaJuridica.addActionListener(ouvinteCheckBox);
 		JcbPessoaJuridica.addMouseListener(ouvinteBranco);
 
+		background.add(JcbPessoaFisica);
+		background.add(JcbPessoaJuridica);
+		background.add(txtCNPJ);
+		background.add(txtCPF);
+		background.add(lblCPF);
+		background.add(lblCNPJ);
 		background.add(lblTelefone);
 		background.add(lblEmail);
-		background.add(lblCNPJ);
 		background.add(lblNome);
-		background.add(lblCPF);
 		background.add(txtNome);
 		background.add(txtEmail);
 		background.add(txtTelefone);
-		background.add(txtCNPJ);
-		background.add(txtCPF);
-		background.add(JcbPessoaFisica);
-		background.add(JcbPessoaJuridica);
 		background.add(btnCadastrar);
 	}
 

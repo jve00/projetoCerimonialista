@@ -16,7 +16,7 @@ import ulitlidades.validacao.Validador;
 import ultilidades.fabricas.FabricaJOptionPane;
 import ultilidades.reporsitorio.CentralDeInformacoes;
 
-public class OuvinteBotaoCadastrarTelaCadastrarCliente implements ActionListener {
+public class OuvinteBotaoCadastrarTelaCadastrarCliente implements ActionListener{
 
 	Persistencia persistencia = new Persistencia();
 	CentralDeInformacoes central = persistencia.recuperarCentral("central");

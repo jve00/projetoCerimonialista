@@ -1,135 +1,190 @@
-//package projeto.telas.ADM;
-//
-//import java.awt.Color;
-//import java.awt.Font;
-//
-//import javax.swing.BorderFactory;
-//import javax.swing.JCheckBox;
-//import javax.swing.JComboBox;
-//import javax.swing.JLabel;
-//import javax.swing.JTextField;
-//
-//import projeto.OuvinteBotaoFundoPreto;
-//import projeto.telas.MenuAdm.ouvintes.OuvinteCheckBoxTelaDeCadastrarFornecedor;
-//import ultilidades.fabricas.FabricaJCheckBox;
-//import ultilidades.fabricas.FabricaJLabel;
-//import ultilidades.fabricas.FabricaJText;
-//import ultilidades.fabricas.FabricasColors;
-//
-//revisar classe por completo e criar logica com o codigo mais limpo
-//
-//
-//
-//
-//public class TelaCadastrarFornecedor extends TelaCadastrarCliente {
-//
-//	private JComboBox<String> box;
-//	private JLabel lblNome;
-//	private JLabel lblCpf;
-//	private JLabel lblCnpj;
-//	private JTextField txtCnpj;
-//	private JTextField txtCpf;
-//	private JCheckBox jcbPessoaFisica;
-//	private JCheckBox JcbPessoaJuridica;
-//
-//	public TelaCadastrarFornecedor(String titulo) {
-//		super(titulo);
-//		configurarComponentes();
-//	}
-//
-//	public void configurarComponentes() {
-//		configImagemFundo();
-//		configTela();
-//	}
-//
-//	public void configTela() {
-//		super.configTela();
-//
-//		OuvinteCheckBoxTelaDeCadastrarFornecedor ouvinteCheck = new OuvinteCheckBoxTelaDeCadastrarFornecedor(this);
-//		OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
-//
-//		lblNome = FabricaJLabel.criarJLabel("Tipo De Servico: ", 20, 260, 460, 40, FabricasColors.corLabelBranca, 15);
-//
-//		txtCnpj = (JTextField) getTxtCNPJ().add(FabricaJText.criarJTextField(440, 335, 190, 30,
-//				FabricasColors.corTxtField, FabricasColors.corLabelBranca, "Digite o seu CNPJ aqui", 20));
-//
-//		txtCpf = (JTextField) getTxtCNPJ().add(FabricaJText.criarJTextField(440, 395, 190, 30,
-//				FabricasColors.corTxtField, FabricasColors.corLabelBranca, "Digite o seu CPF aqui", 20));
-//
-//		lblCpf = (JLabel) getTxtCNPJ()
-//				.add(FabricaJLabel.criarJLabel("CNPJ", 440, 300, 460, 40, FabricasColors.corLabelBranca, 20));
-//		lblCnpj = (JLabel) getTxtCNPJ()
-//				.add(FabricaJLabel.criarJLabel("CPF", 440, 360, 460, 40, FabricasColors.corLabelBranca, 20));
-//
-//		jcbPessoaFisica = FabricaJCheckBox.criarJCheckBox(500, 264, 80, 30, "Fisica", FabricasColors.corTxtField,
-//				FabricasColors.corLabelBranca, "clique aqui para selecionar o cliente como pessoa fisica");
-//		JcbPessoaJuridica = FabricaJCheckBox.criarJCheckBox(430, 264, 80, 30, "juridica", FabricasColors.corTxtField,
-//				FabricasColors.corLabelBranca, "clique aqui para selecionar o cliente como pessoa juridica");
-//
-//		jcbPessoaFisica.addActionListener(ouvinteCheck);
-//		jcbPessoaFisica.addMouseListener(ouvinte);
-//		JcbPessoaJuridica.addActionListener(ouvinteCheck);
-//		JcbPessoaJuridica.addMouseListener(ouvinte);
-//
-//		box = new JComboBox<String>(new String[] { "Decoracao", "Musica" });
-//		box.setBounds(20, 290, 240, 40);
-//		box.setFont(new Font("Arial", 1, 20));
-//		box.setForeground(Color.white);
-//		box.setBackground(Color.BLUE);
-//		box.setBorder(BorderFactory.createLineBorder(FabricasColors.CorRoxo));
-//		box.setToolTipText("Selecione ate tres tipos de servicos");
-//
-//		getMeuBackground().add(lblCpf);
-//		getMeuBackground().add(lblCnpj);
-//		getMeuBackground().add(txtCnpj);
-//		getMeuBackground().add(txtCpf);
-//		getMeuBackground().add(lblNome);
-//		getMeuBackground().add(box);
-//
-//	}
-//
-//	public JTextField getTxtCnpj() {
-//		return txtCnpj;
-//	}
-//
-//	public void setTxtCnpj(JTextField txtCnpj) {
-//		this.txtCnpj = txtCnpj;
-//	}
-//
-//	public JTextField getTxtCpf() {
-//		return txtCpf;
-//	}
-//
-//	public void setTxtCpf(JTextField txtCpf) {
-//		this.txtCpf = txtCpf;
-//	}
-//
-//	public JCheckBox getJcbPessoaFisica() {
-//		return jcbPessoaFisica;
-//	}
-//
-//	public void setJcbPessoaFisica(JCheckBox jcbPessoaFisica) {
-//		this.jcbPessoaFisica = jcbPessoaFisica;
-//	}
-//
-//	public JCheckBox getJcbPessoaJuridica() {
-//		return JcbPessoaJuridica;
-//	}
-//
-//	public void setJcbPessoaJuridica(JCheckBox jcbPessoaJuridica) {
-//		JcbPessoaJuridica = jcbPessoaJuridica;
-//	}
-//
-//	public JComboBox<String> getBox() {
-//		return box;
-//	}
-//
-//	public void setBox(JComboBox<String> box) {
-//		this.box = box;
-//	}
-//
-//	public static void main(String[] args) {
-//		new TelaCadastrarFornecedor("");
-//	}
-//
-//}
+package projeto.telas.ADM;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+import projeto.ImagemDeFundo;
+import projeto.TelaPadrao;
+import ultilidades.fabricas.FabricaJButton;
+import ultilidades.fabricas.FabricaJCheckBox;
+import ultilidades.fabricas.FabricaJLabel;
+import ultilidades.fabricas.FabricaJText;
+import ultilidades.fabricas.FabricasColors;
+
+public class TelaCadastrarFornecedor extends TelaPadrao{
+
+	
+	private ImagemDeFundo background;
+	private JTextField txtNome;
+	private JTextField txtEmail;
+	private JTextField txtTelefone;
+	private JTextField txtCNPJ;
+	private JTextField txtCPF;
+	private JCheckBox JcbPessoaFisica;
+	private JCheckBox JcbPessoaJuridica;
+	private JButton btnCadastrar;
+	private JLabel lblCNPJ;
+	private JLabel lblCPF;
+	
+	
+	public TelaCadastrarFornecedor(String titulo) {
+		super(titulo);
+		setVisible(true);
+	
+	}
+
+	public void configurarComponentes() {
+		configImagemFundo();
+		
+	}
+	public void configTela() {
+	
+		
+		JLabel lblNome = FabricaJLabel.criarJLabel("Nome", 100, 20, 460, 40, FabricasColors.corLabelBranca, 25);
+		JLabel lblEmail = FabricaJLabel.criarJLabel("Telefone", 100, 100, 460, 40, FabricasColors.corLabelBranca, 25);
+		JLabel lblTelefone = FabricaJLabel.criarJLabel("Email", 100, 180, 460, 40, FabricasColors.corLabelBranca, 25);
+
+		lblCNPJ = FabricaJLabel.criarJLabel("CNPJ", 100, 280, 460, 40, FabricasColors.corLabelBranca, 20);
+
+		lblCNPJ.setVisible(false);
+
+		lblCPF = FabricaJLabel.criarJLabel("CPF", 100, 340, 460, 40, FabricasColors.corLabelBranca, 20);
+
+		lblCPF.setVisible(false);
+
+		txtCNPJ = FabricaJText.criarJTextField(100, 315, 190, 30, FabricasColors.corTxtField,
+				FabricasColors.corLabelBranca, "Digite o seu CNPJ aqui", 20);
+
+		txtCNPJ.setVisible(false);
+
+		txtCPF = FabricaJText.criarJTextField(100, 375, 190, 30, FabricasColors.corTxtField,
+				FabricasColors.corLabelBranca, "Digite o seu CPF aqui", 20);
+		txtCPF.setVisible(false);
+
+		JcbPessoaFisica = FabricaJCheckBox.criarJCheckBox(500, 264, 80, 30, "Fisica", FabricasColors.corTxtField,
+				FabricasColors.corLabelBranca, "clique aqui para selecionar o cliente como pessoa fisica");
+		JcbPessoaJuridica = FabricaJCheckBox.criarJCheckBox(430, 264, 80, 30, "juridica", FabricasColors.corTxtField,
+				FabricasColors.corLabelBranca, "clique aqui para selecionar o cliente como pessoa juridica");
+
+		btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 300, 300, 90, 40, FabricasColors.corLabelBranca,
+				FabricasColors.CorRoxo, "Clique aqui para confimar o seu cadastro", 16);
+		txtNome = FabricaJText.criarJTextField(100, 60, 460, 40, FabricasColors.corTxtField,
+				FabricasColors.corLabelBranca, "Digite o seu Nome aqui", 20);
+
+		txtTelefone = FabricaJText.criarJTextField(100, 135, 460, 40, FabricasColors.corTxtField,
+				FabricasColors.corLabelBranca, "Digite o seu Telefone aqui", 20);
+
+		txtEmail = FabricaJText.criarJTextField(100, 220, 460, 40, FabricasColors.corTxtField,
+				FabricasColors.corLabelBranca, "Digite o seu Email aqui", 20);
+
+		
+
+		background.add(JcbPessoaFisica);
+		background.add(JcbPessoaJuridica);
+		background.add(txtCNPJ);
+		background.add(txtCPF);
+		background.add(lblCPF);
+		background.add(lblCNPJ);
+		background.add(lblTelefone);
+		background.add(lblEmail);
+		background.add(lblNome);
+		background.add(txtNome);
+		background.add(txtEmail);
+		background.add(txtTelefone);
+		background.add(btnCadastrar);
+	
+	}
+
+	public void configImagemFundo() {
+		background = super.configImagemFundo("background.png");
+		add(background);
+	}
+	
+	public JTextField getTxtNome() {
+		return txtNome;
+	}
+
+	public void setTxtNome(JTextField txtNome) {
+		this.txtNome = txtNome;
+	}
+
+	public JTextField getTxtEmail() {
+		return txtEmail;
+	}
+
+	public void setTxtEmail(JTextField txtEmail) {
+		this.txtEmail = txtEmail;
+	}
+
+	public JTextField getTxtTelefone() {
+		return txtTelefone;
+	}
+
+	public void setTxtTelefone(JTextField txtTelefone) {
+		this.txtTelefone = txtTelefone;
+	}
+
+	public JTextField getTxtCNPJ() {
+		return txtCNPJ;
+	}
+
+	public void setTxtCNPJ(JTextField txtCNPJ) {
+		this.txtCNPJ = txtCNPJ;
+	}
+
+	public JTextField getTxtCPF() {
+		return txtCPF;
+	}
+
+	public void setTxtCPF(JTextField txtCPF) {
+		this.txtCPF = txtCPF;
+	}
+
+	public JCheckBox getJcbPessoaFisica() {
+		return JcbPessoaFisica;
+	}
+
+	public void setJcbPessoaFisica(JCheckBox jcbPessoaFisica) {
+		JcbPessoaFisica = jcbPessoaFisica;
+	}
+
+	public JCheckBox getJcbPessoaJuridica() {
+		return JcbPessoaJuridica;
+	}
+
+	public void setJcbPessoaJuridica(JCheckBox jcbPessoaJuridica) {
+		JcbPessoaJuridica = jcbPessoaJuridica;
+	}
+
+	public JButton getBtnCadastrar() {
+		return btnCadastrar;
+	}
+
+	public void setBtnCadastrar(JButton btnCadastrar) {
+		this.btnCadastrar = btnCadastrar;
+	}
+
+	public JLabel getLblCNPJ() {
+		return lblCNPJ;
+	}
+
+	public void setLblCNPJ(JLabel lblCNPJ) {
+		this.lblCNPJ = lblCNPJ;
+	}
+
+	public JLabel getLblCPF() {
+		return lblCPF;
+	}
+
+	public void setLblCPF(JLabel lblCPF) {
+		this.lblCPF = lblCPF;
+	}
+
+	public static void main(String[] args) {
+		new TelaCadastrarFornecedor("Cadastrar Fornecedor");
+		
+	}
+	
+}
