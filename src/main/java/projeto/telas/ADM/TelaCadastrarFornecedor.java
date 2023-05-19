@@ -71,15 +71,18 @@ public class TelaCadastrarFornecedor extends TelaPadrao{
 
 		txtCPF = FabricaJText.criarJTextField(430, 375, 190, 30, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o seu CPF aqui", 20);
+		
 		txtCPF.setVisible(true);
 
 		JcbPessoaFisica = FabricaJCheckBox.criarJCheckBox(500, 264, 80, 30, "Fisica", FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "clique aqui para selecionar o cliente como pessoa fisica");
+		
 		JcbPessoaJuridica = FabricaJCheckBox.criarJCheckBox(430, 264, 80, 30, "juridica", FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "clique aqui para selecionar o cliente como pessoa juridica");
 
 		btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 300, 400, 90, 40, FabricasColors.corLabelBranca,
 				FabricasColors.CorRoxo, "Clique aqui para confimar o seu cadastro", 16);
+		
 		txtNome = FabricaJText.criarJTextField(100, 60, 460, 40, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o seu Nome aqui", 20);
 
@@ -92,16 +95,16 @@ public class TelaCadastrarFornecedor extends TelaPadrao{
 		JcbBuffet = FabricaJCheckBox.criarJCheckBox(100, 300, 100, 30, "Buffet", FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "clique aqui para selecionar o serviço de buffet");
 		
-		JcbDecoracao = FabricaJCheckBox.criarJCheckBox(100, 335, 100, 30, "Decoração", FabricasColors.corTxtField,
+		JcbDecoracao = FabricaJCheckBox.criarJCheckBox(200, 300, 100, 30, "Decoração", FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "clique aqui para selecionar o serviço de decoração");
 		
-		JcbEquipamentosDeEstrutura = FabricaJCheckBox.criarJCheckBox(100, 365, 100, 30, "Estruturação", FabricasColors.corTxtField,
+		JcbEquipamentosDeEstrutura = FabricaJCheckBox.criarJCheckBox(100, 335, 100, 30, "Estruturação", FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "clique aqui para selecionar o serviço de equipamentos de estrutura");
 		
-		JcbLocalDeEvento = FabricaJCheckBox.criarJCheckBox(100, 400, 180, 30, "Local de Evento", FabricasColors.corTxtField,
+		JcbLocalDeEvento = FabricaJCheckBox.criarJCheckBox(200, 335, 180, 30, "Local de Evento", FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "clique aqui para selecionar o serviço de fornecedor de local");
 		
-		JcbMusica = FabricaJCheckBox.criarJCheckBox(100, 435, 100, 30, "Musica", FabricasColors.corTxtField,
+		JcbMusica = FabricaJCheckBox.criarJCheckBox(100, 375, 100, 30, "Musica", FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "clique aqui para selecionar o serviço de musica");
 
 		background.add(JcbPessoaFisica);
