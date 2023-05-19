@@ -37,7 +37,6 @@ public class TelaCadastrarFornecedor extends TelaPadrao{
 	private JCheckBox JcbEquipamentosDeEstrutura;
 	private JCheckBox JcbLocalDeEvento;
 	
-	
 	public TelaCadastrarFornecedor(String titulo) {
 		super(titulo);
 		configTela();
@@ -123,7 +122,6 @@ public class TelaCadastrarFornecedor extends TelaPadrao{
 		background.add(JcbEquipamentosDeEstrutura);
 		background.add(JcbLocalDeEvento);
 		background.add(JcbMusica);
-
 		background.add(lbTiposDeServico);
 	}
 
