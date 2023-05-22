@@ -1,6 +1,8 @@
 package projeto.modelos;
 
-public class PessoaJuridica extends Cliente {
+import projeto.UsuarioPadrao;
+
+public class PessoaJuridica extends Cliente{
 
 	// Atributos unicos de pessoa juridica
 	private long CNPJ;

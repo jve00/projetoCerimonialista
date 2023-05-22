@@ -9,7 +9,8 @@ import projeto.exceptions.ClienteJaExisteException;
 import projeto.modelos.PessoaFisica;
 import projeto.modelos.PessoaJuridica;
 import projeto.modelos.enuns.TipoDeConta;
-import projeto.telas.ADM.TelaCadastrarCliente;
+import projeto.modelos.enuns.TipoDeServico;
+import projeto.telas.MenuAdm.TelaCadastrarCliente;
 import projeto.telas.MenuAdm.TelaMenuADM;
 import ulitilidades.persistencia.Persistencia;
 import ulitlidades.validacao.Validador;
@@ -18,8 +19,6 @@ import ultilidades.reporsitorio.CentralDeInformacoes;
 
 public class OuvinteBotaoCadastrarTelaCadastrarCliente implements ActionListener{
 
-	Persistencia persistencia = new Persistencia();
-	CentralDeInformacoes central = persistencia.recuperarCentral("central");
 	private TelaCadastrarCliente tela;
 
 	public OuvinteBotaoCadastrarTelaCadastrarCliente(TelaCadastrarCliente tela) {
@@ -27,6 +26,8 @@ public class OuvinteBotaoCadastrarTelaCadastrarCliente implements ActionListener
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		Persistencia persistencia = new Persistencia();
+		CentralDeInformacoes central = persistencia.recuperarCentral("central");
 
 		String nome = tela.getTxtNome().getText();
 		String telefone = String.valueOf((tela.getTxtTelefone().getText()));
@@ -50,22 +51,22 @@ public class OuvinteBotaoCadastrarTelaCadastrarCliente implements ActionListener
 				cpf = tela.getTxtCPF().getText();
 				cpfValido = Validador.validarCpf(cpf);
 			}
-			if (valido) {
-				if (cnpjValido) {
-					central.adicionarCliente(new PessoaJuridica(nome, telefone, email, tipo, Long.parseLong(cnpj)));
-					persistencia.salvarCentral(central, "central");
-					FabricaJOptionPane.criarMsg("Cadastro Confirmado.");
-					tela.dispose();
-					new TelaMenuADM("Menu");
-				} else {
-					central.adicionarCliente(new PessoaFisica(nome, telefone, email, tipo, Long.parseLong(cpf)));
-					System.out.println("não entrou");
-					persistencia.salvarCentral(central, "central");
-					FabricaJOptionPane.criarMsg("Cadastro Confirmado.");
-					tela.dispose();
-					new TelaMenuADM("Menu");
-				}
-			}
+//			if (valido) {
+//				if (cnpjValido) {
+//					central.adicionarFornecedor(new PessoaJuridica(nome, telefone, email, tipo, Long.parseLong(cnpj)));
+//					persistencia.salvarCentral(central, "central");
+//					FabricaJOptionPane.criarMsg("Cadastro Confirmado.");
+//					tela.dispose();
+//					new TelaMenuADM("Menu");
+//				} else {
+//					central.adicionarFornecedor(new PessoaFisica(nome, telefone, email, tipo, Long.parseLong(cpf)));
+//					System.out.println("não entrou");
+//					persistencia.salvarCentral(central, "central");
+//					FabricaJOptionPane.criarMsg("Cadastro Confirmado.");
+//					tela.dispose();
+//					new TelaMenuADM("Menu");
+//				}
+//			}
 		} catch (Exception e1) {
 			FabricaJOptionPane.criarMsgErro(e1.getMessage());
 		}

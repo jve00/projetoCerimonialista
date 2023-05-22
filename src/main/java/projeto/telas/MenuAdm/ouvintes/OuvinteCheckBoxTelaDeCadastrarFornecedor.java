@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 
-import projeto.telas.ADM.TelaCadastrarFornecedor;
+import projeto.telas.MenuAdm.TelaCadastrarFornecedor;
 
 public class OuvinteCheckBoxTelaDeCadastrarFornecedor implements ActionListener {
 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ultilidades.reporsitorio.CentralDeInformacoes>
+  <todosOsCliente/>
+  <todosOsFornecedores>
+    <projeto.modelos.FornecedorJuridico>
+      <nome>joao vitor silva</nome>
+      <email>jv@gmail.com</email>
+      <tipo>PESSOAJURIDICA</tipo>
+      <tipoDeServicos>
+        <projeto.modelos.enuns.TipoDeServico>BUFFET</projeto.modelos.enuns.TipoDeServico>
+        <projeto.modelos.enuns.TipoDeServico>DECORACAO</projeto.modelos.enuns.TipoDeServico>
+        <projeto.modelos.enuns.TipoDeServico>EQUIPAMENTOS_DE_ESTRUTURA</projeto.modelos.enuns.TipoDeServico>
+        <projeto.modelos.enuns.TipoDeServico>LOCAL_DO_EVENTO</projeto.modelos.enuns.TipoDeServico>
+        <projeto.modelos.enuns.TipoDeServico>MUSICA</projeto.modelos.enuns.TipoDeServico>
+      </tipoDeServicos>
+      <CNPJ>12345667891234</CNPJ>
+    </projeto.modelos.FornecedorJuridico>
+    <projeto.modelos.FornecedorJuridico>
+      <nome>cleber david </nome>
+      <email>cleber@gmail.com</email>
+      <tipo>PESSOAJURIDICA</tipo>
+      <tipoDeServicos>
+        <projeto.modelos.enuns.TipoDeServico>BUFFET</projeto.modelos.enuns.TipoDeServico>
+        <projeto.modelos.enuns.TipoDeServico>DECORACAO</projeto.modelos.enuns.TipoDeServico>
+        <projeto.modelos.enuns.TipoDeServico>EQUIPAMENTOS_DE_ESTRUTURA</projeto.modelos.enuns.TipoDeServico>
+      </tipoDeServicos>
+      <CNPJ>12122323231212</CNPJ>
+    </projeto.modelos.FornecedorJuridico>
+    <projeto.modelos.FornecedorJuridico>
+      <nome>cleber david</nome>
+      <email>cleber12@gmail.com</email>
+      <tipo>PESSOAJURIDICA</tipo>
+      <tipoDeServicos>
+        <projeto.modelos.enuns.TipoDeServico>BUFFET</projeto.modelos.enuns.TipoDeServico>
+        <projeto.modelos.enuns.TipoDeServico>DECORACAO</projeto.modelos.enuns.TipoDeServico>
+        <projeto.modelos.enuns.TipoDeServico>EQUIPAMENTOS_DE_ESTRUTURA</projeto.modelos.enuns.TipoDeServico>
+      </tipoDeServicos>
+      <CNPJ>21221212121212</CNPJ>
+    </projeto.modelos.FornecedorJuridico>
+  </todosOsFornecedores>
+  <todosOsEventos/>
+</ultilidades.reporsitorio.CentralDeInformacoes>

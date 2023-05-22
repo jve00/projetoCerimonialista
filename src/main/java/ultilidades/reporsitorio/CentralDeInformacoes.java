@@ -3,15 +3,17 @@ package ultilidades.reporsitorio;
 import java.util.ArrayList;
 
 import projeto.exceptions.ClienteJaExisteException;
+import projeto.exceptions.FornecedorExixtenteException;
 import projeto.exceptions.UsuarioNaoExisteException;
 import projeto.modelos.Administrador;
 import projeto.modelos.Cliente;
 import projeto.modelos.Evento;
-import ultilidades.fabricas.FabricaJOptionPane;
+import projeto.modelos.Fornecedor;
 
 public class CentralDeInformacoes {
 
 	private ArrayList<Cliente> todosOsCliente = new ArrayList<Cliente>();
+	private ArrayList<Fornecedor> todosOsFornecedores = new ArrayList<Fornecedor>();
 	private ArrayList<Evento> todosOsEventos = new ArrayList<Evento>();
 	private Administrador administrador;
 
@@ -60,6 +62,25 @@ public class CentralDeInformacoes {
 		return null;
 	}
 
+	public Fornecedor recuperarFornecedorPorEmail(String email) {
+		for (Fornecedor f : todosOsFornecedores) {
+			if (f.getEmail().equals(email)) {
+				return f;
+			}
+		}
+		return null;
+	}
+
+	public boolean adicionarFornecedor(Fornecedor fornecedor) throws FornecedorExixtenteException {
+		for (Fornecedor f : todosOsFornecedores) {
+			if (f.equals(recuperarFornecedorPorEmail(fornecedor.getEmail()))) {
+				throw new FornecedorExixtenteException();
+			}
+		}
+		todosOsFornecedores.add(fornecedor);
+		return true;
+	}
+
 	public boolean adicionarCliente(Cliente cliente) throws ClienteJaExisteException {
 		for (Cliente c : todosOsCliente) {
 			if (c.equals(recuperarClientePorEmail(cliente.getEmail()))) {
@@ -101,6 +122,14 @@ public class CentralDeInformacoes {
 
 	public void setAdministrador(Administrador administrador) {
 		this.administrador = administrador;
+	}
+
+	public ArrayList<Fornecedor> getTodoOsFornecedores() {
+		return todosOsFornecedores;
+	}
+
+	public void setTodoOsFornecedores(ArrayList<Fornecedor> todoOsFornecedores) {
+		this.todosOsFornecedores = todoOsFornecedores;
 	}
 
 }

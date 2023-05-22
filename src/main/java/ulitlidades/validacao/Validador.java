@@ -1,6 +1,7 @@
 package ulitlidades.validacao;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,8 +21,9 @@ public abstract class Validador {
 			throws ValidacaoException, ValidacaoExceptionEmail {
 		boolean emailValido = validarEmail(email);
 		boolean senhaValida = validarSenha(senha);
+		boolean idadeValida = idadeValida(data);
 
-		if (emailValido && senhaValida)
+		if (emailValido && senhaValida && idadeValida)
 			return true;
 		return false;
 	}
@@ -29,6 +31,7 @@ public abstract class Validador {
 	public static boolean validarCadastro(String nomeCompleto, String telefone, String email, JCheckBox cbfisica,
 			JCheckBox cbJuridica) throws Exception {
 		boolean nomeValido = validarNome(nomeCompleto);
+
 		boolean telefoneValido = validarTelefone(telefone);
 		boolean emailValido = validarEmail(email);
 		boolean cbValido = validarCheckBox(cbJuridica, cbfisica);
@@ -37,6 +40,15 @@ public abstract class Validador {
 			return true;
 		}
 		return false;
+	}
+
+	public static boolean idadeValida(LocalDate dataNascimento) throws ValidacaoException {
+		LocalDate dataNasc = dataNascimento;
+		LocalDate dataAtual = LocalDate.now();
+		Period periodo = Period.between(dataNasc, dataAtual);
+		if (periodo.getYears() >= 18)
+			return true;
+		throw new ValidacaoException("Data de nascimento invalida");
 	}
 
 	public static boolean validarCpf(String CPF) throws ValidarCpfException {
@@ -75,6 +87,13 @@ public abstract class Validador {
 		}
 		return true;
 	}
+//	public static boolean validarCheckBoxFornecedor(JCheckBox cb) {
+//		boolean selecionouUmaOpcao = 
+//		return true;
+//	}
+//	
+//	
+//	
 
 //	Lembrar de adicionar outros tipos de endereço para ele n só aceitar @gmail
 

@@ -15,6 +15,7 @@ public class Imagens {
   public static final ImageIcon SERVICOS = (ImageIcon) Imagens.importarImagem("img/btnListarServicos.png");
   public static final ImageIcon ORCAMENTOS = (ImageIcon) Imagens.importarImagem("img/btnOrcamentos.png");
   public static final ImageIcon PACOTES = (ImageIcon) Imagens.importarImagem("img/btnPacotes.png");
+  public static final ImageIcon SALVAR = (ImageIcon) Imagens.importarImagem("img/btnSalvar.png");
 
 }
  

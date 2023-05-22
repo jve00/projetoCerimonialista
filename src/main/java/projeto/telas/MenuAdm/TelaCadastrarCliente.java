@@ -1,25 +1,25 @@
-package projeto.telas.ADM;
-
-import java.awt.Color;
-import java.awt.Font;
+package projeto.telas.MenuAdm;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import projeto.ImagemDeFundo;
+import projeto.OuvinteBotaoFundoBranco;
+import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
+import projeto.telas.ADM.ouvintes.OuvinteBotaoCadastrarTelaCadastrarCliente;
+import projeto.telas.ADM.ouvintes.OuvinteCheckBoxJuridicoTelaDeCadastrarCliente;
 import ultilidades.fabricas.FabricaJButton;
 import ultilidades.fabricas.FabricaJCheckBox;
 import ultilidades.fabricas.FabricaJLabel;
 import ultilidades.fabricas.FabricaJText;
 import ultilidades.fabricas.FabricasColors;
+import ultilidades.imagens.Imagens;
 
-public class TelaCadastrarFornecedor extends TelaPadrao{
+public class TelaCadastrarCliente extends TelaPadrao {
 
-	
 	private ImagemDeFundo background;
 	private JTextField txtNome;
 	private JTextField txtEmail;
@@ -31,58 +31,62 @@ public class TelaCadastrarFornecedor extends TelaPadrao{
 	private JButton btnCadastrar;
 	private JLabel lblCNPJ;
 	private JLabel lblCPF;
-	private JCheckBox JcbBuffet;
-	private JCheckBox JcbMusica;
-	private JCheckBox JcbDecoracao;
-	private JCheckBox JcbEquipamentosDeEstrutura;
-	private JCheckBox JcbLocalDeEvento;
-	
-	public TelaCadastrarFornecedor(String titulo) {
+
+	public TelaCadastrarCliente(String titulo) {
 		super(titulo);
-		configTela();
 		setVisible(true);
-	
 	}
 
 	public void configurarComponentes() {
 		configImagemFundo();
-		
+		configTipoCliente();
+		configTela();
+
 	}
+
+	public void configImagemFundo() {
+		background = super.configImagemFundo("background.png");
+		add(background);
+	}
+
+	public void configTipoCliente() {
+	}
+
 	public void configTela() {
-	
-		
+		OuvinteBotaoCadastrarTelaCadastrarCliente ouvinteCadastrarCliente = new OuvinteBotaoCadastrarTelaCadastrarCliente(
+				this);
+		OuvinteCheckBoxJuridicoTelaDeCadastrarCliente ouvinteCheckBox = new OuvinteCheckBoxJuridicoTelaDeCadastrarCliente(
+				this);
+		OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
+		OuvinteBotaoFundoBranco ouvinteBranco = new OuvinteBotaoFundoBranco();
 		JLabel lblNome = FabricaJLabel.criarJLabel("Nome", 100, 20, 460, 40, FabricasColors.corLabelBranca, 25);
 		JLabel lblEmail = FabricaJLabel.criarJLabel("Telefone", 100, 100, 460, 40, FabricasColors.corLabelBranca, 25);
 		JLabel lblTelefone = FabricaJLabel.criarJLabel("Email", 100, 180, 460, 40, FabricasColors.corLabelBranca, 25);
-		JLabel lbTiposDeServico = FabricaJLabel.criarJLabel("Tipos de Serviços", 100, 270, 460, 40, FabricasColors.corLabelBranca, 18);
-		
-		lblCNPJ = FabricaJLabel.criarJLabel("CNPJ", 430, 280, 460, 40, FabricasColors.corLabelBranca, 20);
 
-		lblCNPJ.setVisible(true);
+		lblCNPJ = FabricaJLabel.criarJLabel("CNPJ", 100, 280, 460, 40, FabricasColors.corLabelBranca, 20);
 
-		lblCPF = FabricaJLabel.criarJLabel("CPF", 430, 340, 460, 40, FabricasColors.corLabelBranca, 20);
+		lblCNPJ.setVisible(false);
 
-		lblCPF.setVisible(true);
+		lblCPF = FabricaJLabel.criarJLabel("CPF", 100, 340, 460, 40, FabricasColors.corLabelBranca, 20);
 
-		txtCNPJ = FabricaJText.criarJTextField(430, 315, 190, 30, FabricasColors.corTxtField,
+		lblCPF.setVisible(false);
+
+		txtCNPJ = FabricaJText.criarJTextField(100, 315, 190, 30, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o seu CNPJ aqui", 20);
 
-		txtCNPJ.setVisible(true);
+		txtCNPJ.setVisible(false);
 
-		txtCPF = FabricaJText.criarJTextField(430, 375, 190, 30, FabricasColors.corTxtField,
+		txtCPF = FabricaJText.criarJTextField(100, 375, 190, 30, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o seu CPF aqui", 20);
-		
-		txtCPF.setVisible(true);
+		txtCPF.setVisible(false);
 
 		JcbPessoaFisica = FabricaJCheckBox.criarJCheckBox(500, 264, 80, 30, "Fisica", FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "clique aqui para selecionar o cliente como pessoa fisica");
-		
 		JcbPessoaJuridica = FabricaJCheckBox.criarJCheckBox(430, 264, 80, 30, "juridica", FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "clique aqui para selecionar o cliente como pessoa juridica");
 
-		btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 300, 400, 90, 40, FabricasColors.corLabelBranca,
+		btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 300, 300, 90, 40, FabricasColors.corLabelBranca,
 				FabricasColors.CorRoxo, "Clique aqui para confimar o seu cadastro", 16);
-		
 		txtNome = FabricaJText.criarJTextField(100, 60, 460, 40, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o seu Nome aqui", 20);
 
@@ -91,21 +95,13 @@ public class TelaCadastrarFornecedor extends TelaPadrao{
 
 		txtEmail = FabricaJText.criarJTextField(100, 220, 460, 40, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o seu Email aqui", 20);
-		
-		JcbBuffet = FabricaJCheckBox.criarJCheckBox(100, 300, 100, 30, "Buffet", FabricasColors.corTxtField,
-				FabricasColors.corLabelBranca, "clique aqui para selecionar o serviço de buffet");
-		
-		JcbDecoracao = FabricaJCheckBox.criarJCheckBox(200, 300, 100, 30, "Decoração", FabricasColors.corTxtField,
-				FabricasColors.corLabelBranca, "clique aqui para selecionar o serviço de decoração");
-		
-		JcbEquipamentosDeEstrutura = FabricaJCheckBox.criarJCheckBox(100, 335, 100, 30, "Estruturação", FabricasColors.corTxtField,
-				FabricasColors.corLabelBranca, "clique aqui para selecionar o serviço de equipamentos de estrutura");
-		
-		JcbLocalDeEvento = FabricaJCheckBox.criarJCheckBox(200, 335, 180, 30, "Local de Evento", FabricasColors.corTxtField,
-				FabricasColors.corLabelBranca, "clique aqui para selecionar o serviço de fornecedor de local");
-		
-		JcbMusica = FabricaJCheckBox.criarJCheckBox(100, 375, 100, 30, "Musica", FabricasColors.corTxtField,
-				FabricasColors.corLabelBranca, "clique aqui para selecionar o serviço de musica");
+
+		btnCadastrar.addActionListener(ouvinteCadastrarCliente);
+		btnCadastrar.addMouseListener(ouvinte);
+		JcbPessoaFisica.addActionListener(ouvinteCheckBox);
+		JcbPessoaFisica.addMouseListener(ouvinteBranco);
+		JcbPessoaJuridica.addActionListener(ouvinteCheckBox);
+		JcbPessoaJuridica.addMouseListener(ouvinteBranco);
 
 		background.add(JcbPessoaFisica);
 		background.add(JcbPessoaJuridica);
@@ -120,57 +116,6 @@ public class TelaCadastrarFornecedor extends TelaPadrao{
 		background.add(txtEmail);
 		background.add(txtTelefone);
 		background.add(btnCadastrar);
-		background.add(JcbBuffet);
-		background.add(JcbDecoracao);
-		background.add(JcbEquipamentosDeEstrutura);
-		background.add(JcbLocalDeEvento);
-		background.add(JcbMusica);
-		background.add(lbTiposDeServico);
-	}
-
-	public void configImagemFundo() {
-		background = super.configImagemFundo("background.png");
-		add(background);
-	}
-	
-	public JTextField getTxtNome() {
-		return txtNome;
-	}
-
-	public void setTxtNome(JTextField txtNome) {
-		this.txtNome = txtNome;
-	}
-
-	public JTextField getTxtEmail() {
-		return txtEmail;
-	}
-
-	public void setTxtEmail(JTextField txtEmail) {
-		this.txtEmail = txtEmail;
-	}
-
-	public JTextField getTxtTelefone() {
-		return txtTelefone;
-	}
-
-	public void setTxtTelefone(JTextField txtTelefone) {
-		this.txtTelefone = txtTelefone;
-	}
-
-	public JTextField getTxtCNPJ() {
-		return txtCNPJ;
-	}
-
-	public void setTxtCNPJ(JTextField txtCNPJ) {
-		this.txtCNPJ = txtCNPJ;
-	}
-
-	public JTextField getTxtCPF() {
-		return txtCPF;
-	}
-
-	public void setTxtCPF(JTextField txtCPF) {
-		this.txtCPF = txtCPF;
 	}
 
 	public JCheckBox getJcbPessoaFisica() {
@@ -197,6 +142,50 @@ public class TelaCadastrarFornecedor extends TelaPadrao{
 		this.btnCadastrar = btnCadastrar;
 	}
 
+	public JTextField getTxtNome() {
+		return txtNome;
+	}
+
+	public void setTxtNome(JTextField txtNome) {
+		this.txtNome = txtNome;
+	}
+
+	public JTextField getTxtEmail() {
+		return txtEmail;
+	}
+
+	public void setTxtEmail(JTextField txtEmail) {
+		this.txtEmail = txtEmail;
+	}
+
+	public JTextField getTxtTelefone() {
+		return txtTelefone;
+	}
+
+	public void setTxtTelefone(JTextField txtTelefone) {
+		this.txtTelefone = txtTelefone;
+	}
+
+	public static void main(String[] args) {
+		new TelaCadastrarCliente("");
+	}
+
+	public JTextField getTxtCNPJ() {
+		return txtCNPJ;
+	}
+
+	public void setTxtCNPJ(JTextField txtCNPJ) {
+		this.txtCNPJ = txtCNPJ;
+	}
+
+	public JTextField getTxtCPF() {
+		return txtCPF;
+	}
+
+	public void setTxtCPF(JTextField txtCPF) {
+		this.txtCPF = txtCPF;
+	}
+
 	public JLabel getLblCNPJ() {
 		return lblCNPJ;
 	}
@@ -213,9 +202,8 @@ public class TelaCadastrarFornecedor extends TelaPadrao{
 		this.lblCPF = lblCPF;
 	}
 
-	public static void main(String[] args) {
-		new TelaCadastrarFornecedor("Cadastrar Fornecedor");
-		
+	public ImagemDeFundo getMeuBackground() {
+		return background;
 	}
-	
+
 }
