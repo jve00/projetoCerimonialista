@@ -2,8 +2,6 @@ package projeto.modelos;
 
 import java.util.ArrayList;
 
-import projeto.modelos.enuns.TipoDeServico;
-
 public class FornecedorFisico extends Fornecedor {
 
 	// Atributos unicos de PessoaFisica
@@ -11,7 +9,7 @@ public class FornecedorFisico extends Fornecedor {
 
 	// Construto para facilitar a cria��o passando todos os atributos
 	public FornecedorFisico(String nome, String telefone, String tipo, String email, long CPF,
-			ArrayList<TipoDeServico> tipoDeServico) {
+			ArrayList<String> tipoDeServico) {
 		super(nome, telefone, tipo, email, tipoDeServico);
 		this.CPF = this.CPF;
 	}

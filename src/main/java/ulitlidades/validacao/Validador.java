@@ -31,7 +31,6 @@ public abstract class Validador {
 	public static boolean validarCadastro(String nomeCompleto, String telefone, String email, JCheckBox cbfisica,
 			JCheckBox cbJuridica) throws Exception {
 		boolean nomeValido = validarNome(nomeCompleto);
-
 		boolean telefoneValido = validarTelefone(telefone);
 		boolean emailValido = validarEmail(email);
 		boolean cbValido = validarCheckBox(cbJuridica, cbfisica);
@@ -87,26 +86,27 @@ public abstract class Validador {
 		}
 		return true;
 	}
-//	public static boolean validarCheckBoxFornecedor(JCheckBox cb) {
-//		boolean selecionouUmaOpcao = 
-//		return true;
-//	}
-//	
-//	
-//	
+
+	public static boolean validarCampos(String campos) {
+		if (campos.isBlank()) {
+			return false;
+		}
+		return true;
+	}
 
 //	Lembrar de adicionar outros tipos de endereço para ele n só aceitar @gmail
 
 	public static boolean validarEmail(String email) throws ValidacaoExceptionEmail {
-		if (email.isEmpty()) {
-			throw new ValidacaoExceptionEmail("O Email está vazio");
-		}
-		Pattern pattern = Pattern.compile("^[a-z0-9.@!#$%&'*+/=?^_`{|}~-]+$");
-		Matcher matcher = pattern.matcher(email);
+		if (email.isEmpty())
+			throw new ValidacaoExceptionEmail("E-mail nao pode ser vazio");
 
-		if (!matcher.matches()) {
+		String regex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(email);
+		boolean valido = matcher.matches() && email.contains("gmail.com");
+
+		if (!valido)
 			throw new ValidacaoExceptionEmail("E-mail invalido");
-		}
 		return true;
 	}
 

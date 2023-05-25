@@ -13,8 +13,8 @@ import javax.swing.table.DefaultTableModel;
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
+import projeto.exceptions.UsuarioNaoExisteException;
 import projeto.modelos.Fornecedor;
-import projeto.modelos.enuns.TipoDeServico;
 import projeto.telas.MenuAdm.ouvintes.OuvinteBotaoApagarTelaServicosFornecedores;
 import projeto.telas.MenuAdm.ouvintes.OuvinteBotaoEditarTelaServicosFornecedores;
 import projeto.telas.MenuAdm.ouvintes.OuvinteBotaoSalvarTelaServicosFornecedores;
@@ -34,8 +34,11 @@ public class TelaServicosFornecedores extends TelaPadrao {
 	private JButton btnApagar;
 	private JTextField txtServico;
 	private JTable tabelaServicos;
+	private	ArrayList<String> servicos;
 	
-
+	Persistencia persistencia = new Persistencia();
+	CentralDeInformacoes central = persistencia.recuperarCentral("central");
+	
 	private JScrollPane scrol;
 	private DefaultTableModel modelo;
 
@@ -100,34 +103,34 @@ public class TelaServicosFornecedores extends TelaPadrao {
 
 	}
 
-	private void popularTabela() {
-		Persistencia persistencia = new Persistencia();
-		CentralDeInformacoes central = persistencia.recuperarCentral("central");
-
-//		try {
-//			ArrayList<Corrida> corridasDoPassageiro = central
-//					.recuperarCorridasDeUmPassageiro(TelaPadrao.passageiroLogado.getEmail());
-//			for (Corrida c : corridasDoPassageiro) {
-//				addLinha(modelo, c);
-//			}
-//		} catch (UsuarioNaoExisteException e) {
+//	private void popularTabela() throws UsuarioNaoExisteException {
+//	
+//		ArrayList<String> servicos = central.getServicos();
+//
+//		for(String s: servicos) {
+//			addLinha(modelo, servicos);
 //		}
 //
-	}
-
-	private void addLinha(DefaultTableModel modelo, Fornecedor f) {
-
-		Object[] linha = new Object[0];
-		linha[0] = f.getTipoDeServicos();
-
-		modelo.addRow(linha);
-		scrol.repaint();
-
-	}
+//	}
+//
+//	private void addLinha(DefaultTableModel modelo,	ArrayList<String> c) {
+//		Object[] linhas = new Object[0];
+//		linhas[0] = c;
+//		modelo.addRow(linhas);
+//		scrol.repaint();
+//	}
 
 	public void configImagemFundo() {
 		background = super.configImagemFundo("background.png");
 		add(background);
+	}
+
+	public JTextField getTxtServico() {
+		return txtServico;
+	}
+
+	public void setTxtServico(JTextField txtServico) {
+		this.txtServico = txtServico;
 	}
 
 	public JButton getBtnSalvar() {

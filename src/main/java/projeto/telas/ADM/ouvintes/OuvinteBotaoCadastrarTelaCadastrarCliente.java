@@ -5,11 +5,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JCheckBox;
 
-import projeto.exceptions.ClienteJaExisteException;
 import projeto.modelos.PessoaFisica;
 import projeto.modelos.PessoaJuridica;
 import projeto.modelos.enuns.TipoDeConta;
-import projeto.modelos.enuns.TipoDeServico;
 import projeto.telas.MenuAdm.TelaCadastrarCliente;
 import projeto.telas.MenuAdm.TelaMenuADM;
 import ulitilidades.persistencia.Persistencia;
@@ -17,7 +15,7 @@ import ulitlidades.validacao.Validador;
 import ultilidades.fabricas.FabricaJOptionPane;
 import ultilidades.reporsitorio.CentralDeInformacoes;
 
-public class OuvinteBotaoCadastrarTelaCadastrarCliente implements ActionListener{
+public class OuvinteBotaoCadastrarTelaCadastrarCliente implements ActionListener {
 
 	private TelaCadastrarCliente tela;
 
@@ -51,22 +49,22 @@ public class OuvinteBotaoCadastrarTelaCadastrarCliente implements ActionListener
 				cpf = tela.getTxtCPF().getText();
 				cpfValido = Validador.validarCpf(cpf);
 			}
-//			if (valido) {
-//				if (cnpjValido) {
-//					central.adicionarFornecedor(new PessoaJuridica(nome, telefone, email, tipo, Long.parseLong(cnpj)));
-//					persistencia.salvarCentral(central, "central");
-//					FabricaJOptionPane.criarMsg("Cadastro Confirmado.");
-//					tela.dispose();
-//					new TelaMenuADM("Menu");
-//				} else {
-//					central.adicionarFornecedor(new PessoaFisica(nome, telefone, email, tipo, Long.parseLong(cpf)));
-//					System.out.println("não entrou");
-//					persistencia.salvarCentral(central, "central");
-//					FabricaJOptionPane.criarMsg("Cadastro Confirmado.");
-//					tela.dispose();
-//					new TelaMenuADM("Menu");
-//				}
-//			}
+			if (valido) {
+				if (cnpjValido) {
+					central.adicionarCliente(new PessoaJuridica(nome, telefone, email, tipo, Long.parseLong(cnpj)));
+					persistencia.salvarCentral(central, "central");
+					FabricaJOptionPane.criarMsg("Cadastro Confirmado.");
+					tela.dispose();
+					new TelaMenuADM("Menu");
+				} else {
+					central.adicionarCliente(new PessoaFisica(nome, telefone, email, tipo, Long.parseLong(cpf)));
+					System.out.println("não entrou");
+					persistencia.salvarCentral(central, "central");
+					FabricaJOptionPane.criarMsg("Cadastro Confirmado.");
+					tela.dispose();
+					new TelaMenuADM("Menu");
+				}
+			}
 		} catch (Exception e1) {
 			FabricaJOptionPane.criarMsgErro(e1.getMessage());
 		}

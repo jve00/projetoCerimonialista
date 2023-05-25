@@ -28,7 +28,6 @@ public class TelaDeCadastroADM extends TelaPadrao {
 	private JButton btnCadastrar;
 	private JFormattedTextField txtData;
 	private ImagemDeFundo background;
-	
 
 	public TelaDeCadastroADM(String titulo) {
 		super(titulo);
@@ -55,8 +54,8 @@ public class TelaDeCadastroADM extends TelaPadrao {
 		JLabel lblSenha = FabricaJLabel.criarJLabel("Senha", 100, 180, 460, 40, FabricasColors.corLabelBranca, 25);
 
 		btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 270, 350, 120, 45, FabricasColors.corLabelBranca,
-				FabricasColors.CorRoxo,"Clique aqui para confimar o seu cadastro", 20);
-		
+				FabricasColors.CorRoxo, "Clique aqui para confimar o seu cadastro", 20);
+
 		// Campo para armazenar o email
 		txtEmail = FabricaJText.criarJTextField(100, 135, 460, 40, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o seu email aqui", 20);
@@ -68,7 +67,7 @@ public class TelaDeCadastroADM extends TelaPadrao {
 		JLabel lblDataNascimento = FabricaJLabel.criarJLabel("Data de Nascimento", 100, 260, 460, 40, Color.white, 20);
 		try {
 			txtData = FabricaJFormatted.criarJFormatted(100, 295, 130, 40, new MaskFormatter("##/##/####"),
-				FabricasColors.corTxtField, FabricasColors.corLabelBranca, "Digite a sua data de nascimento aqui");
+					FabricasColors.corTxtField, FabricasColors.corLabelBranca, "Digite a sua data de nascimento aqui");
 		} catch (Exception e) {
 		}
 
@@ -76,7 +75,7 @@ public class TelaDeCadastroADM extends TelaPadrao {
 		OuvinteBotaoFundoPreto ouvinteFundoPreto = new OuvinteBotaoFundoPreto();
 		btnCadastrar.addActionListener(ouvinte);
 		btnCadastrar.addMouseListener(ouvinteFundoPreto);
-	
+
 		background.add(lblDataNascimento);
 		background.add(txtData);
 		background.add(btnCadastrar);
@@ -85,7 +84,6 @@ public class TelaDeCadastroADM extends TelaPadrao {
 		background.add(txtEmail);
 		background.add(lblSenha);
 		background.add(txtSenha);
-	
 
 	}
 

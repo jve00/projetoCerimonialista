@@ -3,24 +3,23 @@ package projeto.modelos;
 import java.util.ArrayList;
 
 import projeto.UsuarioPadrao;
-import projeto.modelos.enuns.TipoDeServico;
 
 public class Fornecedor extends UsuarioPadrao {
 
-	private ArrayList<TipoDeServico> tipoDeServicos;
+	private ArrayList<String> tipoDeServicos;
 
 	public Fornecedor(String nome,String telefone, String tipo, String email,
-			ArrayList<TipoDeServico> tipoDeServico) {
+			ArrayList<String> tipoDeServico) {
 		super(nome,telefone, tipo, email);
 		this.tipoDeServicos = tipoDeServico;
 
 	}
-
-	public ArrayList<TipoDeServico> getTipoDeServicos() {
+	
+	public ArrayList<String> getTipoDeServicos() {
 		return tipoDeServicos;
 	}
 
-	public void setTipoDeServicos(ArrayList<TipoDeServico> tipoDeServicos) {
+	public void setTipoDeServicos(ArrayList<String> tipoDeServicos) {
 		this.tipoDeServicos = tipoDeServicos;
 	}
 	

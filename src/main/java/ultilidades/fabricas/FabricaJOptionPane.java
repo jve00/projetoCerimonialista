@@ -1,5 +1,6 @@
 package ultilidades.fabricas;
 
+import javax.swing.Icon;
 import javax.swing.JOptionPane;
 
 public abstract class FabricaJOptionPane {
@@ -22,6 +23,7 @@ public abstract class FabricaJOptionPane {
 	}
 	public static void criarMsg(String msg) {
 		JOptionPane.showMessageDialog(null, msg, "Informaçao", JOptionPane.INFORMATION_MESSAGE);
+		
 	}
 	
 }

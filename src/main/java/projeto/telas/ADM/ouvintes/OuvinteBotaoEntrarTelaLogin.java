@@ -42,15 +42,15 @@ public class OuvinteBotaoEntrarTelaLogin implements ActionListener {
 			if (valido && validarSenha && verificarEmail && VerificarSenha) {
 				tela.dispose();
 				new TelaMenuADM("Menu");
-			}else {
+			} else {
 				FabricaJOptionPane.criarMsgErro("Email ou senha Invalido");
 			}
 		} catch (UsuarioNaoExisteException e1) {
 			FabricaJOptionPane.criarMsgErro(e1.getMessage());
-		} catch (ValidacaoExceptionEmail erro) {
-			FabricaJOptionPane.criarMsgErro(erro.getMessage());
 		} catch (ValidacaoException e2) {
 			FabricaJOptionPane.criarMsgErro(e2.getMessage());
+		} catch (ValidacaoExceptionEmail e1) {
+			FabricaJOptionPane.criarMsgErro(e1.getMessage());
 		}
 	}
 

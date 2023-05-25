@@ -9,6 +9,7 @@ import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.telas.MenuAdm.ouvintes.OuvinteBotaoCadastarTelaCadastrarFornecedor;
+import projeto.telas.MenuAdm.ouvintes.OuvitenteBotaoServicosTelaCadastrarFornecedor;
 import ultilidades.fabricas.FabricaJButton;
 import ultilidades.fabricas.FabricaJCheckBox;
 import ultilidades.fabricas.FabricaJLabel;
@@ -28,11 +29,7 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 	private JButton btnCadastrar;
 	private JLabel lblCNPJ;
 	private JLabel lblCPF;
-	private JCheckBox JcbBuffet;
-	private JCheckBox JcbMusica;
-	private JCheckBox JcbDecoracao;
-	private JCheckBox JcbEquipamentosDeEstrutura;
-	private JCheckBox JcbLocalDeEvento;
+	private JButton btnTiposDeServicos;
 
 	public TelaCadastrarFornecedor(String titulo) {
 		super(titulo);
@@ -47,13 +44,16 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 	}
 
 	public void configTela() {
-		OuvinteBotaoCadastarTelaCadastrarFornecedor ouvinteCadastrar = new OuvinteBotaoCadastarTelaCadastrarFornecedor(this);
+		OuvinteBotaoCadastarTelaCadastrarFornecedor ouvinteCadastrar = new OuvinteBotaoCadastarTelaCadastrarFornecedor(
+				this);
+		OuvitenteBotaoServicosTelaCadastrarFornecedor ouvinteServico = new OuvitenteBotaoServicosTelaCadastrarFornecedor(
+				this);
 		OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
 
 		JLabel lblNome = FabricaJLabel.criarJLabel("Nome", 100, 20, 460, 40, FabricasColors.corLabelBranca, 25);
 		JLabel lblEmail = FabricaJLabel.criarJLabel("Telefone", 100, 100, 460, 40, FabricasColors.corLabelBranca, 25);
 		JLabel lblTelefone = FabricaJLabel.criarJLabel("Email", 100, 180, 460, 40, FabricasColors.corLabelBranca, 25);
-		JLabel lbTiposDeServico = FabricaJLabel.criarJLabel("Tipos de Servi�os", 100, 270, 460, 40,
+		JLabel lbTiposDeServico = FabricaJLabel.criarJLabel("Tipos de Servicos", 100, 270, 460, 40,
 				FabricasColors.corLabelBranca, 18);
 
 		lblCNPJ = FabricaJLabel.criarJLabel("CNPJ", 430, 280, 460, 40, FabricasColors.corLabelBranca, 20);
@@ -92,49 +92,37 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 		txtEmail = FabricaJText.criarJTextField(100, 220, 460, 40, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o seu Email aqui", 20);
 
-		JcbBuffet = FabricaJCheckBox.criarJCheckBox(100, 300, 100, 30, "Buffet", FabricasColors.corTxtField,
-				FabricasColors.corLabelBranca, "clique aqui para selecionar o servi�o de buffet");
-
-		JcbDecoracao = FabricaJCheckBox.criarJCheckBox(200, 300, 100, 30, "Decora��o", FabricasColors.corTxtField,
-				FabricasColors.corLabelBranca, "clique aqui para selecionar o servi�o de decora��o");
-
-		JcbEquipamentosDeEstrutura = FabricaJCheckBox.criarJCheckBox(100, 335, 100, 30, "Estrutura��o",
-				FabricasColors.corTxtField, FabricasColors.corLabelBranca,
-				"clique aqui para selecionar o servi�o de equipamentos de estrutura");
-
-		JcbLocalDeEvento = FabricaJCheckBox.criarJCheckBox(200, 335, 180, 30, "Local de Evento",
-				FabricasColors.corTxtField, FabricasColors.corLabelBranca,
-				"clique aqui para selecionar o servi�o de fornecedor de local");
-
-		JcbMusica = FabricaJCheckBox.criarJCheckBox(100, 375, 100, 30, "Musica", FabricasColors.corTxtField,
-				FabricasColors.corLabelBranca, "clique aqui para selecionar o servi�o de musica");
-		
-	
 		btnCadastrar.addActionListener(ouvinteCadastrar);
 		btnCadastrar.addMouseListener(ouvinte);
-		
-		
-		
 
+		btnTiposDeServicos = FabricaJButton.criarJButton("Tipos de servicos", 110, 300, 140, 40,
+				FabricasColors.corLabelBranca, FabricasColors.CorRoxo, "", 15);
+		btnTiposDeServicos.addActionListener(ouvinteServico);
+		btnTiposDeServicos.addMouseListener(ouvinte);
+
+		background.add(lblTelefone);
+		background.add(lblEmail);
+		background.add(lblNome);
+		background.add(lbTiposDeServico);
 		background.add(JcbPessoaFisica);
 		background.add(JcbPessoaJuridica);
 		background.add(txtCNPJ);
 		background.add(txtCPF);
 		background.add(lblCPF);
 		background.add(lblCNPJ);
-		background.add(lblTelefone);
-		background.add(lblEmail);
-		background.add(lblNome);
 		background.add(txtNome);
 		background.add(txtEmail);
 		background.add(txtTelefone);
 		background.add(btnCadastrar);
-		background.add(JcbBuffet);
-		background.add(JcbDecoracao);
-		background.add(JcbEquipamentosDeEstrutura);
-		background.add(JcbLocalDeEvento);
-		background.add(JcbMusica);
-		background.add(lbTiposDeServico);
+		background.add(btnTiposDeServicos);
+	}
+
+	public JButton getBtnTiposDeServicos() {
+		return btnTiposDeServicos;
+	}
+
+	public void setBtnTiposDeServicos(JButton btnTiposDeServicos) {
+		this.btnTiposDeServicos = btnTiposDeServicos;
 	}
 
 	public void configImagemFundo() {
@@ -220,46 +208,6 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 
 	public void setLblCPF(JLabel lblCPF) {
 		this.lblCPF = lblCPF;
-	}
-
-	public JCheckBox getJcbBuffet() {
-		return JcbBuffet;
-	}
-
-	public void setJcbBuffet(JCheckBox jcbBuffet) {
-		JcbBuffet = jcbBuffet;
-	}
-
-	public JCheckBox getJcbMusica() {
-		return JcbMusica;
-	}
-
-	public void setJcbMusica(JCheckBox jcbMusica) {
-		JcbMusica = jcbMusica;
-	}
-
-	public JCheckBox getJcbDecoracao() {
-		return JcbDecoracao;
-	}
-
-	public void setJcbDecoracao(JCheckBox jcbDecoracao) {
-		JcbDecoracao = jcbDecoracao;
-	}
-
-	public JCheckBox getJcbEquipamentosDeEstrutura() {
-		return JcbEquipamentosDeEstrutura;
-	}
-
-	public void setJcbEquipamentosDeEstrutura(JCheckBox jcbEquipamentosDeEstrutura) {
-		JcbEquipamentosDeEstrutura = jcbEquipamentosDeEstrutura;
-	}
-
-	public JCheckBox getJcbLocalDeEvento() {
-		return JcbLocalDeEvento;
-	}
-
-	public void setJcbLocalDeEvento(JCheckBox jcbLocalDeEvento) {
-		JcbLocalDeEvento = jcbLocalDeEvento;
 	}
 
 	public static void main(String[] args) {
