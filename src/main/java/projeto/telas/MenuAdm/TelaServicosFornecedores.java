@@ -1,7 +1,6 @@
 package projeto.telas.MenuAdm;
 
 import java.awt.Font;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -36,7 +35,7 @@ public class TelaServicosFornecedores extends TelaPadrao {
 
 	private JScrollPane scrol;
 	private DefaultTableModel modelo;
-	OuvinteBotaoApagarTelaServicosFornecedores ouvinteApagar = new OuvinteBotaoApagarTelaServicosFornecedores(this);
+	private ArrayList<String> servicos;
 
 	public TelaServicosFornecedores(String titulo) {
 		super(titulo);
@@ -53,6 +52,7 @@ public class TelaServicosFornecedores extends TelaPadrao {
 	public void configTela() {
 		OuvinteBotaoEditarTelaServicosFornecedores ouvinteEditar = new OuvinteBotaoEditarTelaServicosFornecedores(this);
 		OuvinteBotaoSalvarTelaServicosFornecedores ouvinteSalvar = new OuvinteBotaoSalvarTelaServicosFornecedores(this);
+		OuvinteBotaoApagarTelaServicosFornecedores ouvinteApagar = new OuvinteBotaoApagarTelaServicosFornecedores(this);
 		OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
 
 		JLabel lblNome = FabricaJLabel.criarJLabel("Novo Servico: ", 230, 20, 400, 40, FabricasColors.corLabelBranca,
@@ -110,17 +110,15 @@ public class TelaServicosFornecedores extends TelaPadrao {
 		Persistencia persistencia = new Persistencia();
 		CentralDeInformacoes central = persistencia.recuperarCentral("central");
 
-		ArrayList<String> servicos = central.getServicos();
+		servicos = central.getServicos();
 		for (String s : servicos) {
 			addLinha(modelo, s);
 		}
+
 	}
 
 	private void addLinha(DefaultTableModel modelo, String c) {
-		
-		tabelaServicos.addMouseListener((MouseListener) ouvinteApagar);
-
-		Object[] linhas = new Object[1];
+		Object[] linhas = new Object[servicos.size()];
 		linhas[0] = c;
 		modelo.addRow(linhas);
 		scrol.repaint();
@@ -161,6 +159,14 @@ public class TelaServicosFornecedores extends TelaPadrao {
 
 	public void setBtnApagar(JButton btnApagar) {
 		this.btnApagar = btnApagar;
+	}
+
+	public ArrayList<String> getServicos() {
+		return servicos;
+	}
+
+	public void setServicos(ArrayList<String> servicos) {
+		this.servicos = servicos;
 	}
 
 	public static void main(String[] args) {
