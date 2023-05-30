@@ -16,7 +16,7 @@ public class CentralDeInformacoes {
 	private ArrayList<Cliente> todosOsCliente = new ArrayList<Cliente>();
 	private ArrayList<Fornecedor> todosOsFornecedores = new ArrayList<Fornecedor>();
 	private ArrayList<Evento> todosOsEventos = new ArrayList<Evento>();
-//	private ArrayList<String> servicos = new ArrayList<String>();
+	private ArrayList<String> servicos = new ArrayList<String>();
 	private Administrador administrador;
 
 	public boolean adicionarEvento(Evento evento) {
@@ -41,39 +41,43 @@ public class CentralDeInformacoes {
 		return false;
 	}
 
-	public boolean adicionarServico(String servico) throws ServicoJaCadastradoException {
-		for (Fornecedor f : todosOsFornecedores) {
-			if (f.getTipoDeServicos().equals(servico)) {
-				throw new ServicoJaCadastradoException();
-			} else {
-				System.out.println("é diferente e adicionou");
-				f.getTipoDeServicos().add(servico);
-			}
-		}
-		return true;
-
-	}
-
 //	public boolean adicionarServico(String servico) throws ServicoJaCadastradoException {
-//		System.out.println("entrou");
-//		if (servicos == null) {
-//			servicos.add(servico);
-//			System.out.println("adicionou");
-//		} else if (servicos.contains(servico)) {
-//			throw new ServicoJaCadastradoException();
-//		} else {
-//			System.out.println("é diferente e adicionou");
-//			servicos.add(servico);
+//		for (Fornecedor f : todosOsFornecedores) {
+//			if (f.getTipoDeServicos().equals(servico)) {
+//				throw new ServicoJaCadastradoException();
+//			} else {
+//				System.out.println("é diferente e adicionou");
+//				f.getTipoDeServicos().add(servico);
+//			}
 //		}
 //		return true;
-//	}
 //
-//	public boolean recuperarServicoNome(String NomeServico) {
-//		if (servicos.contains(NomeServico)) {
-//			return true;
-//		}
-//		return false;
 //	}
+
+	public boolean adicionarServico(String servico) throws ServicoJaCadastradoException {
+		if (servicos == null) {
+			servicos.add(servico);
+		} else if (servicos.contains(servico)) {
+			throw new ServicoJaCadastradoException();
+		} else {
+			servicos.add(servico);
+		}
+		return true;
+	}
+
+//	public ArrayList<String> retornarServicos() {
+//		for (int i = 0; i < servicos.size(); i++) {
+//			return servicos;
+//		}
+//		return null;
+//	}
+
+	public boolean recuperarServicoNome(String NomeServico) {
+		if (servicos.contains(NomeServico)) {
+			return true;
+		}
+		return false;
+	}
 
 	public ArrayList<Evento> recuperarEventosCliente(String email) {
 		ArrayList<Evento> eventoDoCliente = new ArrayList<Evento>();
@@ -168,12 +172,12 @@ public class CentralDeInformacoes {
 		this.todosOsFornecedores = todoOsFornecedores;
 	}
 
-//	public ArrayList<String> getServicos() {
-//		return servicos;
-//	}
-//
-//	public void setServicos(ArrayList<String> servicos) {
-//		this.servicos = servicos;
-//	}
+	public ArrayList<String> getServicos() {
+		return servicos;
+	}
+
+	public void setServicos(ArrayList<String> servicos) {
+		this.servicos = servicos;
+	}
 
 }

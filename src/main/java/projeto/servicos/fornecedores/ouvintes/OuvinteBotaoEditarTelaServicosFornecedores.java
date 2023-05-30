@@ -1,4 +1,4 @@
-package projeto.telas.MenuAdm.ouvintes;
+package projeto.servicos.fornecedores.ouvintes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -1,6 +1,7 @@
 package projeto.telas.MenuAdm;
 
 import java.awt.Font;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -13,11 +14,9 @@ import javax.swing.table.DefaultTableModel;
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
-import projeto.exceptions.UsuarioNaoExisteException;
-import projeto.modelos.Fornecedor;
-import projeto.telas.MenuAdm.ouvintes.OuvinteBotaoApagarTelaServicosFornecedores;
-import projeto.telas.MenuAdm.ouvintes.OuvinteBotaoEditarTelaServicosFornecedores;
-import projeto.telas.MenuAdm.ouvintes.OuvinteBotaoSalvarTelaServicosFornecedores;
+import projeto.servicos.fornecedores.ouvintes.OuvinteBotaoApagarTelaServicosFornecedores;
+import projeto.servicos.fornecedores.ouvintes.OuvinteBotaoEditarTelaServicosFornecedores;
+import projeto.servicos.fornecedores.ouvintes.OuvinteBotaoSalvarTelaServicosFornecedores;
 import ulitilidades.persistencia.Persistencia;
 import ultilidades.fabricas.FabricaJButton;
 import ultilidades.fabricas.FabricaJLabel;
@@ -34,13 +33,10 @@ public class TelaServicosFornecedores extends TelaPadrao {
 	private JButton btnApagar;
 	private JTextField txtServico;
 	private JTable tabelaServicos;
-	private	ArrayList<String> servicos;
-	
-	Persistencia persistencia = new Persistencia();
-	CentralDeInformacoes central = persistencia.recuperarCentral("central");
-	
+
 	private JScrollPane scrol;
 	private DefaultTableModel modelo;
+	OuvinteBotaoApagarTelaServicosFornecedores ouvinteApagar = new OuvinteBotaoApagarTelaServicosFornecedores(this);
 
 	public TelaServicosFornecedores(String titulo) {
 		super(titulo);
@@ -51,11 +47,10 @@ public class TelaServicosFornecedores extends TelaPadrao {
 		configImagemFundo();
 		configTabelaServicos();
 		configTela();
-
+		popularTabela();
 	}
 
 	public void configTela() {
-		OuvinteBotaoApagarTelaServicosFornecedores ouvinteApagar = new OuvinteBotaoApagarTelaServicosFornecedores(this);
 		OuvinteBotaoEditarTelaServicosFornecedores ouvinteEditar = new OuvinteBotaoEditarTelaServicosFornecedores(this);
 		OuvinteBotaoSalvarTelaServicosFornecedores ouvinteSalvar = new OuvinteBotaoSalvarTelaServicosFornecedores(this);
 		OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
@@ -91,7 +86,7 @@ public class TelaServicosFornecedores extends TelaPadrao {
 		modelo = new DefaultTableModel();
 		modelo.setColumnIdentifiers(new String[] { "Servicos" });
 		tabelaServicos = new JTable(modelo);
-		tabelaServicos.setFont(new Font("Arial", 1, 20));
+		tabelaServicos.setFont(new Font("Arial", 1, 15));
 		tabelaServicos.getTableHeader().setFont(new Font("Arial", Font.BOLD, 25));
 		tabelaServicos.getTableHeader().setBackground(FabricasColors.corLabelBranca);
 		tabelaServicos.getTableHeader().setForeground(FabricasColors.CorRoxo);
@@ -103,22 +98,33 @@ public class TelaServicosFornecedores extends TelaPadrao {
 
 	}
 
-//	private void popularTabela() throws UsuarioNaoExisteException {
-//	
-//		ArrayList<String> servicos = central.getServicos();
-//
-//		for(String s: servicos) {
-//			addLinha(modelo, servicos);
-//		}
-//
-//	}
-//
-//	private void addLinha(DefaultTableModel modelo,	ArrayList<String> c) {
-//		Object[] linhas = new Object[0];
-//		linhas[0] = c;
-//		modelo.addRow(linhas);
-//		scrol.repaint();
-//	}
+	public JTable getTabelaServicos() {
+		return tabelaServicos;
+	}
+
+	public void setTabelaServicos(JTable tabelaServicos) {
+		this.tabelaServicos = tabelaServicos;
+	}
+
+	private void popularTabela() {
+		Persistencia persistencia = new Persistencia();
+		CentralDeInformacoes central = persistencia.recuperarCentral("central");
+
+		ArrayList<String> servicos = central.getServicos();
+		for (String s : servicos) {
+			addLinha(modelo, s);
+		}
+	}
+
+	private void addLinha(DefaultTableModel modelo, String c) {
+		
+		tabelaServicos.addMouseListener((MouseListener) ouvinteApagar);
+
+		Object[] linhas = new Object[1];
+		linhas[0] = c;
+		modelo.addRow(linhas);
+		scrol.repaint();
+	}
 
 	public void configImagemFundo() {
 		background = super.configImagemFundo("background.png");

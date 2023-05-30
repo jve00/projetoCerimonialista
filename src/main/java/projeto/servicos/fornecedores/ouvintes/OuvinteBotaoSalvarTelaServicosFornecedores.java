@@ -1,7 +1,8 @@
-package projeto.telas.MenuAdm.ouvintes;
+package projeto.servicos.fornecedores.ouvintes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 import projeto.exceptions.ServicoJaCadastradoException;
 import projeto.telas.MenuAdm.TelaServicosFornecedores;
@@ -28,8 +29,11 @@ public class OuvinteBotaoSalvarTelaServicosFornecedores implements ActionListene
 		if (valido) {
 			try {
 				central.adicionarServico(servico);
-				FabricaJOptionPane.criarMsg("Servico cadastrado com sucesso.");
 				persistencia.salvarCentral(central, "central");
+				tela.getTxtServico().setText("");
+				FabricaJOptionPane.criarMsg("Servico cadastrado com sucesso.");
+				tela.dispose();
+				new TelaServicosFornecedores("Servicos");
 			} catch (ServicoJaCadastradoException e1) {
 				FabricaJOptionPane.criarMsgErro(e1.getMessage());
 			}

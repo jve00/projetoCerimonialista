@@ -35,6 +35,7 @@ public class OuvinteBotaoCadastarTelaCadastrarFornecedor implements ActionListen
 		boolean selecionouPessoaFisica = tela.getJcbPessoaFisica().isSelected();
 		TipoDeConta tipo = (selecionouPessoaFisica ? TipoDeConta.PESSOAFISICA : TipoDeConta.PESSOAJURIDICA);
 		String tipoDaConta = String.valueOf(tipo);
+		
 //		boolean tipoBuffet = tela.getJcbBuffet().isSelected();
 //		boolean tipoDecoracao = tela.getJcbDecoracao().isSelected();
 //		boolean tipoEstrutura = tela.getJcbEquipamentosDeEstrutura().isSelected();
@@ -77,14 +78,14 @@ public class OuvinteBotaoCadastarTelaCadastrarFornecedor implements ActionListen
 			if (valido) {
 				if (cnpjValido) {
 					central.adicionarFornecedor(new FornecedorJuridico(nome, telefone, email, tipoDaConta,
-							Long.parseLong(cnpj), str));
+							Long.parseLong(cnpj), central.getServicos()));
 					persistencia.salvarCentral(central, "central");
 					FabricaJOptionPane.criarMsg("Cadastro Confirmado.");
 					tela.dispose();
 					new TelaMenuADM("Menu");
 				} else {
 					central.adicionarFornecedor(new FornecedorFisico(nome, telefone, email, tipoDaConta,
-							Long.parseLong(cpf), arrayServicos));
+							Long.parseLong(cpf), central.getServicos()));
 					persistencia.salvarCentral(central, "central");
 					FabricaJOptionPane.criarMsg("Cadastro Confirmado.");
 					tela.dispose();
