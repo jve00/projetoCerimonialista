@@ -24,8 +24,6 @@ public class OuvinteBotaoCadastarTelaCadastrarFornecedor implements ActionListen
 	}
 
 	public void actionPerformed(ActionEvent e) {
-	
-		
 		Persistencia persistencia = new Persistencia();
 		CentralDeInformacoes central = persistencia.recuperarCentral("central");
 		Object componente = e.getSource();
@@ -35,29 +33,6 @@ public class OuvinteBotaoCadastarTelaCadastrarFornecedor implements ActionListen
 		boolean selecionouPessoaFisica = tela.getJcbPessoaFisica().isSelected();
 		TipoDeConta tipo = (selecionouPessoaFisica ? TipoDeConta.PESSOAFISICA : TipoDeConta.PESSOAJURIDICA);
 		String tipoDaConta = String.valueOf(tipo);
-		
-//		boolean tipoBuffet = tela.getJcbBuffet().isSelected();
-//		boolean tipoDecoracao = tela.getJcbDecoracao().isSelected();
-//		boolean tipoEstrutura = tela.getJcbEquipamentosDeEstrutura().isSelected();
-//		boolean tipoLocal = tela.getJcbLocalDeEvento().isSelected();
-//		boolean tipoMusica = tela.getJcbMusica().isSelected();
-//		String servico = "";
-//
-//		if (tipoBuffet) {
-//			arrayServicos.add(TipoDeServico.BUFFET);
-//		}
-//		if (tipoDecoracao) {
-//			arrayServicos.add(TipoDeServico.DECORACAO);
-//		}
-//		if (tipoEstrutura) {
-//			arrayServicos.add(TipoDeServico.EQUIPAMENTOS_DE_ESTRUTURA);
-//		}
-//		if (tipoLocal) {
-//			arrayServicos.add(TipoDeServico.LOCAL_DO_EVENTO);
-//		}
-//		if (tipoMusica) {
-//			arrayServicos.add(TipoDeServico.MUSICA);
-//		}
 
 		JCheckBox pessoaFisica = tela.getJcbPessoaFisica();
 		JCheckBox pessoaJuridica = tela.getJcbPessoaJuridica();
@@ -78,14 +53,14 @@ public class OuvinteBotaoCadastarTelaCadastrarFornecedor implements ActionListen
 			if (valido) {
 				if (cnpjValido) {
 					central.adicionarFornecedor(new FornecedorJuridico(nome, telefone, email, tipoDaConta,
-							Long.parseLong(cnpj), central.getServicos()));
+							Long.parseLong(cnpj), tela.getServicosDoFornecedor()));
 					persistencia.salvarCentral(central, "central");
 					FabricaJOptionPane.criarMsg("Cadastro Confirmado.");
 					tela.dispose();
 					new TelaMenuADM("Menu");
 				} else {
 					central.adicionarFornecedor(new FornecedorFisico(nome, telefone, email, tipoDaConta,
-							Long.parseLong(cpf), central.getServicos()));
+							Long.parseLong(cpf), tela.getServicosDoFornecedor()));
 					persistencia.salvarCentral(central, "central");
 					FabricaJOptionPane.criarMsg("Cadastro Confirmado.");
 					tela.dispose();
@@ -95,7 +70,5 @@ public class OuvinteBotaoCadastarTelaCadastrarFornecedor implements ActionListen
 		} catch (Exception e1) {
 			FabricaJOptionPane.criarMsgErro(e1.getMessage());
 		}
-
 	}
-
 }

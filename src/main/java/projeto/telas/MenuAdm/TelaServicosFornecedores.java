@@ -111,17 +111,17 @@ public class TelaServicosFornecedores extends TelaPadrao {
 		CentralDeInformacoes central = persistencia.recuperarCentral("central");
 
 		servicos = central.getServicos();
+	
 		for (String s : servicos) {
 			addLinha(modelo, s);
 		}
-
+		scrol.repaint();
 	}
 
 	private void addLinha(DefaultTableModel modelo, String c) {
 		Object[] linhas = new Object[servicos.size()];
 		linhas[0] = c;
 		modelo.addRow(linhas);
-		scrol.repaint();
 	}
 
 	public void configImagemFundo() {

@@ -1,20 +1,29 @@
 package projeto.telas.MenuAdm;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import projeto.ImagemDeFundo;
+import projeto.OuvinteBotaoFundoBranco;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.telas.MenuAdm.ouvintes.OuvinteBotaoCadastarTelaCadastrarFornecedor;
-import projeto.telas.MenuAdm.ouvintes.OuvitenteBotaoServicosTelaCadastrarFornecedor;
+import ulitilidades.persistencia.Persistencia;
 import ultilidades.fabricas.FabricaJButton;
 import ultilidades.fabricas.FabricaJCheckBox;
 import ultilidades.fabricas.FabricaJLabel;
 import ultilidades.fabricas.FabricaJText;
 import ultilidades.fabricas.FabricasColors;
+import ultilidades.reporsitorio.CentralDeInformacoes;
 
 public class TelaCadastrarFornecedor extends TelaPadrao {
 
@@ -30,31 +39,93 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 	private JLabel lblCNPJ;
 	private JLabel lblCPF;
 	private JButton btnTiposDeServicos;
+	private ArrayList<String> servicosDoFornecedor;
 
 	public TelaCadastrarFornecedor(String titulo) {
 		super(titulo);
 		configTela();
 		setVisible(true);
-
 	}
 
 	public void configurarComponentes() {
 		configImagemFundo();
+	}
+
+	private class OuvinteBotaoTiposDeServicos implements ActionListener {
+
+		private TelaCadastrarFornecedor tela;
+
+		public OuvinteBotaoTiposDeServicos(TelaCadastrarFornecedor tela) {
+			this.tela = tela;
+
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			Persistencia persistencia = new Persistencia();
+			CentralDeInformacoes central = persistencia.recuperarCentral("central");
+
+			ArrayList<String> servicos = central.getServicos();
+			String[] servicosArray = servicos.toArray(new String[servicos.size()]);
+			JComboBox<String> comboBox = new JComboBox<>(servicosArray);
+			JOptionPane.showMessageDialog(null, comboBox, "Selecione um serviço", JOptionPane.QUESTION_MESSAGE);
+			String servicoSelecionado = comboBox.getSelectedItem().toString();
+			servicosDoFornecedor = new ArrayList<String>();
+
+			for (String s : servicosArray) {
+				if (servicoSelecionado != null) {
+					servicosDoFornecedor.add(s);
+				}
+				System.out.println(s);
+			}
+		}
+
+	}
+
+	public class OuvinteCheckBoxTelaDeCadastrarFornecedor implements ActionListener {
+
+		private TelaCadastrarFornecedor tela;
+
+		public OuvinteCheckBoxTelaDeCadastrarFornecedor(TelaCadastrarFornecedor tela) {
+			this.tela = tela;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			Object componente = e.getSource();
+
+			boolean JuridicaSelecionada = tela.getJcbPessoaJuridica().isSelected();
+			boolean FisicaSelecionada = tela.getJcbPessoaFisica().isSelected();
+			ButtonGroup button = new ButtonGroup();
+			tela.getLblCPF().setVisible(false);
+			tela.getTxtCNPJ().setVisible(false);
+			tela.getLblCNPJ().setVisible(false);
+			tela.getTxtCPF().setVisible(false);
+
+			button.add(tela.getJcbPessoaFisica());
+			button.add(tela.getJcbPessoaJuridica());
+
+			if (JuridicaSelecionada) {
+				tela.getLblCNPJ().setVisible(true);
+				tela.getTxtCNPJ().setVisible(true);
+			} else {
+				tela.getTxtCPF().setVisible(true);
+				tela.getLblCPF().setVisible(true);
+			}
+		}
 
 	}
 
 	public void configTela() {
 		OuvinteBotaoCadastarTelaCadastrarFornecedor ouvinteCadastrar = new OuvinteBotaoCadastarTelaCadastrarFornecedor(
 				this);
-		OuvitenteBotaoServicosTelaCadastrarFornecedor ouvinteServico = new OuvitenteBotaoServicosTelaCadastrarFornecedor(
-				this);
+		OuvinteBotaoTiposDeServicos ouvinteServicos = new OuvinteBotaoTiposDeServicos(this);
 		OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
-
+		OuvinteCheckBoxTelaDeCadastrarFornecedor ouvinteCheckBox = new OuvinteCheckBoxTelaDeCadastrarFornecedor(this);
+		OuvinteBotaoFundoBranco ouvinteBranco = new OuvinteBotaoFundoBranco();
 		JLabel lblNome = FabricaJLabel.criarJLabel("Nome", 100, 20, 460, 40, FabricasColors.corLabelBranca, 25);
 		JLabel lblEmail = FabricaJLabel.criarJLabel("Telefone", 100, 100, 460, 40, FabricasColors.corLabelBranca, 25);
 		JLabel lblTelefone = FabricaJLabel.criarJLabel("Email", 100, 180, 460, 40, FabricasColors.corLabelBranca, 25);
-		JLabel lbTiposDeServico = FabricaJLabel.criarJLabel("Tipos de Servicos", 100, 270, 460, 40,
-				FabricasColors.corLabelBranca, 18);
+		JLabel lbTiposDeServico = FabricaJLabel.criarJLabel("Tipos de Servicos", 110, 270, 440, 35,
+				FabricasColors.corLabelBranca, 15);
 
 		lblCNPJ = FabricaJLabel.criarJLabel("CNPJ", 430, 280, 460, 40, FabricasColors.corLabelBranca, 20);
 
@@ -80,7 +151,7 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 		JcbPessoaJuridica = FabricaJCheckBox.criarJCheckBox(430, 264, 80, 30, "juridica", FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "clique aqui para selecionar o cliente como pessoa juridica");
 
-		btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 300, 400, 90, 40, FabricasColors.corLabelBranca,
+		btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 290, 400, 90, 40, FabricasColors.corLabelBranca,
 				FabricasColors.CorRoxo, "Clique aqui para confimar o seu cadastro", 16);
 
 		txtNome = FabricaJText.criarJTextField(100, 60, 460, 40, FabricasColors.corTxtField,
@@ -95,10 +166,15 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 		btnCadastrar.addActionListener(ouvinteCadastrar);
 		btnCadastrar.addMouseListener(ouvinte);
 
-		btnTiposDeServicos = FabricaJButton.criarJButton("Tipos de servicos", 110, 300, 140, 40,
-				FabricasColors.corLabelBranca, FabricasColors.CorRoxo, "", 15);
-		btnTiposDeServicos.addActionListener(ouvinteServico);
+		btnTiposDeServicos = FabricaJButton.criarJButton("Tipos de servicos", 110, 300, 135, 40,
+				FabricasColors.corLabelBranca, FabricasColors.CorRoxo, "Selecione os tipos de Servicos aqui", 15);
+		btnTiposDeServicos.addActionListener(ouvinteServicos);
 		btnTiposDeServicos.addMouseListener(ouvinte);
+
+		JcbPessoaFisica.addActionListener(ouvinteCheckBox);
+		JcbPessoaFisica.addMouseListener(ouvinteBranco);
+		JcbPessoaJuridica.addActionListener(ouvinteCheckBox);
+		JcbPessoaJuridica.addMouseListener(ouvinteBranco);
 
 		background.add(lblTelefone);
 		background.add(lblEmail);
@@ -208,6 +284,14 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 
 	public void setLblCPF(JLabel lblCPF) {
 		this.lblCPF = lblCPF;
+	}
+
+	public ArrayList<String> getServicosDoFornecedor() {
+		return servicosDoFornecedor;
+	}
+
+	public void setServicosDoFornecedor(ArrayList<String> servicosDoFornecedor) {
+		this.servicosDoFornecedor = servicosDoFornecedor;
 	}
 
 	public static void main(String[] args) {

@@ -55,22 +55,13 @@ public class CentralDeInformacoes {
 //	}
 
 	public boolean adicionarServico(String servico) throws ServicoJaCadastradoException {
-		if (servicos == null) {
-			servicos.add(servico);
-		} else if (servicos.contains(servico)) {
+		if (servicos.contains(servico)) {
 			throw new ServicoJaCadastradoException();
 		} else {
 			servicos.add(servico);
 		}
 		return true;
 	}
-
-//	public ArrayList<String> retornarServicos() {
-//		for (int i = 0; i < servicos.size(); i++) {
-//			return servicos;
-//		}
-//		return null;
-//	}
 
 	public boolean recuperarServicoNome(String NomeServico) {
 		if (servicos.contains(NomeServico)) {
@@ -140,44 +131,28 @@ public class CentralDeInformacoes {
 		return null;
 	}
 
-	public ArrayList<Cliente> getTodosOsCliente() {
-		return todosOsCliente;
+	public void setAdministrador(Administrador administrador) {
+		this.administrador = administrador;
 	}
 
-	public void setTodosOsCliente(ArrayList<Cliente> todosOsCliente) {
-		this.todosOsCliente = todosOsCliente;
+	public ArrayList<Cliente> getTodosOsCliente() {
+		return todosOsCliente;
 	}
 
 	public ArrayList<Evento> getTodosOsEventos() {
 		return todosOsEventos;
 	}
 
-	public void setTodosOsEventos(ArrayList<Evento> todosOsEventos) {
-		this.todosOsEventos = todosOsEventos;
-	}
-
 	public Administrador getAdministrador() {
 		return administrador;
-	}
-
-	public void setAdministrador(Administrador administrador) {
-		this.administrador = administrador;
 	}
 
 	public ArrayList<Fornecedor> getTodoOsFornecedores() {
 		return todosOsFornecedores;
 	}
 
-	public void setTodoOsFornecedores(ArrayList<Fornecedor> todoOsFornecedores) {
-		this.todosOsFornecedores = todoOsFornecedores;
-	}
-
 	public ArrayList<String> getServicos() {
 		return servicos;
-	}
-
-	public void setServicos(ArrayList<String> servicos) {
-		this.servicos = servicos;
 	}
 
 }
