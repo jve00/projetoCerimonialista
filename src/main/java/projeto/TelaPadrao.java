@@ -31,6 +31,7 @@ public abstract class TelaPadrao extends JFrame {
 		background.setBounds(0, 0, 700, 500);
 		return background;
 	}
+
 	private void configTela(String titulo) {
 		setSize(700, 500);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);

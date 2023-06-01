@@ -11,7 +11,7 @@ public class FornecedorFisico extends Fornecedor {
 	public FornecedorFisico(String nome, String telefone, String tipo, String email, long CPF,
 			ArrayList<String> tipoDeServico) {
 		super(nome, telefone, tipo, email, tipoDeServico);
-		this.CPF = this.CPF;
+		this.CPF = CPF;
 	}
 
 	// gets e sets dos atributos unicos

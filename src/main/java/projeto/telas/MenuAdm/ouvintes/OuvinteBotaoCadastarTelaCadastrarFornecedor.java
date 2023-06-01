@@ -58,7 +58,8 @@ public class OuvinteBotaoCadastarTelaCadastrarFornecedor implements ActionListen
 					FabricaJOptionPane.criarMsg("Cadastro Confirmado.");
 					tela.dispose();
 					new TelaMenuADM("Menu");
-				} else {
+				} else if (cpfValido) {
+					System.out.println(cpf);
 					central.adicionarFornecedor(new FornecedorFisico(nome, telefone, email, tipoDaConta,
 							Long.parseLong(cpf), tela.getServicosDoFornecedor()));
 					persistencia.salvarCentral(central, "central");

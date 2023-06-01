@@ -7,10 +7,11 @@ import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoBranco;
@@ -21,6 +22,7 @@ import ulitilidades.persistencia.Persistencia;
 import ultilidades.fabricas.FabricaJButton;
 import ultilidades.fabricas.FabricaJCheckBox;
 import ultilidades.fabricas.FabricaJLabel;
+import ultilidades.fabricas.FabricaJOptionPane;
 import ultilidades.fabricas.FabricaJText;
 import ultilidades.fabricas.FabricasColors;
 import ultilidades.reporsitorio.CentralDeInformacoes;
@@ -39,7 +41,9 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 	private JLabel lblCNPJ;
 	private JLabel lblCPF;
 	private JButton btnTiposDeServicos;
-	private ArrayList<String> servicosDoFornecedor;
+	private ArrayList<String> servicosDoFornecedor = new ArrayList<String>();
+	private JButton btnAdicionar;
+	private JList<String> jList;
 
 	public TelaCadastrarFornecedor(String titulo) {
 		super(titulo);
@@ -49,36 +53,6 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 
 	public void configurarComponentes() {
 		configImagemFundo();
-	}
-
-	private class OuvinteBotaoTiposDeServicos implements ActionListener {
-
-		private TelaCadastrarFornecedor tela;
-
-		public OuvinteBotaoTiposDeServicos(TelaCadastrarFornecedor tela) {
-			this.tela = tela;
-
-		}
-
-		public void actionPerformed(ActionEvent e) {
-			Persistencia persistencia = new Persistencia();
-			CentralDeInformacoes central = persistencia.recuperarCentral("central");
-
-			ArrayList<String> servicos = central.getServicos();
-			String[] servicosArray = servicos.toArray(new String[servicos.size()]);
-			JComboBox<String> comboBox = new JComboBox<>(servicosArray);
-			JOptionPane.showMessageDialog(null, comboBox, "Selecione um serviço", JOptionPane.QUESTION_MESSAGE);
-			String servicoSelecionado = comboBox.getSelectedItem().toString();
-			servicosDoFornecedor = new ArrayList<String>();
-
-			for (String s : servicosArray) {
-				if (servicoSelecionado != null) {
-					servicosDoFornecedor.add(s);
-				}
-				System.out.println(s);
-			}
-		}
-
 	}
 
 	public class OuvinteCheckBoxTelaDeCadastrarFornecedor implements ActionListener {
@@ -115,9 +89,10 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 	}
 
 	public void configTela() {
+		Persistencia persistencia = new Persistencia();
+		CentralDeInformacoes central = persistencia.recuperarCentral("central");
 		OuvinteBotaoCadastarTelaCadastrarFornecedor ouvinteCadastrar = new OuvinteBotaoCadastarTelaCadastrarFornecedor(
 				this);
-		OuvinteBotaoTiposDeServicos ouvinteServicos = new OuvinteBotaoTiposDeServicos(this);
 		OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
 		OuvinteCheckBoxTelaDeCadastrarFornecedor ouvinteCheckBox = new OuvinteCheckBoxTelaDeCadastrarFornecedor(this);
 		OuvinteBotaoFundoBranco ouvinteBranco = new OuvinteBotaoFundoBranco();
@@ -162,20 +137,42 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 
 		txtEmail = FabricaJText.criarJTextField(100, 220, 460, 40, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o seu Email aqui", 20);
+		btnAdicionar = FabricaJButton.criarJButton("Adicionar", 135, 420, 75, 30, FabricasColors.corLabelBranca,
+				FabricasColors.CorRoxo, "Clique aqui para adicionar um servico.", 15);
 
+//		adicionando JList na tela
+
+		ArrayList<String> servicos = central.getServicos();
+		String[] servicosArray = servicos.toArray(new String[servicos.size()]);
+		
+		jList = new JList<>(servicosArray);
+		jList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+		JScrollPane scrollPane = new JScrollPane(jList);
+		scrollPane.setBounds(105, 300, 140, 120);
+
+		btnAdicionar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectedIndex = jList.getSelectedIndex();
+				if (selectedIndex != -1) {
+					String selectedItem = jList.getSelectedValue();
+					servicosDoFornecedor.add(selectedItem);
+				} else {
+					FabricaJOptionPane.criarMsgErro("Selecione um servico. ");
+				}
+
+			}
+		});
+		background.add(scrollPane);
 		btnCadastrar.addActionListener(ouvinteCadastrar);
 		btnCadastrar.addMouseListener(ouvinte);
-
-		btnTiposDeServicos = FabricaJButton.criarJButton("Tipos de servicos", 110, 300, 135, 40,
-				FabricasColors.corLabelBranca, FabricasColors.CorRoxo, "Selecione os tipos de Servicos aqui", 15);
-		btnTiposDeServicos.addActionListener(ouvinteServicos);
-		btnTiposDeServicos.addMouseListener(ouvinte);
 
 		JcbPessoaFisica.addActionListener(ouvinteCheckBox);
 		JcbPessoaFisica.addMouseListener(ouvinteBranco);
 		JcbPessoaJuridica.addActionListener(ouvinteCheckBox);
 		JcbPessoaJuridica.addMouseListener(ouvinteBranco);
 
+		background.add(btnAdicionar);
 		background.add(lblTelefone);
 		background.add(lblEmail);
 		background.add(lblNome);
@@ -190,7 +187,7 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 		background.add(txtEmail);
 		background.add(txtTelefone);
 		background.add(btnCadastrar);
-		background.add(btnTiposDeServicos);
+
 	}
 
 	public JButton getBtnTiposDeServicos() {
@@ -218,72 +215,36 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 		return txtEmail;
 	}
 
-	public void setTxtEmail(JTextField txtEmail) {
-		this.txtEmail = txtEmail;
-	}
-
 	public JTextField getTxtTelefone() {
 		return txtTelefone;
-	}
-
-	public void setTxtTelefone(JTextField txtTelefone) {
-		this.txtTelefone = txtTelefone;
 	}
 
 	public JTextField getTxtCNPJ() {
 		return txtCNPJ;
 	}
 
-	public void setTxtCNPJ(JTextField txtCNPJ) {
-		this.txtCNPJ = txtCNPJ;
-	}
-
 	public JTextField getTxtCPF() {
 		return txtCPF;
-	}
-
-	public void setTxtCPF(JTextField txtCPF) {
-		this.txtCPF = txtCPF;
 	}
 
 	public JCheckBox getJcbPessoaFisica() {
 		return JcbPessoaFisica;
 	}
 
-	public void setJcbPessoaFisica(JCheckBox jcbPessoaFisica) {
-		JcbPessoaFisica = jcbPessoaFisica;
-	}
-
 	public JCheckBox getJcbPessoaJuridica() {
 		return JcbPessoaJuridica;
-	}
-
-	public void setJcbPessoaJuridica(JCheckBox jcbPessoaJuridica) {
-		JcbPessoaJuridica = jcbPessoaJuridica;
 	}
 
 	public JButton getBtnCadastrar() {
 		return btnCadastrar;
 	}
 
-	public void setBtnCadastrar(JButton btnCadastrar) {
-		this.btnCadastrar = btnCadastrar;
-	}
-
 	public JLabel getLblCNPJ() {
 		return lblCNPJ;
 	}
 
-	public void setLblCNPJ(JLabel lblCNPJ) {
-		this.lblCNPJ = lblCNPJ;
-	}
-
 	public JLabel getLblCPF() {
 		return lblCPF;
-	}
-
-	public void setLblCPF(JLabel lblCPF) {
-		this.lblCPF = lblCPF;
 	}
 
 	public ArrayList<String> getServicosDoFornecedor() {
