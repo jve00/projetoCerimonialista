@@ -1,6 +1,8 @@
 package projeto.telas.ListarFornecedores;
 
 import java.awt.Font;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -11,8 +13,13 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import projeto.ImagemDeFundo;
+import projeto.OuvinteBotaoFundoBranco;
 import projeto.TelaPadrao;
+
 import projeto.modelos.Fornecedor;
+import projeto.modelos.FornecedorFisico;
+import projeto.modelos.PessoaFisica;
+import projeto.modelos.PessoaJuridica;
 import ulitilidades.persistencia.Persistencia;
 import ultilidades.fabricas.FabricaJButton;
 import ultilidades.fabricas.FabricaJLabel;
@@ -24,8 +31,8 @@ public class TelaListarFornecedores extends TelaPadrao {
 
 	private ImagemDeFundo background;
 
-	private JRadioButton pessoaFisica;
-	private JRadioButton pessoaJuridica;
+	private JRadioButton rdPessoaFisica;
+	private JRadioButton rdPessoaJuridica;
 	private JButton btnDetalhes;
 	private DefaultTableModel modelo;
 	private JScrollPane scrol;
@@ -44,6 +51,50 @@ public class TelaListarFornecedores extends TelaPadrao {
 		configTabela();
 		popularTabelaFornecedor();
 	}
+	
+	
+	
+	
+
+//	public class OuvinteFiltrarTabela implements ItemListener {
+//
+//		private TelaListarFornecedores tela;
+//		private ArrayList<Fornecedor> fornecedores;
+//
+//		public OuvinteFiltrarTabela(TelaListarFornecedores tela) {
+//			this.tela = tela;
+//		}
+
+//		public void itemStateChanged(ItemEvent e) {
+//			FornecedorFisico fornecedorFisico = new FornecedorFisico(getName(), getTitle(), getWarningString(),
+//					getName(), ABORT, null);
+//
+//			fornecedores = new ArrayList<>();
+//			p = new Persistencia();
+//			central = p.recuperarCentral("central");
+//
+//			boolean filtroFisica = tela.getrdPessoaFisica().isSelected();
+//		
+//			if (!filtroFisica) {
+//				System.out.println("entrou");
+//				for (Fornecedor f : fornecedores) {
+//					System.out.println(f);
+//					if (f.getTipo().equals(fornecedorFisico.getTipo())) {
+//					
+//						
+//						System.out.println(f.getTipo());
+//						addLinha(modelo, f);
+//
+//					}
+//				}
+//
+//			}
+//
+//			modelo.setRowCount(0);
+//			scrol.repaint();
+//		}
+//
+//	}
 
 	public void popularTabelaFornecedor() {
 		p = new Persistencia();
@@ -79,26 +130,33 @@ public class TelaListarFornecedores extends TelaPadrao {
 	}
 
 	public void configTela() {
-
+//		OuvinteFiltrarTabela ouvinteFiltro = new OuvinteFiltrarTabela(this);
+//		OuvinteBotaoFundoBranco ouvinte = new OuvinteBotaoFundoBranco();
+		
 		JLabel lblListaDeFornecedores = FabricaJLabel.criarJLabel("Lista De Fornecedores", 210, 10, 460, 40,
 				FabricasColors.corLabelBranca, 25);
 		JLabel lblInfor = FabricaJLabel.criarJLabel(
 				"Escolha uma das opcões acima para filtrar os forncedores pelo tipo", 110, 90, 480, 40,
 				FabricasColors.corLabelBranca, 13);
 
-		pessoaFisica = FabricaJRadionButton.criarRadionButton("Pessoa Fisica", 140, 50, 130, 50,
+		rdPessoaFisica = FabricaJRadionButton.criarRadionButton("Pessoa Fisica", 140, 50, 130, 50,
 				FabricasColors.corLabelBranca, "Clique aqui para filtrar por pessoas fisicas", 15);
 
-		pessoaJuridica = FabricaJRadionButton.criarRadionButton("Pessoa Fisica", 400, 50, 130, 50,
+		rdPessoaJuridica = FabricaJRadionButton.criarRadionButton("Pessoa Fisica", 400, 50, 130, 50,
 				FabricasColors.corLabelBranca, "Clique aqui para filtrar por pessoas Juridicas", 15);
 
 		btnDetalhes = FabricaJButton.criarJButton("Ver Detalhes", 280, 390, 120, 30, FabricasColors.corLabelBranca,
 				FabricasColors.CorRoxo, "Clique aqui para confimar o seu cadastro", 16);
 
+//		rdPessoaFisica.addItemListener(ouvinteFiltro);
+//		rdPessoaFisica.addMouseListener(ouvinte);
+//		rdPessoaJuridica.addItemListener(ouvinteFiltro);
+//		rdPessoaJuridica.addMouseListener(ouvinte);
+		
 		background.add(lblInfor);
 		background.add(btnDetalhes);
-		background.add(pessoaFisica);
-		background.add(pessoaJuridica);
+		background.add(rdPessoaFisica);
+		background.add(rdPessoaJuridica);
 		background.add(lblListaDeFornecedores);
 	}
 
@@ -106,6 +164,22 @@ public class TelaListarFornecedores extends TelaPadrao {
 		background = super.configImagemFundo("background.png");
 		add(background);
 
+	}
+
+	public JRadioButton getrdPessoaFisica() {
+		return rdPessoaFisica;
+	}
+
+	public JRadioButton getrdPessoaJuridica() {
+		return rdPessoaJuridica;
+	}
+
+	public JButton getBtnDetalhes() {
+		return btnDetalhes;
+	}
+
+	public JTable getTabelaFornecedores() {
+		return tabelaFornecedores;
 	}
 
 	public static void main(String[] args) {

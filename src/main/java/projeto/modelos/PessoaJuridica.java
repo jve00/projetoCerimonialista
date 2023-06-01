@@ -1,7 +1,5 @@
 package projeto.modelos;
 
-import projeto.UsuarioPadrao;
-
 public class PessoaJuridica extends Cliente{
 
 	// Atributos unicos de pessoa juridica
