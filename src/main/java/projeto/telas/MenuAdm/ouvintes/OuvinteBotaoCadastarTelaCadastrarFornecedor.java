@@ -2,6 +2,7 @@ package projeto.telas.MenuAdm.ouvintes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JCheckBox;
 
@@ -33,7 +34,8 @@ public class OuvinteBotaoCadastarTelaCadastrarFornecedor implements ActionListen
 		boolean selecionouPessoaFisica = tela.getJcbPessoaFisica().isSelected();
 		TipoDeConta tipo = (selecionouPessoaFisica ? TipoDeConta.PESSOAFISICA : TipoDeConta.PESSOAJURIDICA);
 		String tipoDaConta = String.valueOf(tipo);
-
+//		ArrayList<String> servico = tela.getServicosDoFornecedor();
+//		String servicoConvertido = String.valueOf(servico);
 		JCheckBox pessoaFisica = tela.getJcbPessoaFisica();
 		JCheckBox pessoaJuridica = tela.getJcbPessoaJuridica();
 		String cpf = "";
@@ -42,6 +44,7 @@ public class OuvinteBotaoCadastarTelaCadastrarFornecedor implements ActionListen
 		boolean cnpjValido = false;
 
 		try {
+
 			boolean valido = Validador.validarCadastro(nome, telefone, email, pessoaFisica, pessoaJuridica);
 			if (pessoaJuridica.isSelected()) {
 				cnpj = tela.getTxtCNPJ().getText();

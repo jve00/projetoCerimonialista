@@ -165,10 +165,6 @@ public class TelaServicosFornecedores extends TelaPadrao {
 		return servicos;
 	}
 
-	public void setServicos(ArrayList<String> servicos) {
-		this.servicos = servicos;
-	}
-
 	public static void main(String[] args) {
 		new TelaServicosFornecedores("Cadastrar ou editar Servicos");
 	}

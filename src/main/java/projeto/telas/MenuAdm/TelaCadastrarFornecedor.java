@@ -44,6 +44,7 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 	private ArrayList<String> servicosDoFornecedor = new ArrayList<String>();
 	private JButton btnAdicionar;
 	private JList<String> jList;
+	private String[] servicosArray;
 
 	public TelaCadastrarFornecedor(String titulo) {
 		super(titulo);
@@ -141,10 +142,9 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 				FabricasColors.CorRoxo, "Clique aqui para adicionar um servico.", 15);
 
 //		adicionando JList na tela
-
 		ArrayList<String> servicos = central.getServicos();
-		String[] servicosArray = servicos.toArray(new String[servicos.size()]);
-		
+		servicosArray = servicos.toArray(new String[servicos.size()]);
+
 		jList = new JList<>(servicosArray);
 		jList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
@@ -157,6 +157,7 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 				if (selectedIndex != -1) {
 					String selectedItem = jList.getSelectedValue();
 					servicosDoFornecedor.add(selectedItem);
+					FabricaJOptionPane.criarMsg("Servico Cadastrado com Sucesso.");
 				} else {
 					FabricaJOptionPane.criarMsgErro("Selecione um servico. ");
 				}
@@ -189,7 +190,6 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 		background.add(btnCadastrar);
 
 	}
-
 	public JButton getBtnTiposDeServicos() {
 		return btnTiposDeServicos;
 	}

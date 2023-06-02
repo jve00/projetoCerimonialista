@@ -92,7 +92,6 @@ public class CentralDeInformacoes {
 		}
 		return null;
 	}
-
 	public Fornecedor recuperarFornecedorPorEmail(String email) {
 		for (Fornecedor f : todosOsFornecedores) {
 			if (f.getEmail().equals(email)) {
@@ -101,7 +100,6 @@ public class CentralDeInformacoes {
 		}
 		return null;
 	}
-
 	public boolean adicionarFornecedor(Fornecedor fornecedor) throws FornecedorExixtenteException {
 		for (Fornecedor f : todosOsFornecedores) {
 			if (f.equals(recuperarFornecedorPorEmail(fornecedor.getEmail()))) {

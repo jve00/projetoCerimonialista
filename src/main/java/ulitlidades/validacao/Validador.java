@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 import javax.swing.JCheckBox;
 
+import projeto.exceptions.ServicoInvalidoException;
 import projeto.exceptions.ValidacaoException;
 import projeto.exceptions.ValidacaoExceptionEmail;
 import projeto.exceptions.ValidarCheckBoxException;
@@ -14,6 +15,7 @@ import projeto.exceptions.ValidarCnpjException;
 import projeto.exceptions.ValidarCpfException;
 import projeto.exceptions.ValidarNomeException;
 import projeto.exceptions.ValidarTelefoneException;
+import ultilidades.fabricas.FabricaJOptionPane;
 
 public abstract class Validador {
 
@@ -34,13 +36,13 @@ public abstract class Validador {
 		boolean telefoneValido = validarTelefone(telefone);
 		boolean emailValido = validarEmail(email);
 		boolean cbValido = validarCheckBox(cbJuridica, cbfisica);
+//		boolean servicoValido = validarServico(index);
 
 		if (nomeValido && telefoneValido && emailValido && cbValido) {
 			return true;
 		}
 		return false;
 	}
-
 	public static boolean idadeValida(LocalDate dataNascimento) throws ValidacaoException {
 		LocalDate dataNasc = dataNascimento;
 		LocalDate dataAtual = LocalDate.now();
@@ -87,15 +89,20 @@ public abstract class Validador {
 		return true;
 	}
 
+//	public static boolean validarServico(int index) throws ServicoInvalidoException {
+//		if (index != 0) {
+//			return true;
+//		}
+//		throw new ServicoInvalidoException();
+//	}
+
 	public static boolean validarCampos(String campos) {
 		if (campos.isBlank()) {
 			return false;
 		}
 		return true;
 	}
-
 //	Lembrar de adicionar outros tipos de endereço para ele n só aceitar @gmail
-
 	public static boolean validarEmail(String email) throws ValidacaoExceptionEmail {
 		if (email.isEmpty())
 			throw new ValidacaoExceptionEmail("E-mail nao pode ser vazio");
