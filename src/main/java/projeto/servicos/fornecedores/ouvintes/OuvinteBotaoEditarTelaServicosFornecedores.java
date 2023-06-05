@@ -24,7 +24,6 @@ public class OuvinteBotaoEditarTelaServicosFornecedores implements ActionListene
 		Object componente = e.getSource();
 		int linhaSelecionada = 0;
 		linhaSelecionada = tela.getTabelaServicos().getSelectedRow();
-		System.out.println(linhaSelecionada);
 		if (linhaSelecionada == -1) {
 			FabricaJOptionPane.criarMsgErro("Selecione uma linha.");
 		} else if (componente == tela.getBtnEditar()) {

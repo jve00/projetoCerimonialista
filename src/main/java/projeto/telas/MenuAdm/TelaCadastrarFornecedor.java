@@ -41,7 +41,7 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 	private JLabel lblCNPJ;
 	private JLabel lblCPF;
 	private JButton btnTiposDeServicos;
-	private ArrayList<String> servicosDoFornecedor = new ArrayList<String>();
+	private ArrayList<String> servicosDoFornecedor;
 	private JButton btnAdicionar;
 	private JList<String> jList;
 	private String[] servicosArray;
@@ -140,8 +140,9 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 				FabricasColors.corLabelBranca, "Digite o seu Email aqui", 20);
 		btnAdicionar = FabricaJButton.criarJButton("Adicionar", 135, 420, 75, 30, FabricasColors.corLabelBranca,
 				FabricasColors.CorRoxo, "Clique aqui para adicionar um servico.", 15);
-
+		
 //		adicionando JList na tela
+		servicosDoFornecedor = new ArrayList<String>();
 		ArrayList<String> servicos = central.getServicos();
 		servicosArray = servicos.toArray(new String[servicos.size()]);
 
@@ -167,7 +168,7 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 		background.add(scrollPane);
 		btnCadastrar.addActionListener(ouvinteCadastrar);
 		btnCadastrar.addMouseListener(ouvinte);
-
+		btnAdicionar.addMouseListener(ouvinte);
 		JcbPessoaFisica.addActionListener(ouvinteCheckBox);
 		JcbPessoaFisica.addMouseListener(ouvinteBranco);
 		JcbPessoaJuridica.addActionListener(ouvinteCheckBox);

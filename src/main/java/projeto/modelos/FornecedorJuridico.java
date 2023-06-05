@@ -13,7 +13,6 @@ public class FornecedorJuridico extends Fornecedor {
 		this.CNPJ = CNPJ;
 	}
 
-
 	// gets e sets unicos
 	public long getCNPJ() {
 		return CNPJ;
@@ -22,4 +21,6 @@ public class FornecedorJuridico extends Fornecedor {
 	public void setCNPJ(long cNPJ) {
 		CNPJ = cNPJ;
 	}
+	
+	
 }

@@ -8,13 +8,12 @@ public class Fornecedor extends UsuarioPadrao {
 
 	private ArrayList<String> tipoDeServicos;
 
-	public Fornecedor(String nome,String telefone, String tipo, String email,
-			ArrayList<String> tipoDeServico) {
-		super(nome,telefone, tipo, email);
+	public Fornecedor(String nome, String telefone, String tipo, String email, ArrayList<String> tipoDeServico) {
+		super(nome, telefone, tipo, email);
 		this.tipoDeServicos = tipoDeServico;
 
 	}
-	
+
 	public ArrayList<String> getTipoDeServicos() {
 		return tipoDeServicos;
 	}
@@ -22,5 +21,5 @@ public class Fornecedor extends UsuarioPadrao {
 	public void setTipoDeServicos(ArrayList<String> tipoDeServicos) {
 		this.tipoDeServicos = tipoDeServicos;
 	}
-	
+
 }

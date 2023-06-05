@@ -13,6 +13,7 @@ public abstract class UsuarioPadrao {
 	private LocalDate dataDeNascimento;
 	private String tipo;
 	private String id;
+	private String Telefone;
 	
 
 	public UsuarioPadrao(String nome, String telefone, String email, String tipo) {
@@ -70,6 +71,16 @@ public abstract class UsuarioPadrao {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+
+	public String getTelefone() {
+		return Telefone;
+	}
+
+
+	public void setTelefone(String telefone) {
+		Telefone = telefone;
 	}
 
 

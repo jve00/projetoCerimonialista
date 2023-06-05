@@ -11,7 +11,9 @@ public class PessoaFisica extends Cliente {
 		super(nome, telefone, tipo, email);
 		this.CPF = CPF;
 	}
-
+	private String tipo() {
+		return "PESSOAFISICA";
+	}
 	// gets e sets dos atributos unicos
 	public long getCPF() {
 		return CPF;

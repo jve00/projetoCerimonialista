@@ -2,6 +2,7 @@ package ulitlidades.validacao;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,7 +16,7 @@ import projeto.exceptions.ValidarCnpjException;
 import projeto.exceptions.ValidarCpfException;
 import projeto.exceptions.ValidarNomeException;
 import projeto.exceptions.ValidarTelefoneException;
-import ultilidades.fabricas.FabricaJOptionPane;
+import projeto.telas.MenuAdm.TelaCadastrarFornecedor;
 
 public abstract class Validador {
 
@@ -36,13 +37,13 @@ public abstract class Validador {
 		boolean telefoneValido = validarTelefone(telefone);
 		boolean emailValido = validarEmail(email);
 		boolean cbValido = validarCheckBox(cbJuridica, cbfisica);
-//		boolean servicoValido = validarServico(index);
 
 		if (nomeValido && telefoneValido && emailValido && cbValido) {
 			return true;
 		}
 		return false;
 	}
+
 	public static boolean idadeValida(LocalDate dataNascimento) throws ValidacaoException {
 		LocalDate dataNasc = dataNascimento;
 		LocalDate dataAtual = LocalDate.now();
@@ -89,12 +90,14 @@ public abstract class Validador {
 		return true;
 	}
 
-//	public static boolean validarServico(int index) throws ServicoInvalidoException {
-//		if (index != 0) {
-//			return true;
-//		}
-//		throw new ServicoInvalidoException();
-//	}
+	public static boolean validarServico(ArrayList<String> array) throws ServicoInvalidoException {
+		TelaCadastrarFornecedor tela = new TelaCadastrarFornecedor("");
+
+		if (tela.getServicosDoFornecedor() == null && tela.getServicosDoFornecedor().size() < 1) {
+			throw new ServicoInvalidoException();
+		}
+		return true;
+	}
 
 	public static boolean validarCampos(String campos) {
 		if (campos.isBlank()) {
@@ -102,6 +105,7 @@ public abstract class Validador {
 		}
 		return true;
 	}
+
 //	Lembrar de adicionar outros tipos de endereço para ele n só aceitar @gmail
 	public static boolean validarEmail(String email) throws ValidacaoExceptionEmail {
 		if (email.isEmpty())

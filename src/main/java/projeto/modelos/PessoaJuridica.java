@@ -1,12 +1,12 @@
 package projeto.modelos;
 
-public class PessoaJuridica extends Cliente{
+public class PessoaJuridica extends Cliente {
 
 	// Atributos unicos de pessoa juridica
 	private long CNPJ;
 
 	// construtor feito para iniciar todos os atributos
-	public PessoaJuridica(String nome,String telefone,  String email, String tipo, long CNPJ) {
+	public PessoaJuridica(String nome, String telefone, String email, String tipo, long CNPJ) {
 		super(nome, telefone, email, tipo);
 		this.CNPJ = CNPJ;
 	}

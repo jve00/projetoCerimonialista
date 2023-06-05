@@ -14,13 +14,17 @@ public class FornecedorFisico extends Fornecedor {
 		this.CPF = CPF;
 	}
 
+	public String tipo() {
+		return "PESSOAFISICA";
+	}
+
 	// gets e sets dos atributos unicos
 	public long getCPF() {
 		return CPF;
 	}
-
 	public void setCPF(long CPF) {
 		this.CPF = CPF;
 	}
 
 }
+
