@@ -39,8 +39,6 @@ public class TelaListarFornecedores extends TelaPadrao {
 	private Persistencia p = new Persistencia();
 	private CentralDeInformacoes central = p.recuperarCentral("central");
 	private JTextField txtFiltro;
-	private ArrayList<String> servicosDoFornecedor;
-	private Comparator<Object> comparador;
 	private static int linhaSelecionada;
 
 	public TelaListarFornecedores(String titulo) {
@@ -179,9 +177,9 @@ public class TelaListarFornecedores extends TelaPadrao {
 
 		public void actionPerformed(ActionEvent e) {
 			Object componente = e.getSource();
-			linhaSelecionada = tela.getTabelaFornecedores().getSelectedRow();
-			String emailSelecionado = (String) tela.getTabelaFornecedores().getValueAt(linhaSelecionada, 3);
-			String tipoFornecedor = (String) tela.getTabelaFornecedores().getValueAt(linhaSelecionada, 1);
+			linhaSelecionada = TelaListarFornecedores.getTabelaFornecedores().getSelectedRow();
+			String emailSelecionado = (String) TelaListarFornecedores.getTabelaFornecedores().getValueAt(linhaSelecionada, 3);
+			String tipoFornecedor = (String) TelaListarFornecedores.getTabelaFornecedores().getValueAt(linhaSelecionada, 1);
 			Fornecedor fornecedor = central.recuperarFornecedorPorEmail(emailSelecionado);
 			TelaEditarInforFornecedor telaEditar = new TelaEditarInforFornecedor("tela de Editar Dados");
 			Editar.desativarComponentes(telaEditar, false);
@@ -202,15 +200,11 @@ public class TelaListarFornecedores extends TelaPadrao {
 				FabricaJOptionPane.criarMsgErro("Selecione uma linha");
 			}
 		}
-
 	}
-
 	public void configImagemFundo() {
 		background = super.configImagemFundo("background.png");
 		add(background);
-
 	}
-
 	public JTextField getTxtFiltro() {
 		return txtFiltro;
 	}
@@ -230,5 +224,4 @@ public class TelaListarFornecedores extends TelaPadrao {
 	public static int getLinhaSelecionada() {
 		return linhaSelecionada;
 	}
-
 }

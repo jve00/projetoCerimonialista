@@ -43,7 +43,6 @@ public class OuvinteBotaoCadastarTelaCadastrarFornecedor implements ActionListen
 		boolean cnpjValido = false;
 
 		try {
-//			boolean servicoValido = Validador.validarServico(servico);
 
 			boolean valido = Validador.validarCadastro(nome, telefone, email, pessoaFisica, pessoaJuridica);
 			if (pessoaJuridica.isSelected()) {

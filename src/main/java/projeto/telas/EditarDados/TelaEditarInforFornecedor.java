@@ -122,18 +122,15 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 			CentralDeInformacoes central = persistencia.recuperarCentral("central");
 			Object componente = e.getSource();
 			int linhaSelecionada = 0;
-
-			String edit = "";
+			String edit;
 			String cnpj = "";
-			linhaSelecionada = tela.getTabelaServicos().getSelectedRow();
-
 			String nome = tela.getTxtNome().getText();
 			String emailDoFornecedor = tela.getTxtEmail().getText();
-
 			String emailSelecionado = (String) TelaListarFornecedores.getTabelaFornecedores()
 					.getValueAt(TelaListarFornecedores.getLinhaSelecionada(), 3);
 			Fornecedor fornecedorRecuperado = central.recuperarFornecedorPorEmail(emailSelecionado);
-
+		
+			
 			if (tela.getBtnEditar() == componente) {
 				Editar.ativarComponentes(tela, true);
 				TelaListarFornecedores.getTabelaFornecedores().repaint();
@@ -149,29 +146,29 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 					p.salvarCentral(central, "central");
 				}
 			}
-			
-			if (tela.getRdPessoaJuridica().isSelected()) {
-				fornecedorRecuperado.setNome(nome);
-				fornecedorRecuperado.setEmail(emailDoFornecedor);
-				cnpj = tela.getTxtCNPJ().getText();
-				try {
-					central.adicionarFornecedor(new FornecedorJuridico(fornecedorRecuperado.getNome(),
-							fornecedorRecuperado.getTelefone(), fornecedorRecuperado.getEmail(), fornecedorRecuperado.getTipo(),
-							Long.parseLong(cnpj), fornecedorRecuperado.getTipoDeServicos()));
-					System.out.println("adicionou");
-					tela.dispose();
-					new TelaEditarInforFornecedor("Tela Editar Dados");
-				} catch (FornecedorExixtenteException e1) {
-					FabricaJOptionPane.criarMsgErro(e1.getMessage());
-					
-				}
-			}
 			if (tela.getBtnSalvar() == componente) {
-				TelaListarFornecedores.getTabelaFornecedores().repaint();
-				p.salvarCentral(central, "central");
-				FabricaJOptionPane.criarMsg("Dados editado com sucesso");
-				Editar.desativarComponentes(tela, false);
+				central.getTodoOsFornecedores().remove(fornecedorRecuperado);
+				tela.getTabelaServicos().repaint();
+				if (tela.getRdPessoaJuridica().isSelected()) {
+					DefaultTableModel modelo = (DefaultTableModel) tela.getTabelaServicos().getModel();
+					fornecedorRecuperado.setNome(nome);
+					fornecedorRecuperado.setEmail(emailDoFornecedor);
+					cnpj = tela.getTxtCNPJ().getText();
+					FornecedorJuridico fJuridico = new FornecedorJuridico(fornecedorRecuperado.getNome(),
+							fornecedorRecuperado.getTelefone(), fornecedorRecuperado.getEmail(), "PESSOAJURIDICA",
+							Long.parseLong(cnpj), fornecedorRecuperado.getTipoDeServicos());
+					try {
+						central.adicionarFornecedor(fJuridico);
+						p.salvarCentral(central, "central");
+						FabricaJOptionPane.criarMsg("Dados editado com sucesso");
+						tela.dispose();
+					} catch (FornecedorExixtenteException e1) {
+						FabricaJOptionPane.criarMsgErro(e1.getMessage());
+					}
+				}
+
 			}
+
 		}
 
 	}
