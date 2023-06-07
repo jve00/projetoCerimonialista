@@ -49,7 +49,7 @@ public class CentralDeInformacoes {
 			throw new ServicoJaCadastradoException();
 		} else {
 			servicos.add(servico);
-		}
+			}
 		return true;
 	}
 

@@ -150,7 +150,16 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 			if (tela.getBtnSalvar() == componente) {
 				fornecedorRecuperado.setNome(nome);
 				fornecedorRecuperado.setEmail(emailDoFornecedor);
-				if (tela.getRdPessoaJuridica().isSelected()) {
+
+				if (tela.getRdDesativado().isSelected()) {
+					fornecedorRecuperado.setSituacaoDoFornecedor(false);
+					p.salvarCentral(central, "central");
+				} else if (tela.getRdBloqueado().isSelected()) {
+					String comentario = FabricaJOptionPane.criarInput("Digite um comentario a respeito do fornecedor");
+					fornecedorRecuperado.setSituacaoDoFornecedor(false);
+					fornecedorRecuperado.setFeedback(comentario);
+					p.salvarCentral(central, "central");
+				} else if (tela.getRdPessoaJuridica().isSelected()) {
 					cnpj = tela.getTxtCNPJ().getText();
 					DefaultTableModel modelo = (DefaultTableModel) tela.getTabelaServicos().getModel();
 					try {
@@ -163,27 +172,18 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 									"PESSOAJURIDICA", Long.parseLong(cnpj), fornecedorRecuperado.getTipoDeServicos(),
 									true));
 							p.salvarCentral(central, "central");
+							FabricaJOptionPane.criarMsg("Dados editado com sucesso");
+							tela.dispose();
+							new TelaListarFornecedores("Listagem de fornecedores");
 						}
 					} catch (Exception e1) {
 						FabricaJOptionPane.criarMsgErro(e1.getMessage());
 					}
 				}
-				if (tela.getRdDesativado().isSelected()) {
-					fornecedorRecuperado.setSituacaoDoFornecedor(false);
-					p.salvarCentral(central, "central");
-				} else if (tela.getRdBloqueado().isSelected()) {
-					String comentario = FabricaJOptionPane.criarInput("Digite um comentario a respeito do fornecedor");
-					fornecedorRecuperado.setSituacaoDoFornecedor(false);
-					fornecedorRecuperado.setFeedback(comentario);
-					p.salvarCentral(central, "central");
-				}
-				FabricaJOptionPane.criarMsg("Dados editado com sucesso");
-				p.salvarCentral(central, "central");
-				tela.dispose();
-				new TelaListarFornecedores("Listagem de fornecedores");
 			}
 		}
 	}
+
 	public void configTela() {
 		OuvinteBotaoEditar ouvinteEditar = new OuvinteBotaoEditar(this);
 		OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
@@ -247,6 +247,7 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 		background.add(rdBloqueado);
 		background.add(rdDesativado);
 	}
+
 	public static void main(String[] args) {
 		new TelaEditarInforFornecedor("Tela Editar Dados");
 	}
