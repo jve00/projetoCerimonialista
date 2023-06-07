@@ -1,4 +1,4 @@
-package projeto.telas.ListarFornecedores;
+        package projeto.telas.ListarFornecedores;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.Comparator;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -187,13 +186,15 @@ public class TelaListarFornecedores extends TelaPadrao {
 				telaEditar.getTxtNome().setText(fornecedor.getNome());
 				telaEditar.getTxtEmail().setText(fornecedor.getEmail());
 				telaEditar.getTabelaServicos();
+				telaEditar.getRdAtivo().setSelected(true);
 				tela.dispose();
 				if (tipoFornecedor.equals("PESSOAJURIDICA")) {
-					telaEditar.getRdPessoaJuridica().setSelected(true);
+					telaEditar.getLblTipo().setVisible(false);
+					telaEditar.getRdPessoaJuridica().setVisible(false);
 					telaEditar.getTxtCNPJ().setVisible(false);
 					telaEditar.getLblCNPJ().setVisible(false);
-				} else if (tipoFornecedor.equals("PESSOAFISICA")) {
-					telaEditar.getRdPessoaJuridica().setSelected(false);
+				}
+				if (tipoFornecedor.equals("PESSOAFISICA")) {
 				}
 			} else if (linhaSelecionada == -1) {
 				FabricaJOptionPane.criarMsgErro("Selecione uma linha");

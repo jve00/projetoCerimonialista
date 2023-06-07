@@ -41,19 +41,6 @@ public class CentralDeInformacoes {
 		return false;
 	}
 
-//	public boolean adicionarServico(String servico) throws ServicoJaCadastradoException {
-//		for (Fornecedor f : todosOsFornecedores) {
-//			if (f.getTipoDeServicos().equals(servico)) {
-//				throw new ServicoJaCadastradoException();
-//			} else {
-//				System.out.println("é diferente e adicionou");
-//				f.getTipoDeServicos().add(servico);
-//			}
-//		}
-//		return true;
-//
-//	}
-
 	public boolean adicionarServico(String servico) throws ServicoJaCadastradoException {
 		if (servicos.contains(servico)) {
 			throw new ServicoJaCadastradoException();

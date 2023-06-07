@@ -9,8 +9,8 @@ public class FornecedorFisico extends Fornecedor {
 
 	// Construto para facilitar a cria��o passando todos os atributos
 	public FornecedorFisico(String nome, String telefone, String tipo, String email, long CPF,
-			ArrayList<String> tipoDeServico) {
-		super(nome, telefone, tipo, email, tipoDeServico);
+			ArrayList<String> tipoDeServico, boolean situacao) {
+		super(nome, telefone, tipo, email, tipoDeServico, situacao);
 		this.CPF = CPF;
 	}
 	// gets e sets dos atributos unicos

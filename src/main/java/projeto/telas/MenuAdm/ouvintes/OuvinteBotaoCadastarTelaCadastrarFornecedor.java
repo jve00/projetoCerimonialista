@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.JCheckBox;
 
+import projeto.modelos.Fornecedor;
 import projeto.modelos.FornecedorFisico;
 import projeto.modelos.FornecedorJuridico;
 import projeto.modelos.enuns.TipoDeConta;
@@ -53,10 +54,9 @@ public class OuvinteBotaoCadastarTelaCadastrarFornecedor implements ActionListen
 				cpfValido = Validador.validarCpf(cpf);
 			}
 			if (valido) {
-
 				if (cnpjValido) {
 					central.adicionarFornecedor(new FornecedorJuridico(nome, telefone, email, tipoDaConta,
-							Long.parseLong(cnpj), tela.getServicosDoFornecedor()));
+							Long.parseLong(cnpj), tela.getServicosDoFornecedor(), true));
 					persistencia.salvarCentral(central, "central");
 					FabricaJOptionPane.criarMsg("Cadastro Confirmado.");
 					tela.dispose();
@@ -64,9 +64,10 @@ public class OuvinteBotaoCadastarTelaCadastrarFornecedor implements ActionListen
 				} else if (cpfValido) {
 					System.out.println(cpf);
 					central.adicionarFornecedor(new FornecedorFisico(nome, telefone, email, tipoDaConta,
-							Long.parseLong(cpf), tela.getServicosDoFornecedor()));
+							Long.parseLong(cpf), tela.getServicosDoFornecedor(), true));
 					persistencia.salvarCentral(central, "central");
 					FabricaJOptionPane.criarMsg("Cadastro Confirmado.");
+
 					tela.dispose();
 					new TelaMenuADM("Menu");
 

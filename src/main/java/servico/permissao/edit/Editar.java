@@ -8,21 +8,21 @@ public class Editar {
 		tela.getTxtNome().setEnabled(b);
 		tela.getTxtEmail().setEnabled(b);
 		tela.getTxtCNPJ().setEnabled(b);
-		tela.getTxtAreaFeedback().setEnabled(b);
 		tela.getTabelaServicos().setEnabled(b);
 		tela.getLblCNPJ().setEnabled(b);
 		tela.getLblEmail().setEnabled(b);
 		tela.getLblNomeDoFornecedor().setEnabled(b);
 		tela.getLblTipo().setEnabled(b);
 		tela.getLblTitulo().setEnabled(b);
-		tela.getRdPessoaJuridica().setEnabled(b);
+		tela.getRdAtivo().setEnabled(b);
+		tela.getRdBloqueado().setEnabled(b);
+		tela.getRdDesativado().setEnabled(b);
 	}
 
 	public static void ativarComponentes(TelaEditarInforFornecedor tela, boolean b) {
 		tela.getTxtNome().setEnabled(b);
 		tela.getTxtEmail().setEnabled(b);
 		tela.getTxtCNPJ().setEnabled(b);
-		tela.getTxtAreaFeedback().setEnabled(b);
 		tela.getTabelaServicos().setEnabled(b);
 		tela.getLblCNPJ().setEnabled(b);
 		tela.getLblEmail().setEnabled(b);
@@ -30,6 +30,9 @@ public class Editar {
 		tela.getLblTipo().setEnabled(b);
 		tela.getLblTitulo().setEnabled(b);
 		tela.getRdPessoaJuridica().setEnabled(b);
+		tela.getRdAtivo().setEnabled(b);
+		tela.getRdBloqueado().setEnabled(b);
+		tela.getRdDesativado().setEnabled(b);
 	}
 
 }

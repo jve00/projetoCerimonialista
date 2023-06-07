@@ -43,18 +43,19 @@ public abstract class Validador {
 		}
 		return false;
 	}
-	public static boolean validarCadastro(String nomeCompleto, String telefone, String email, String CNPJ) throws Exception {
+
+	public static boolean validarCadastro(String nomeCompleto, String email, String CNPJ) throws Exception {
 		boolean nomeValido = validarNome(nomeCompleto);
-		boolean telefoneValido = validarTelefone(telefone);
+		;
 		boolean emailValido = validarEmail(email);
 		boolean validarCNPJ = validarCNPJ(CNPJ);
-		
 
-		if (nomeValido && telefoneValido && emailValido && validarCNPJ) {
+		if (nomeValido && emailValido && validarCNPJ) {
 			return true;
 		}
 		return false;
 	}
+
 	public static boolean idadeValida(LocalDate dataNascimento) throws ValidacaoException {
 		LocalDate dataNasc = dataNascimento;
 		LocalDate dataAtual = LocalDate.now();
@@ -86,7 +87,6 @@ public abstract class Validador {
 		}
 		return true;
 	}
-
 	public static boolean validarNome(String nome) throws ValidarNomeException {
 		if (nome.isEmpty() || nome.length() < 10) {
 			throw new ValidarNomeException();

@@ -23,6 +23,7 @@ import projeto.modelos.FornecedorJuridico;
 import projeto.telas.ListarFornecedores.TelaListarFornecedores;
 import servico.permissao.edit.Editar;
 import ulitilidades.persistencia.Persistencia;
+import ulitlidades.validacao.Validador;
 import ultilidades.fabricas.FabricaJButton;
 import ultilidades.fabricas.FabricaJLabel;
 import ultilidades.fabricas.FabricaJOptionPane;
@@ -131,17 +132,10 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 			String emailSelecionado = (String) TelaListarFornecedores.getTabelaFornecedores()
 					.getValueAt(TelaListarFornecedores.getLinhaSelecionada(), 3);
 			Fornecedor fornecedorRecuperado = central.recuperarFornecedorPorEmail(emailSelecionado);
-
 			if (tela.getBtnEditar() == componente) {
 				Editar.ativarComponentes(tela, true);
 				TelaListarFornecedores.getTabelaFornecedores().repaint();
 			}
-
-//			
-//			Validador.va
-//			if() {
-//				
-//			}
 			if (tela.getBtnAlterar() == componente) {
 				if (linhaSelecionada == -1) {
 					FabricaJOptionPane.criarMsg("Selecione uma linha");
@@ -154,32 +148,42 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 				}
 			}
 			if (tela.getBtnSalvar() == componente) {
-				central.getTodoOsFornecedores().remove(fornecedorRecuperado);
-				tela.getTabelaServicos().repaint();
+				fornecedorRecuperado.setNome(nome);
+				fornecedorRecuperado.setEmail(emailDoFornecedor);
 				if (tela.getRdPessoaJuridica().isSelected()) {
-					DefaultTableModel modelo = (DefaultTableModel) tela.getTabelaServicos().getModel();
-					fornecedorRecuperado.setNome(nome);
-					fornecedorRecuperado.setEmail(emailDoFornecedor);
 					cnpj = tela.getTxtCNPJ().getText();
-					FornecedorJuridico fJuridico = new FornecedorJuridico(fornecedorRecuperado.getNome(),
-							fornecedorRecuperado.getTelefone(), fornecedorRecuperado.getEmail(), "PESSOAJURIDICA",
-							Long.parseLong(cnpj), fornecedorRecuperado.getTipoDeServicos());
+					DefaultTableModel modelo = (DefaultTableModel) tela.getTabelaServicos().getModel();
 					try {
-						central.adicionarFornecedor(fJuridico);
-						p.salvarCentral(central, "central");
-						FabricaJOptionPane.criarMsg("Dados editado com sucesso");
-						tela.dispose();
-					} catch (FornecedorExixtenteException e1) {
+						boolean fornecedorValido = Validador.validarCadastro(nome, emailDoFornecedor, cnpj);
+						if (fornecedorValido) {
+							central.getTodoOsFornecedores().remove(fornecedorRecuperado);
+							tela.getTabelaServicos().repaint();
+							central.adicionarFornecedor(new FornecedorJuridico(fornecedorRecuperado.getNome(),
+									fornecedorRecuperado.getTelefone(), fornecedorRecuperado.getEmail(),
+									"PESSOAJURIDICA", Long.parseLong(cnpj), fornecedorRecuperado.getTipoDeServicos(),
+									true));
+							p.salvarCentral(central, "central");
+						}
+					} catch (Exception e1) {
 						FabricaJOptionPane.criarMsgErro(e1.getMessage());
 					}
 				}
-
+				if (tela.getRdDesativado().isSelected()) {
+					fornecedorRecuperado.setSituacaoDoFornecedor(false);
+					p.salvarCentral(central, "central");
+				} else if (tela.getRdBloqueado().isSelected()) {
+					String comentario = FabricaJOptionPane.criarInput("Digite um comentario a respeito do fornecedor");
+					fornecedorRecuperado.setSituacaoDoFornecedor(false);
+					fornecedorRecuperado.setFeedback(comentario);
+					p.salvarCentral(central, "central");
+				}
+				FabricaJOptionPane.criarMsg("Dados editado com sucesso");
+				p.salvarCentral(central, "central");
+				tela.dispose();
+				new TelaListarFornecedores("Listagem de fornecedores");
 			}
-
 		}
-
 	}
-
 	public void configTela() {
 		OuvinteBotaoEditar ouvinteEditar = new OuvinteBotaoEditar(this);
 		OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
@@ -243,7 +247,6 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 		background.add(rdBloqueado);
 		background.add(rdDesativado);
 	}
-
 	public static void main(String[] args) {
 		new TelaEditarInforFornecedor("Tela Editar Dados");
 	}
@@ -336,7 +339,7 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 		return rdDesativado;
 	}
 
-	public JRadioButton getRdBloqquado() {
+	public JRadioButton getRdBloqueado() {
 		return rdBloqueado;
 	}
 
