@@ -184,39 +184,39 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 		OuvinteBotaoEditar ouvinteEditar = new OuvinteBotaoEditar(this);
 		OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
 
-		lblTitulo = FabricaJLabel.criarJLabel("Editar Perfil do Fornecedor", 210, 10, 460, 40,
+		lblTitulo = FabricaJLabel.criarJLabel("Editar Perfil do Fornecedor", 180, 10, 460, 40,
 				FabricasColors.corLabelBranca, 25);
-		lblNomeDoFornecedor = FabricaJLabel.criarJLabel("Nome:", 130, 70, 100, 25, FabricasColors.corLabelBranca, 20);
-		lblEmail = FabricaJLabel.criarJLabel("Email: ", 130, 100, 100, 25, FabricasColors.corLabelBranca, 20);
+		lblNomeDoFornecedor = FabricaJLabel.criarJLabel("Nome:", 100, 70, 100, 25, FabricasColors.corLabelBranca, 20);
+		lblEmail = FabricaJLabel.criarJLabel("Email: ", 100, 100, 100, 25, FabricasColors.corLabelBranca, 20);
 
-		lblTipo = FabricaJLabel.criarJLabel("Tipo:", 20, 270, 100, 25, FabricasColors.corLabelBranca, 20);
-		lblCNPJ = FabricaJLabel.criarJLabel("CNPJ: ", 20, 300, 250, 25, FabricasColors.corLabelBranca, 20);
+		lblTipo = FabricaJLabel.criarJLabel("Tipo:", 100, 270, 100, 25, FabricasColors.corLabelBranca, 20);
+		lblCNPJ = FabricaJLabel.criarJLabel("CNPJ: ", 100, 300, 250, 25, FabricasColors.corLabelBranca, 20);
 
-		txtNome = FabricaJText.criarJTextField(200, 70, 300, 25, FabricasColors.corTxtField,
+		txtNome = FabricaJText.criarJTextField(200, 70, 347, 25, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite seu nome aqui", 16);
-		txtEmail = FabricaJText.criarJTextField(200, 100, 300, 25, FabricasColors.corTxtField,
+		txtEmail = FabricaJText.criarJTextField(200, 100, 347, 25, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite seu e-mail aqui", 16);
-		btnEditar = FabricaJButton.criarJButton("Editar", 20, 10, 90, 30, FabricasColors.corLabelBranca,
+		btnEditar = FabricaJButton.criarJButton("Editar", 230, 410, 90, 30, FabricasColors.corLabelBranca,
 				FabricasColors.CorRoxo, "Clique aqui para editar o servico", 16);
-		btnSalvar = FabricaJButton.criarJButton("Salvar", 510, 410, 90, 30, FabricasColors.corLabelBranca,
+		btnSalvar = FabricaJButton.criarJButton("Salvar", 350, 410, 90, 30, FabricasColors.corLabelBranca,
 				FabricasColors.CorRoxo, "Clique aqui para editar o servico", 16);
 
-		btnAlterar = FabricaJButton.criarJButton("Alterar Servico", 420, 278, 130, 30, FabricasColors.corLabelBranca,
+		btnAlterar = FabricaJButton.criarJButton("Alterar Servico", 420, 250, 130, 30, FabricasColors.corLabelBranca,
 				FabricasColors.CorRoxo, "Clique aqui para editar o servico", 16);
 		// se for juridica não pode mudar para fisica, e se for fisica pode mudar pra
 		// juridica
-		rdPessoaJuridica = FabricaJRadionButton.criarRadionButton("Pessoa Juridica", 70, 272, 140, 25,
+		rdPessoaJuridica = FabricaJRadionButton.criarRadionButton("Pessoa Juridica", 149, 272, 140, 25,
 				FabricasColors.corLabelBranca, "Clique aqui para selecionar o tipo Pessoa Juridica", 15);
-		rdAtivo = FabricaJRadionButton.criarRadionButton("Ativo", 20, 350, 70, 25, FabricasColors.corLabelBranca,
+		rdAtivo = FabricaJRadionButton.criarRadionButton("Ativo", 100, 350, 70, 25, FabricasColors.corLabelBranca,
 				"Clique aqui para selecionar o tipo Pessoa Juridica", 15);
-		rdDesativado = FabricaJRadionButton.criarRadionButton("Desativado", 100, 350, 110, 25,
+		rdDesativado = FabricaJRadionButton.criarRadionButton("Desativado", 180, 350, 110, 25,
 				FabricasColors.corLabelBranca, "Clique aqui para selecionar o tipo Pessoa Juridica", 15);
-		rdBloqueado = FabricaJRadionButton.criarRadionButton("Bloqueado", 220, 350, 100, 25,
+		rdBloqueado = FabricaJRadionButton.criarRadionButton("Bloqueado", 300, 350, 100, 25,
 				FabricasColors.corLabelBranca, "Clique aqui para selecionar o tipo Pessoa Juridica", 15);
-		txtCNPJ = FabricaJText.criarJTextField(80, 300, 250, 25, FabricasColors.corTxtField,
+		txtCNPJ = FabricaJText.criarJTextField(160, 300, 250, 25, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite seu CNPJ aqui", 16);
 
-		lblSituacao = FabricaJLabel.criarJLabel("Situacao do fornecedor: ", 20, 320, 460, 40,
+		lblSituacao = FabricaJLabel.criarJLabel("Situacao do fornecedor: ", 100, 320, 460, 40,
 				FabricasColors.corLabelBranca, 15);
 
 		btnEditar.addActionListener(ouvinteEditar);
@@ -245,7 +245,7 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 	}
 
 	public static void main(String[] args) {
-		new TelaEditarInforFornecedor("tela editar dados");
+		new TelaEditarInforFornecedor("Tela Editar Dados");
 	}
 
 	public JRadioButton getRdPessoaJuridica() {
