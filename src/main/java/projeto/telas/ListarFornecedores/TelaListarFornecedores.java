@@ -84,9 +84,7 @@ public class TelaListarFornecedores extends TelaPadrao {
 				} else if (f.getNome().contains(filtro)) {
 					addLinha(modelo, f);
 				}
-
 			}
-
 			scrol.repaint();
 		}
 
@@ -131,7 +129,6 @@ public class TelaListarFornecedores extends TelaPadrao {
 		scrol = new JScrollPane(tabelaFornecedores);
 		scrol.getViewport().setBackground(FabricasColors.CorRoxo);
 		scrol.setBounds(60, 120, 580, 260);
-
 		background.add(scrol);
 
 	}
@@ -178,8 +175,10 @@ public class TelaListarFornecedores extends TelaPadrao {
 		public void actionPerformed(ActionEvent e) {
 			Object componente = e.getSource();
 			linhaSelecionada = TelaListarFornecedores.getTabelaFornecedores().getSelectedRow();
-			String emailSelecionado = (String) TelaListarFornecedores.getTabelaFornecedores().getValueAt(linhaSelecionada, 3);
-			String tipoFornecedor = (String) TelaListarFornecedores.getTabelaFornecedores().getValueAt(linhaSelecionada, 1);
+			String emailSelecionado = (String) TelaListarFornecedores.getTabelaFornecedores()
+					.getValueAt(linhaSelecionada, 3);
+			String tipoFornecedor = (String) TelaListarFornecedores.getTabelaFornecedores().getValueAt(linhaSelecionada,
+					1);
 			Fornecedor fornecedor = central.recuperarFornecedorPorEmail(emailSelecionado);
 			TelaEditarInforFornecedor telaEditar = new TelaEditarInforFornecedor("tela de Editar Dados");
 			Editar.desativarComponentes(telaEditar, false);
@@ -201,10 +200,12 @@ public class TelaListarFornecedores extends TelaPadrao {
 			}
 		}
 	}
+
 	public void configImagemFundo() {
 		background = super.configImagemFundo("background.png");
 		add(background);
 	}
+
 	public JTextField getTxtFiltro() {
 		return txtFiltro;
 	}

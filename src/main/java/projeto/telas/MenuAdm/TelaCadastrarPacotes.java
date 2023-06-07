@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import projeto.ImagemDeFundo;
+import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import ultilidades.fabricas.FabricaJButton;
 import ultilidades.fabricas.FabricaJLabel;
@@ -40,7 +41,7 @@ public class TelaCadastrarPacotes extends TelaPadrao{
 	}
 	
 	public void configTela() {
-		
+		OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
 		JLabel lblNome = FabricaJLabel.criarJLabel("Nome:", 100, 10, 460, 40, FabricasColors.corLabelBranca, 25);
 		JLabel lblEmail = FabricaJLabel.criarJLabel("Fornecedores:", 100, 90, 460, 40, FabricasColors.corLabelBranca, 25);
 		JLabel lblTelefone = FabricaJLabel.criarJLabel("Servicos:", 100, 170, 460, 40, FabricasColors.corLabelBranca, 25);
@@ -61,7 +62,7 @@ public class TelaCadastrarPacotes extends TelaPadrao{
 		btnCadastrar = FabricaJButton.criarJButton("Cadastrar Pacote", 380, 270, 200, 40, FabricasColors.corTxtField, FabricasColors.CorRoxo, "Clique aqui para concluir o cadastro", 20);
 		
 		
-		
+		btnCadastrar.addMouseListener(ouvinte);
 		background.add(lblNome);
 		background.add(lblEmail);
 		background.add(lblTelefone);

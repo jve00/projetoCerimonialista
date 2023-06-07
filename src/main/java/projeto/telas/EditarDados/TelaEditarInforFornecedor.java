@@ -28,7 +28,6 @@ import ultilidades.fabricas.FabricaJLabel;
 import ultilidades.fabricas.FabricaJOptionPane;
 import ultilidades.fabricas.FabricaJRadionButton;
 import ultilidades.fabricas.FabricaJText;
-import ultilidades.fabricas.FabricaJTextArea;
 import ultilidades.fabricas.FabricasColors;
 import ultilidades.reporsitorio.CentralDeInformacoes;
 
@@ -54,7 +53,10 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 	private JLabel lblNomeDoFornecedor;
 	private JLabel lblEmail;
 	private JLabel lblTipo;
-	private JLabel lblFeedback;
+	private JRadioButton rdAtivo;
+	private JRadioButton rdDesativado;
+	private JRadioButton rdBloqueado;
+	private JLabel lblSituacao;
 
 	public TelaEditarInforFornecedor(String titulo) {
 		super(titulo);
@@ -103,7 +105,7 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 		tabelaServicos.setDefaultEditor(Object.class, new DefaultCellEditor(new JTextField()));
 		scrol = new JScrollPane(tabelaServicos);
 		scrol.getViewport().setBackground(FabricasColors.corTxtField);
-		scrol.setBounds(18, 130, 395, 120);
+		scrol.setBounds(100, 130, 450, 120);
 
 		background.add(scrol);
 
@@ -129,12 +131,17 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 			String emailSelecionado = (String) TelaListarFornecedores.getTabelaFornecedores()
 					.getValueAt(TelaListarFornecedores.getLinhaSelecionada(), 3);
 			Fornecedor fornecedorRecuperado = central.recuperarFornecedorPorEmail(emailSelecionado);
-		
-			
+
 			if (tela.getBtnEditar() == componente) {
 				Editar.ativarComponentes(tela, true);
 				TelaListarFornecedores.getTabelaFornecedores().repaint();
 			}
+
+//			
+//			Validador.va
+//			if() {
+//				
+//			}
 			if (tela.getBtnAlterar() == componente) {
 				if (linhaSelecionada == -1) {
 					FabricaJOptionPane.criarMsg("Selecione uma linha");
@@ -176,37 +183,41 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 	public void configTela() {
 		OuvinteBotaoEditar ouvinteEditar = new OuvinteBotaoEditar(this);
 		OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
+
 		lblTitulo = FabricaJLabel.criarJLabel("Editar Perfil do Fornecedor", 210, 10, 460, 40,
 				FabricasColors.corLabelBranca, 25);
-		lblNomeDoFornecedor = FabricaJLabel.criarJLabel("Nome:", 20, 70, 100, 25, FabricasColors.corLabelBranca, 20);
-		lblEmail = FabricaJLabel.criarJLabel("E - mail:", 20, 100, 100, 25, FabricasColors.corLabelBranca, 20);
+		lblNomeDoFornecedor = FabricaJLabel.criarJLabel("Nome:", 130, 70, 100, 25, FabricasColors.corLabelBranca, 20);
+		lblEmail = FabricaJLabel.criarJLabel("Email: ", 130, 100, 100, 25, FabricasColors.corLabelBranca, 20);
 
 		lblTipo = FabricaJLabel.criarJLabel("Tipo:", 20, 270, 100, 25, FabricasColors.corLabelBranca, 20);
-		lblFeedback = FabricaJLabel.criarJLabel("Feedback:", 20, 300, 100, 25, FabricasColors.corLabelBranca, 20);
-		lblCNPJ = FabricaJLabel.criarJLabel("CNPJ: ", 260, 272, 250, 25, FabricasColors.corLabelBranca, 20);
+		lblCNPJ = FabricaJLabel.criarJLabel("CNPJ: ", 20, 300, 250, 25, FabricasColors.corLabelBranca, 20);
 
-		txtNome = FabricaJText.criarJTextField(110, 70, 300, 25, FabricasColors.corTxtField,
+		txtNome = FabricaJText.criarJTextField(200, 70, 300, 25, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite seu nome aqui", 16);
-		txtEmail = FabricaJText.criarJTextField(110, 100, 300, 25, FabricasColors.corTxtField,
+		txtEmail = FabricaJText.criarJTextField(200, 100, 300, 25, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite seu e-mail aqui", 16);
 		btnEditar = FabricaJButton.criarJButton("Editar", 20, 10, 90, 30, FabricasColors.corLabelBranca,
 				FabricasColors.CorRoxo, "Clique aqui para editar o servico", 16);
 		btnSalvar = FabricaJButton.criarJButton("Salvar", 510, 410, 90, 30, FabricasColors.corLabelBranca,
 				FabricasColors.CorRoxo, "Clique aqui para editar o servico", 16);
 
-		btnAlterar = FabricaJButton.criarJButton("Alterar Servico", 420, 218, 130, 30, FabricasColors.corLabelBranca,
+		btnAlterar = FabricaJButton.criarJButton("Alterar Servico", 420, 278, 130, 30, FabricasColors.corLabelBranca,
 				FabricasColors.CorRoxo, "Clique aqui para editar o servico", 16);
 		// se for juridica não pode mudar para fisica, e se for fisica pode mudar pra
 		// juridica
-
 		rdPessoaJuridica = FabricaJRadionButton.criarRadionButton("Pessoa Juridica", 70, 272, 140, 25,
 				FabricasColors.corLabelBranca, "Clique aqui para selecionar o tipo Pessoa Juridica", 15);
-
-		txtCNPJ = FabricaJText.criarJTextField(320, 272, 250, 25, FabricasColors.corTxtField,
+		rdAtivo = FabricaJRadionButton.criarRadionButton("Ativo", 20, 350, 70, 25, FabricasColors.corLabelBranca,
+				"Clique aqui para selecionar o tipo Pessoa Juridica", 15);
+		rdDesativado = FabricaJRadionButton.criarRadionButton("Desativado", 100, 350, 110, 25,
+				FabricasColors.corLabelBranca, "Clique aqui para selecionar o tipo Pessoa Juridica", 15);
+		rdBloqueado = FabricaJRadionButton.criarRadionButton("Bloqueado", 220, 350, 100, 25,
+				FabricasColors.corLabelBranca, "Clique aqui para selecionar o tipo Pessoa Juridica", 15);
+		txtCNPJ = FabricaJText.criarJTextField(80, 300, 250, 25, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite seu CNPJ aqui", 16);
 
-		txtAreaFeedback = FabricaJTextArea.criarJTextArea(115, 320, 300, 115, FabricasColors.corTxtField,
-				FabricasColors.corLabelBranca);
+		lblSituacao = FabricaJLabel.criarJLabel("Situacao do fornecedor: ", 20, 320, 460, 40,
+				FabricasColors.corLabelBranca, 15);
 
 		btnEditar.addActionListener(ouvinteEditar);
 		btnEditar.addMouseListener(ouvinte);
@@ -220,15 +231,21 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 		background.add(lblNomeDoFornecedor);
 		background.add(lblEmail);
 		background.add(lblTipo);
-		background.add(lblFeedback);
 		background.add(lblCNPJ);
 		background.add(txtNome);
 		background.add(txtEmail);
-		background.add(txtAreaFeedback);
 		background.add(rdPessoaJuridica);
 		background.add(txtCNPJ);
 		background.add(btnSalvar);
 		background.add(btnAlterar);
+		background.add(lblSituacao);
+		background.add(rdAtivo);
+		background.add(rdBloqueado);
+		background.add(rdDesativado);
+	}
+
+	public static void main(String[] args) {
+		new TelaEditarInforFornecedor("tela editar dados");
 	}
 
 	public JRadioButton getRdPessoaJuridica() {
@@ -303,16 +320,24 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 		return lblTipo;
 	}
 
-	public JLabel getLblFeedback() {
-		return lblFeedback;
-	}
-
 	public JButton getBtnSalvar() {
 		return btnSalvar;
 	}
 
 	public void setFornecedor(Fornecedor fornecedor) {
 		this.fornecedor = fornecedor;
+	}
+
+	public JRadioButton getRdAtivo() {
+		return rdAtivo;
+	}
+
+	public JRadioButton getRdDesativado() {
+		return rdDesativado;
+	}
+
+	public JRadioButton getRdBloqquado() {
+		return rdBloqueado;
 	}
 
 }
