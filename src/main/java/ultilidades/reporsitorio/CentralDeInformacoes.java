@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import projeto.exceptions.ClienteJaExisteException;
 import projeto.exceptions.FornecedorExixtenteException;
+import projeto.exceptions.PacoteJaExisteException;
 import projeto.exceptions.ServicoJaCadastradoException;
 import projeto.exceptions.UsuarioNaoExisteException;
 import projeto.modelos.Administrador;
 import projeto.modelos.Cliente;
 import projeto.modelos.Evento;
 import projeto.modelos.Fornecedor;
+import projeto.modelos.Pacote;
 
 public class CentralDeInformacoes {
 
@@ -18,6 +20,7 @@ public class CentralDeInformacoes {
 	private ArrayList<Evento> todosOsEventos = new ArrayList<Evento>();
 	private ArrayList<String> servicos = new ArrayList<String>();
 	private Administrador administrador;
+	private ArrayList<Pacote> todosOsPacotes = new ArrayList<Pacote>();
 
 	public boolean adicionarEvento(Evento evento) {
 		if (recuperarEventoPeloId(evento.getId()) == null) {
@@ -115,6 +118,25 @@ public class CentralDeInformacoes {
 		}
 		return null;
 	}
+	
+	public Pacote recuperarPacote(String nome){
+		for(Pacote p : todosOsPacotes) {
+			if(p.getNome().equals(nome)) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
+	public boolean adicionarPacote(Pacote pacote) throws PacoteJaExisteException{
+		for(Pacote p: todosOsPacotes) {
+			if(p.equals(recuperarPacote(pacote.getNome()))) {
+				throw new PacoteJaExisteException();
+			}
+		}
+		todosOsPacotes.add(pacote);
+		return true;
+	}
 
 	public void setAdministrador(Administrador administrador) {
 		this.administrador = administrador;
@@ -138,6 +160,10 @@ public class CentralDeInformacoes {
 
 	public ArrayList<String> getServicos() {
 		return servicos;
+	}
+
+	public ArrayList<Pacote> getTodosOsPacotes() {
+		return todosOsPacotes;
 	}
 
 }
