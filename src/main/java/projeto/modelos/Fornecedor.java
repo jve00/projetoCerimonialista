@@ -40,4 +40,8 @@ public class Fornecedor extends UsuarioPadrao {
 	public void setFeedback(String feedback) {
 		this.feedback = feedback;
 	}
+	
+	public String toString() {
+		return getNome();
+	}
 }

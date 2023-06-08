@@ -2,6 +2,8 @@ package projeto.telas.MenuAdm;
 
 import java.awt.Event;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -57,7 +59,9 @@ public class TelaCadastrarPacotes extends TelaPadrao{
 		Persistencia persistencia = new Persistencia();
 		CentralDeInformacoes central = persistencia.recuperarCentral("central");
 		
-		OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
+		OuvinteBotaoCadastrarTelaCadastrarPacote ouvinteCadastro = new OuvinteBotaoCadastrarTelaCadastrarPacote();
+		
+		//OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
 		JLabel lblNome = FabricaJLabel.criarJLabel("Nome:", 100, 10, 460, 40, FabricasColors.corLabelBranca, 25);
 		JLabel lblfornecedores = FabricaJLabel.criarJLabel("Fornecedores:", 100, 90, 175, 40, FabricasColors.corLabelBranca, 25);
 		JLabel lblservicos = FabricaJLabel.criarJLabel("Servicos:", 380, 90, 170, 40, FabricasColors.corLabelBranca, 25);
@@ -72,6 +76,8 @@ public class TelaCadastrarPacotes extends TelaPadrao{
 				FabricasColors.corLabelBranca, "Digite os detalhes do pacote aqui", 20);
 		
 		btnCadastrar = FabricaJButton.criarJButton("Cadastrar Pacote", 380, 270, 200, 40, FabricasColors.corTxtField, FabricasColors.CorRoxo, "Clique aqui para concluir o cadastro", 20);
+		//btnAdicionarFornecedor 
+		
 		
 		//Adicionando JList servicos
 		servicosDoFornecedor = new ArrayList<String>();
@@ -82,7 +88,7 @@ public class TelaCadastrarPacotes extends TelaPadrao{
 		jlservicos.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		
 		JScrollPane scrollPaneServicos = new JScrollPane(jlservicos);
-		scrollPaneServicos.setBounds(370,135,200,120);
+		scrollPaneServicos.setBounds(370,125,200,120);
 		
 		//Adicionando JList fornecedores
 		fornecedores = new ArrayList<Fornecedor>();
@@ -93,9 +99,10 @@ public class TelaCadastrarPacotes extends TelaPadrao{
 		jlfornecedores.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		
 		JScrollPane scrollPaneFornecedores = new JScrollPane(jlfornecedores);
-		scrollPaneFornecedores.setBounds(100, 135,200 ,120 );
+		scrollPaneFornecedores.setBounds(90, 125,200 ,120 );
 		
-		btnCadastrar.addMouseListener(ouvinte);
+		btnCadastrar.addActionListener(ouvinteCadastro);
+		//btnCadastrar.addMouseListener(ouvinte);
 		background.add(lblNome);
 		background.add(lblfornecedores);
 		background.add(lblservicos);
@@ -109,7 +116,24 @@ public class TelaCadastrarPacotes extends TelaPadrao{
 		background.add(btnCadastrar);
 	}
 	
-	
+	public class OuvinteBotaoCadastrarTelaCadastrarPacote implements ActionListener{
+		
+		public void actionPerformed(ActionEvent e) {
+			Persistencia persistencia = new Persistencia();
+			CentralDeInformacoes central = persistencia.recuperarCentral("central");
+			String nome = txtNome.getText();
+			System.out.println(nome);
+			float preco = Float.parseFloat(txtpreco.getText());
+			System.out.println(preco);
+			String descricao = txtdescricao.getText();
+			System.out.println(descricao);
+			ArrayList<String> servicos = new ArrayList<String>(jlservicos.getSelectedValuesList());
+			System.out.println(servicos);
+			ArrayList<Fornecedor> fornecedor = new ArrayList<Fornecedor>(jlfornecedores.getSelectedValuesList());
+			System.out.println(fornecedor);
+			
+		}
+	}
 	
 	
 	public static void main(String[] args) {
