@@ -23,7 +23,7 @@ public class TelaMenuADM extends TelaPadrao {
 	private ImagemDeFundo background;
 	private JButton btnCadastros;
 	private JButton btnFornecedores;
-	private JButton btnServicos;
+	private JButton btnServicos;	
 	private JButton btnCadastrarCliente;
 	private JButton btnCadastrarFornecedor;
 	private JButton btnOrcamentos;

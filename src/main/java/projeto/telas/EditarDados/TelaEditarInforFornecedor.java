@@ -17,7 +17,6 @@ import javax.swing.table.DefaultTableModel;
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
-import projeto.exceptions.FornecedorExixtenteException;
 import projeto.modelos.Fornecedor;
 import projeto.modelos.FornecedorJuridico;
 import projeto.telas.ListarFornecedores.TelaListarFornecedores;
@@ -150,15 +149,24 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 			if (tela.getBtnSalvar() == componente) {
 				fornecedorRecuperado.setNome(nome);
 				fornecedorRecuperado.setEmail(emailDoFornecedor);
-
+				if (tela.getRdAtivo().isSelected()) {
+					fornecedorRecuperado.setSituacaoDoFornecedor(true);
+					p.salvarCentral(central, "central");
+					FabricaJOptionPane.criarMsg("Dados editado com sucesso");
+					tela.dispose();
+				}
 				if (tela.getRdDesativado().isSelected()) {
 					fornecedorRecuperado.setSituacaoDoFornecedor(false);
 					p.salvarCentral(central, "central");
+					FabricaJOptionPane.criarMsg("Dados editado com sucesso");
+					tela.dispose();
 				} else if (tela.getRdBloqueado().isSelected()) {
 					String comentario = FabricaJOptionPane.criarInput("Digite um comentario a respeito do fornecedor");
 					fornecedorRecuperado.setSituacaoDoFornecedor(false);
 					fornecedorRecuperado.setFeedback(comentario);
 					p.salvarCentral(central, "central");
+					tela.dispose();
+					FabricaJOptionPane.criarMsg("Dados editado com sucesso");
 				} else if (tela.getRdPessoaJuridica().isSelected()) {
 					cnpj = tela.getTxtCNPJ().getText();
 					DefaultTableModel modelo = (DefaultTableModel) tela.getTabelaServicos().getModel();
@@ -183,7 +191,6 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 			}
 		}
 	}
-
 	public void configTela() {
 		OuvinteBotaoEditar ouvinteEditar = new OuvinteBotaoEditar(this);
 		OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
@@ -207,8 +214,10 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 
 		btnAlterar = FabricaJButton.criarJButton("Alterar Servico", 420, 250, 130, 30, FabricasColors.corLabelBranca,
 				FabricasColors.CorRoxo, "Clique aqui para editar o servico", 16);
+
 		// se for juridica não pode mudar para fisica, e se for fisica pode mudar pra
 		// juridica
+
 		rdPessoaJuridica = FabricaJRadionButton.criarRadionButton("Pessoa Juridica", 149, 272, 140, 25,
 				FabricasColors.corLabelBranca, "Clique aqui para selecionar o tipo Pessoa Juridica", 15);
 		rdAtivo = FabricaJRadionButton.criarRadionButton("Ativo", 100, 350, 70, 25, FabricasColors.corLabelBranca,

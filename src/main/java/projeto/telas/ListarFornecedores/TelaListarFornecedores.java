@@ -1,4 +1,4 @@
-        package projeto.telas.ListarFornecedores;
+package projeto.telas.ListarFornecedores;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
