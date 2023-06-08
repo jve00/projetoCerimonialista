@@ -6,7 +6,10 @@ import java.util.Date;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 import com.toedter.calendar.JDateChooser;
@@ -14,6 +17,7 @@ import com.toedter.calendar.JDateChooser;
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
+import projeto.modelos.Fornecedor;
 import ultilidades.fabricas.FabricaJFormatted;
 import ultilidades.fabricas.FabricaJLabel;
 import ultilidades.fabricas.FabricaJText;
@@ -29,7 +33,9 @@ public class TelaCadastrarOrcamento extends TelaPadrao {
 	private JLabel lblChooser;
 	private JDateChooser chooser;
 	private JFormattedTextField txtHora;
-
+	private DefaultTableModel modelo;
+	private JScrollPane scrol;
+	private JTable tabelaFornecedores;
 	public TelaCadastrarOrcamento(String titulo) {
 		super(titulo);
 		setVisible(true);
@@ -56,6 +62,32 @@ public class TelaCadastrarOrcamento extends TelaPadrao {
 		chooser.setFont(new Font("Arial", 1, 13));
 
 		lblChooser.add(chooser);
+	}
+	
+	private void addLinha(DefaultTableModel modelo, Fornecedor f) {
+		Object[] linhas = new Object[4];
+		linhas[0] = f.getNome();
+		linhas[1] = f.getTipo();
+		linhas[2] = f.getTipoDeServicos();
+		linhas[3] = f.getEmail();
+		modelo.addRow(linhas);
+	}
+
+	private void configTabela() {
+
+		modelo = new DefaultTableModel();
+		modelo.setColumnIdentifiers(new String[] {"Nome", "Pacote ou Individual ", "Valor"});
+		tabelaFornecedores = new JTable(modelo);
+		tabelaFornecedores.setFont(new Font("Arial", 1, 15));
+		tabelaFornecedores.getTableHeader().setFont(new Font("Arial", Font.BOLD, 15));
+		tabelaFornecedores.getTableHeader().setBackground(FabricasColors.corLabelBranca);
+		tabelaFornecedores.getTableHeader().setForeground(FabricasColors.CorRoxo);
+		tabelaFornecedores.setAutoCreateRowSorter(true);
+		scrol = new JScrollPane(tabelaFornecedores);
+		scrol.getViewport().setBackground(FabricasColors.CorRoxo);
+		scrol.setBounds(60, 120, 580, 260);
+		background.add(scrol);
+
 	}
 	public void configTela() {
 

@@ -19,8 +19,8 @@ public class CentralDeInformacoes {
 	private ArrayList<Fornecedor> todosOsFornecedores = new ArrayList<Fornecedor>();
 	private ArrayList<Evento> todosOsEventos = new ArrayList<Evento>();
 	private ArrayList<String> servicos = new ArrayList<String>();
-	private Administrador administrador;
 	private ArrayList<Pacote> todosOsPacotes = new ArrayList<Pacote>();
+	private Administrador administrador;
 
 	public boolean adicionarEvento(Evento evento) {
 		if (recuperarEventoPeloId(evento.getId()) == null) {
@@ -49,7 +49,7 @@ public class CentralDeInformacoes {
 			throw new ServicoJaCadastradoException();
 		} else {
 			servicos.add(servico);
-			}
+		}
 		return true;
 	}
 
@@ -82,6 +82,7 @@ public class CentralDeInformacoes {
 		}
 		return null;
 	}
+
 	public Fornecedor recuperarFornecedorPorEmail(String email) {
 		for (Fornecedor f : todosOsFornecedores) {
 			if (f.getEmail().equals(email)) {
@@ -90,6 +91,7 @@ public class CentralDeInformacoes {
 		}
 		return null;
 	}
+
 	public boolean adicionarFornecedor(Fornecedor fornecedor) throws FornecedorExixtenteException {
 		for (Fornecedor f : todosOsFornecedores) {
 			if (f.equals(recuperarFornecedorPorEmail(fornecedor.getEmail()))) {
@@ -118,27 +120,22 @@ public class CentralDeInformacoes {
 		}
 		return null;
 	}
-	
-	public Pacote recuperarPacote(String nome){
-		for(Pacote p : todosOsPacotes) {
-			if(p.getNome().equals(nome)) {
+
+	public Pacote recuperarPacote(String nome) {
+		for (Pacote p : todosOsPacotes) {
+			if (p.getNome().equals(nome)) {
 				return p;
 			}
 		}
 		return null;
 	}
-	
-	public boolean adicionarPacote(Pacote pacote) throws PacoteJaExisteException{
-		if (todosOsPacotes == null) {
-			todosOsPacotes.add(pacote);
-			return true;
-		}
-		for(Pacote p: todosOsPacotes) {
-			if(p.equals(recuperarPacote(pacote.getNome()))) {
+
+	public boolean adicionarPacote(Pacote pacote) throws PacoteJaExisteException {
+		for (Pacote p : todosOsPacotes) {
+			if (p.equals(recuperarPacote(pacote.getNome()))) {
 				throw new PacoteJaExisteException();
 			}
 		}
-		
 		todosOsPacotes.add(pacote);
 		return true;
 	}

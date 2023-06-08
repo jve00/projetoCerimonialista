@@ -1,7 +1,5 @@
 package projeto.telas.MenuAdm;
 
-import java.awt.Event;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -14,7 +12,6 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
 import projeto.ImagemDeFundo;
-import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.exceptions.PacoteJaExisteException;
 import projeto.modelos.Fornecedor;
@@ -27,7 +24,7 @@ import ultilidades.fabricas.FabricaJText;
 import ultilidades.fabricas.FabricasColors;
 import ultilidades.reporsitorio.CentralDeInformacoes;
 
-public class TelaCadastrarPacotes extends TelaPadrao{
+public class TelaCadastrarPacotes extends TelaPadrao {
 
 	private ImagemDeFundo background;
 	private JTextField txtNome;
@@ -42,70 +39,73 @@ public class TelaCadastrarPacotes extends TelaPadrao{
 	private String[] servicosArray;
 	private ArrayList<Fornecedor> fornecedores;
 	private Fornecedor[] fornecedoresArray;
-	
+
 	public TelaCadastrarPacotes(String titulo) {
 		super(titulo);
 		setVisible(true);
 	}
-	
+
 	public void configImagemFundo() {
 		background = super.configImagemFundo("background.png");
 		add(background);
 	}
-	
+
 	public void configurarComponentes() {
 		configImagemFundo();
 		configTela();
 	}
-	
+
 	public void configTela() {
 		Persistencia persistencia = new Persistencia();
 		CentralDeInformacoes central = persistencia.recuperarCentral("central");
-		
+
 		OuvinteBotaoCadastrarTelaCadastrarPacote ouvinteCadastro = new OuvinteBotaoCadastrarTelaCadastrarPacote(this);
-		
-		//OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
+
+		// OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
 		JLabel lblNome = FabricaJLabel.criarJLabel("Nome:", 100, 10, 460, 40, FabricasColors.corLabelBranca, 25);
-		JLabel lblfornecedores = FabricaJLabel.criarJLabel("Fornecedores:", 100, 90, 175, 40, FabricasColors.corLabelBranca, 25);
-		JLabel lblservicos = FabricaJLabel.criarJLabel("Servicos:", 380, 90, 170, 40, FabricasColors.corLabelBranca, 25);
+		JLabel lblfornecedores = FabricaJLabel.criarJLabel("Fornecedores:", 100, 90, 175, 40,
+				FabricasColors.corLabelBranca, 25);
+		JLabel lblservicos = FabricaJLabel.criarJLabel("Servicos:", 380, 90, 170, 40, FabricasColors.corLabelBranca,
+				25);
 		JLabel lblValor = FabricaJLabel.criarJLabel("Valor:", 100, 270, 70, 40, FabricasColors.corLabelBranca, 25);
-		JLabel lblDetalhePacote = FabricaJLabel.criarJLabel("Detalhes do pacote:", 100, 320, 460, 40, FabricasColors.corLabelBranca, 25);
-		
+		JLabel lblDetalhePacote = FabricaJLabel.criarJLabel("Detalhes do pacote:", 100, 320, 460, 40,
+				FabricasColors.corLabelBranca, 25);
+
 		txtNome = FabricaJText.criarJTextField(100, 50, 460, 40, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o seu Nome aqui", 20);
 		txtpreco = FabricaJText.criarJTextField(175, 270, 200, 40, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o preco aqui", 20);
 		txtdescricao = FabricaJText.criarJTextField(100, 370, 460, 80, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite os detalhes do pacote aqui", 20);
-		
-		btnCadastrar = FabricaJButton.criarJButton("Cadastrar Pacote", 380, 270, 200, 40, FabricasColors.corTxtField, FabricasColors.CorRoxo, "Clique aqui para concluir o cadastro", 20);
-		//btnAdicionarFornecedor 
-		
-		
-		//Adicionando JList servicos
+
+		btnCadastrar = FabricaJButton.criarJButton("Cadastrar Pacote", 380, 270, 200, 40, FabricasColors.corTxtField,
+				FabricasColors.CorRoxo, "Clique aqui para concluir o cadastro", 20);
+		// btnAdicionarFornecedor
+
+		// Adicionando JList servicos
 		servicosDoFornecedor = new ArrayList<String>();
 		ArrayList<String> servicos = central.getServicos();
 		servicosArray = servicos.toArray(new String[servicos.size()]);
-		
+
 		jlservicos = new JList<>(servicosArray);
 		jlservicos.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		
+
 		JScrollPane scrollPaneServicos = new JScrollPane(jlservicos);
-		scrollPaneServicos.setBounds(370,125,200,120);
-		
-		//Adicionando JList fornecedores
+		scrollPaneServicos.setBounds(370, 125, 200, 120);
+
+		// Adicionando JList fornecedores
 		fornecedores = new ArrayList<Fornecedor>();
 		ArrayList<Fornecedor> arrayFor = central.getTodoOsFornecedores();
 		fornecedoresArray = arrayFor.toArray(new Fornecedor[arrayFor.size()]);
-		
+
 		jlfornecedores = new JList<>(fornecedoresArray);
 		jlfornecedores.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		
+
 		JScrollPane scrollPaneFornecedores = new JScrollPane(jlfornecedores);
-		scrollPaneFornecedores.setBounds(90, 125,200 ,120 );
-		
+		scrollPaneFornecedores.setBounds(90, 125, 200, 120);
+
 		btnCadastrar.addActionListener(ouvinteCadastro);
-		//btnCadastrar.addMouseListener(ouvinte);
+		// btnCadastrar.addMouseListener(ouvinte);
 		background.add(lblNome);
 		background.add(lblfornecedores);
 		background.add(lblservicos);
@@ -118,14 +118,13 @@ public class TelaCadastrarPacotes extends TelaPadrao{
 		background.add(txtdescricao);
 		background.add(btnCadastrar);
 	}
-	
-	public class OuvinteBotaoCadastrarTelaCadastrarPacote implements ActionListener{
+
+	public class OuvinteBotaoCadastrarTelaCadastrarPacote implements ActionListener {
 		private TelaCadastrarPacotes tela;
-		
+
 		public OuvinteBotaoCadastrarTelaCadastrarPacote(TelaCadastrarPacotes tela) {
 			this.tela = tela;
 		}
-		
 		public void actionPerformed(ActionEvent e) {
 			Persistencia persistencia = new Persistencia();
 			CentralDeInformacoes central = persistencia.recuperarCentral("central");
@@ -134,27 +133,22 @@ public class TelaCadastrarPacotes extends TelaPadrao{
 			String descricao = txtdescricao.getText();
 			ArrayList<String> servicos = new ArrayList<String>(jlservicos.getSelectedValuesList());
 			ArrayList<Fornecedor> fornecedor = new ArrayList<Fornecedor>(jlfornecedores.getSelectedValuesList());
-			
-			
-			
+
 			Pacote pacote = new Pacote(nome, fornecedor, servicos, preco, descricao);
-			System.out.println(pacote);
 			try {
 				central.adicionarPacote(pacote);
 				persistencia.salvarCentral(central, "central");
 				FabricaJOptionPane.criarMsg("Cadastro Confirmado.");
 				tela.dispose();
-			}catch(PacoteJaExisteException erro) {
+			} catch (PacoteJaExisteException erro) {
 				FabricaJOptionPane.criarMsgErro(erro.getMessage());
 			}
 		}
 	}
-	
-	
 	public static void main(String[] args) {
 		TelaCadastrarPacotes tela = new TelaCadastrarPacotes("TelaCadastro");
 	}
-	
+
 	public void setTxtNome(JTextField txtNome) {
 		this.txtNome = txtNome;
 	}
@@ -202,7 +196,6 @@ public class TelaCadastrarPacotes extends TelaPadrao{
 	public void setFornecedoresArray(Fornecedor[] fornecedoresArray) {
 		this.fornecedoresArray = fornecedoresArray;
 	}
-
 
 	public JTextField getTxtNome() {
 		return txtNome;

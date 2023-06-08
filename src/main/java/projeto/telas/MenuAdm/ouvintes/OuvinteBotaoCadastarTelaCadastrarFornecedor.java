@@ -36,6 +36,9 @@ public class OuvinteBotaoCadastarTelaCadastrarFornecedor implements ActionListen
 		TipoDeConta tipo = (selecionouPessoaFisica ? TipoDeConta.PESSOAFISICA : TipoDeConta.PESSOAJURIDICA);
 		String tipoDaConta = String.valueOf(tipo);
 		ArrayList<String> servico = tela.getServicosDoFornecedor();
+	
+		
+		
 		JCheckBox pessoaFisica = tela.getJcbPessoaFisica();
 		JCheckBox pessoaJuridica = tela.getJcbPessoaJuridica();
 		String cpf = "";
@@ -62,7 +65,6 @@ public class OuvinteBotaoCadastarTelaCadastrarFornecedor implements ActionListen
 					tela.dispose();
 					new TelaMenuADM("Menu");
 				} else if (cpfValido) {
-					System.out.println(cpf);
 					central.adicionarFornecedor(new FornecedorFisico(nome, telefone, email, tipoDaConta,
 							Long.parseLong(cpf), tela.getServicosDoFornecedor(), true));
 					persistencia.salvarCentral(central, "central");

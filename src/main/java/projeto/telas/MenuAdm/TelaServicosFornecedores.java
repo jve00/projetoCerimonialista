@@ -1,4 +1,4 @@
-package projeto.telas.MenuAdm;
+ package projeto.telas.MenuAdm;
 
 import java.awt.Font;
 import java.util.ArrayList;
