@@ -129,11 +129,16 @@ public class CentralDeInformacoes {
 	}
 	
 	public boolean adicionarPacote(Pacote pacote) throws PacoteJaExisteException{
+		if (todosOsPacotes == null) {
+			todosOsPacotes.add(pacote);
+			return true;
+		}
 		for(Pacote p: todosOsPacotes) {
 			if(p.equals(recuperarPacote(pacote.getNome()))) {
 				throw new PacoteJaExisteException();
 			}
 		}
+		
 		todosOsPacotes.add(pacote);
 		return true;
 	}

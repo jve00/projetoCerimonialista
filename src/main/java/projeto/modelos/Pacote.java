@@ -18,6 +18,11 @@ public class Pacote {
 		this.preco = preco;
 		this.descricao = descricao;
 	}
+
+	
+	public String toString() {
+		return nome;
+	}
 	
 	
 	public String getNome() {

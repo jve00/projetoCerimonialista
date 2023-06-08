@@ -16,10 +16,13 @@ import javax.swing.ListSelectionModel;
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
+import projeto.exceptions.PacoteJaExisteException;
 import projeto.modelos.Fornecedor;
+import projeto.modelos.Pacote;
 import ulitilidades.persistencia.Persistencia;
 import ultilidades.fabricas.FabricaJButton;
 import ultilidades.fabricas.FabricaJLabel;
+import ultilidades.fabricas.FabricaJOptionPane;
 import ultilidades.fabricas.FabricaJText;
 import ultilidades.fabricas.FabricasColors;
 import ultilidades.reporsitorio.CentralDeInformacoes;
@@ -59,7 +62,7 @@ public class TelaCadastrarPacotes extends TelaPadrao{
 		Persistencia persistencia = new Persistencia();
 		CentralDeInformacoes central = persistencia.recuperarCentral("central");
 		
-		OuvinteBotaoCadastrarTelaCadastrarPacote ouvinteCadastro = new OuvinteBotaoCadastrarTelaCadastrarPacote();
+		OuvinteBotaoCadastrarTelaCadastrarPacote ouvinteCadastro = new OuvinteBotaoCadastrarTelaCadastrarPacote(this);
 		
 		//OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
 		JLabel lblNome = FabricaJLabel.criarJLabel("Nome:", 100, 10, 460, 40, FabricasColors.corLabelBranca, 25);
@@ -117,21 +120,33 @@ public class TelaCadastrarPacotes extends TelaPadrao{
 	}
 	
 	public class OuvinteBotaoCadastrarTelaCadastrarPacote implements ActionListener{
+		private TelaCadastrarPacotes tela;
+		
+		public OuvinteBotaoCadastrarTelaCadastrarPacote(TelaCadastrarPacotes tela) {
+			this.tela = tela;
+		}
 		
 		public void actionPerformed(ActionEvent e) {
 			Persistencia persistencia = new Persistencia();
 			CentralDeInformacoes central = persistencia.recuperarCentral("central");
 			String nome = txtNome.getText();
-			System.out.println(nome);
 			float preco = Float.parseFloat(txtpreco.getText());
-			System.out.println(preco);
 			String descricao = txtdescricao.getText();
-			System.out.println(descricao);
 			ArrayList<String> servicos = new ArrayList<String>(jlservicos.getSelectedValuesList());
-			System.out.println(servicos);
 			ArrayList<Fornecedor> fornecedor = new ArrayList<Fornecedor>(jlfornecedores.getSelectedValuesList());
-			System.out.println(fornecedor);
 			
+			
+			
+			Pacote pacote = new Pacote(nome, fornecedor, servicos, preco, descricao);
+			System.out.println(pacote);
+			try {
+				central.adicionarPacote(pacote);
+				persistencia.salvarCentral(central, "central");
+				FabricaJOptionPane.criarMsg("Cadastro Confirmado.");
+				tela.dispose();
+			}catch(PacoteJaExisteException erro) {
+				FabricaJOptionPane.criarMsgErro(erro.getMessage());
+			}
 		}
 	}
 	
