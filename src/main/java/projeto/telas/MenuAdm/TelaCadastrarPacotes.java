@@ -88,7 +88,7 @@ public class TelaCadastrarPacotes extends TelaPadrao {
 
 		// Adicionando JList servicos
 		servicosDoFornecedor = new ArrayList<String>();
-		ArrayList<String> servicos = servicosDoFornecedor;
+		ArrayList<String> servicos = central.getServicos();
 		servicosArray = servicos.toArray(new String[servicos.size()]);
 
 		jlservicos = new JList<>(servicosArray);

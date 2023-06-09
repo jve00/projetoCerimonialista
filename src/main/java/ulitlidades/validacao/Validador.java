@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import javax.swing.JCheckBox;
 
+import projeto.exceptions.CamposVazioException;
 import projeto.exceptions.ServicoInvalidoException;
 import projeto.exceptions.ValidacaoException;
 import projeto.exceptions.ValidacaoExceptionEmail;
@@ -56,6 +57,23 @@ public abstract class Validador {
 		return false;
 	}
 
+	public static boolean validarCadastroOrcamento(String nomeCompleto, String evento, String locacao, String tamanho,
+			String hora) throws Exception {
+		boolean nomeValido = validarNome(nomeCompleto);
+		boolean validartudo = tudoValido(evento, locacao, tamanho, hora);
+		if (nomeValido && validartudo) {
+			return true;
+		}
+		return false;
+	}
+	public static boolean tudoValido(String evento, String locacao, String tamanho, String hora)
+			throws CamposVazioException {
+		if (evento.isBlank() && locacao.isBlank() && tamanho.isBlank() && hora.isBlank()) {
+			throw new CamposVazioException();
+		}
+		return true;
+	}
+
 	public static boolean idadeValida(LocalDate dataNascimento) throws ValidacaoException {
 		LocalDate dataNasc = dataNascimento;
 		LocalDate dataAtual = LocalDate.now();
@@ -87,6 +105,7 @@ public abstract class Validador {
 		}
 		return true;
 	}
+
 	public static boolean validarNome(String nome) throws ValidarNomeException {
 		if (nome.isEmpty() || nome.length() < 10) {
 			throw new ValidarNomeException();

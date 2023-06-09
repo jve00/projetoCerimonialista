@@ -11,6 +11,7 @@ import projeto.modelos.Administrador;
 import projeto.modelos.Cliente;
 import projeto.modelos.Evento;
 import projeto.modelos.Fornecedor;
+import projeto.modelos.Orcamento;
 import projeto.modelos.Pacote;
 
 public class CentralDeInformacoes {
@@ -20,6 +21,7 @@ public class CentralDeInformacoes {
 	private ArrayList<Evento> todosOsEventos = new ArrayList<Evento>();
 	private ArrayList<String> servicos = new ArrayList<String>();
 	private ArrayList<Pacote> todosOsPacotes = new ArrayList<Pacote>();
+	private ArrayList<Orcamento> todosOsOrcamentos = new ArrayList<Orcamento>();
 	private Administrador administrador;
 
 	public boolean adicionarEvento(Evento evento) {
@@ -90,6 +92,25 @@ public class CentralDeInformacoes {
 			}
 		}
 		return null;
+	}
+
+	public Orcamento recuperarOrcamento(String nomeDoCliente) {
+		for (Orcamento o : todosOsOrcamentos) {
+			if (o.getNomeDoCliente().equals(nomeDoCliente)) {
+				return o;
+			}
+		}
+		return null;
+	}
+
+	public boolean adicionarOrcamento(Orcamento o) throws FornecedorExixtenteException {
+		for (Orcamento orcamento : todosOsOrcamentos) {
+			if (orcamento.equals(recuperarOrcamento(o.getNomeDoCliente()))) {
+				throw new FornecedorExixtenteException();
+			}
+		}
+		todosOsOrcamentos.add(o);
+		return true;
 	}
 
 	public boolean adicionarFornecedor(Fornecedor fornecedor) throws FornecedorExixtenteException {
