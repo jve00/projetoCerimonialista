@@ -161,7 +161,7 @@ public class TelaCadastrarPacotes extends TelaPadrao {
 			Persistencia persistencia = new Persistencia();
 			CentralDeInformacoes central = persistencia.recuperarCentral("central");
 			String nome = txtNome.getText();
-			float preco = 0;
+			 float preco = 0;
 			String descricao = txtdescricao.getText();
 			ArrayList<String> servicos = new ArrayList<String>(jlservicos.getSelectedValuesList());
 			ArrayList<Fornecedor> fornecedor = new ArrayList<Fornecedor>(jlfornecedores.getSelectedValuesList());

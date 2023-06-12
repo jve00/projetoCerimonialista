@@ -11,6 +11,9 @@ public class PessoaJuridica extends Cliente {
 		this.CNPJ = CNPJ;
 	}
 
+	public String toString() {
+		return getEmail();
+	}
 	// gets e sets unicos
 	public long getCNPJ() {
 		return CNPJ;

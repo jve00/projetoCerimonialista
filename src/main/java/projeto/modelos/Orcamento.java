@@ -4,19 +4,20 @@ import java.time.LocalTime;
 
 public class Orcamento {
 
-	private String nomeDoCliente;
+	private String EmailDoCliente;
 	private String Evento;
 	private String locacao;
 	private String tamanho;
 	private String data;
 	private LocalTime hora;
 	private String tipoDePagamento;
+	private boolean orcamentoConcluido;
+	private float precoTotal;
 
 
-
-	public Orcamento(String nomeDoCliente, String evento, String locacao, String tamanho, String data, LocalTime hora,
-			String tipoDePagamento) {
-		this.nomeDoCliente = nomeDoCliente;
+	public Orcamento(String EmailDoCliente, String evento, String locacao, String tamanho, String data,
+			LocalTime hora, String tipoDePagamento) {
+		this.EmailDoCliente = EmailDoCliente;
 		Evento = evento;
 		this.locacao = locacao;
 		this.tamanho = tamanho;
@@ -25,12 +26,12 @@ public class Orcamento {
 		this.tipoDePagamento = tipoDePagamento;
 	}
 
-	public String getNomeDoCliente() {
-		return nomeDoCliente;
+	public String getEmailDoCliente() {
+		return EmailDoCliente;
 	}
 
-	public void setNomeDoCliente(String nomeDoCliente) {
-		this.nomeDoCliente = nomeDoCliente;
+	public  void setEmailDoCliente(String nomeDoCliente) {
+		this.EmailDoCliente = nomeDoCliente;
 	}
 
 	public String getEvento() {
@@ -43,6 +44,14 @@ public class Orcamento {
 
 	public String getLocacao() {
 		return locacao;
+	}
+
+	public float getPrecoTotal() {
+		return precoTotal;
+	}
+
+	public void setPrecoTotal(float precoTotal) {
+		this.precoTotal = precoTotal;
 	}
 
 	public void setLocacao(String locacao) {
@@ -79,6 +88,14 @@ public class Orcamento {
 
 	public void setHora(LocalTime hora) {
 		this.hora = hora;
+	}
+
+	public boolean isOrcamentoConcluido() {
+		return orcamentoConcluido;
+	}
+
+	public void setOrcamentoConcluido(boolean orcamentoConcluido) {
+		this.orcamentoConcluido = orcamentoConcluido;
 	}
 
 }

@@ -9,6 +9,6 @@ public class CamposVazioException extends Exception{
 	}
 
 	public CamposVazioException() {
-		super("O campos deve estar preenchido");
+		super("Os campos deve estar preenchido");
 	}
 }

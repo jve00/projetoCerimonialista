@@ -57,15 +57,16 @@ public abstract class Validador {
 		return false;
 	}
 
-	public static boolean validarCadastroOrcamento(String nomeCompleto, String evento, String locacao, String tamanho,
+	public static boolean validarCadastroOrcamento(String emailDoCliente, String evento, String locacao, String tamanho,
 			String hora) throws Exception {
-		boolean nomeValido = validarNome(nomeCompleto);
+		boolean emailValido = validarEmail(emailDoCliente);
 		boolean validartudo = tudoValido(evento, locacao, tamanho, hora);
-		if (nomeValido && validartudo) {
+		if (emailValido && validartudo) {
 			return true;
 		}
 		return false;
 	}
+
 	public static boolean tudoValido(String evento, String locacao, String tamanho, String hora)
 			throws CamposVazioException {
 		if (evento.isBlank() && locacao.isBlank() && tamanho.isBlank() && hora.isBlank()) {
@@ -105,7 +106,12 @@ public abstract class Validador {
 		}
 		return true;
 	}
-
+	public static boolean validarHora(String hora) throws CamposVazioException {
+		if (hora.isEmpty()) {
+			throw new CamposVazioException();
+		}
+		return true;
+	}
 	public static boolean validarNome(String nome) throws ValidarNomeException {
 		if (nome.isEmpty() || nome.length() < 10) {
 			throw new ValidarNomeException();

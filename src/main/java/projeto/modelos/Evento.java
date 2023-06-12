@@ -1,42 +1,38 @@
 package projeto.modelos;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import projeto.modelos.enuns.StatusEvento;
 
 public class Evento {
 	private String nome;
-	private long id;
-	private LocalDateTime dataHora;
+	private LocalTime hora;
+	private String data;
 	private String local;
 	private Cliente clienteAssociado;
 	private boolean foiContratado;
 	private StatusEvento status;
 
-	public Evento() {
-		this.id = System.currentTimeMillis();
-		this.foiContratado = false;
-		this.status = StatusEvento.A_SER_REALIZADO;
-	}
-
-	public Evento(String nome, LocalDateTime dataHora, String local, Cliente clienteAssociado, boolean foiContratado) {
+	
+	public Evento(String nome, LocalTime hora, String data, String local, Cliente clienteAssociado) {
 		this.nome = nome;
-		this.dataHora = dataHora;
+		this.hora = hora;
+		this.data = data;
 		this.local = local;
 		this.clienteAssociado = clienteAssociado;
-		this.foiContratado = foiContratado;
+	
 	}
 
 	public boolean jaOcorreu() {
-		LocalDateTime var = LocalDateTime.now();
-		if (getDataHora().isBefore(var)) {
+		LocalTime var = LocalTime.now();
+		if (getHora().isBefore(var)) {
 			return true;
 		}
 		return false;
 	}
+
 	public String toString() {
-		return "nome" + "<" + clienteAssociado.getNome() + ">" + "convida você para o seu" + "<" + nome + ">" + ","
-				+ status + "<" + dataHora + ">" + "," + "<" + local + ">" + ".";
+		return "nome" + "<" + clienteAssociado.getNome() + ">" + "convida você para o seu" + "<" + nome + ">" +  "<" + hora + ">" + "," + "<" + local + ">" + ".";
 	}
 
 	public String getNome() {
@@ -47,20 +43,13 @@ public class Evento {
 		this.nome = nome;
 	}
 
-	public long getId() {
-		return id;
+
+	public LocalTime getHora() {
+		return hora;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public LocalDateTime getDataHora() {
-		return dataHora;
-	}
-
-	public void setDataHora(LocalDateTime dataHora) {
-		this.dataHora = dataHora;
+	public void setHora(LocalTime hora) {
+		this.hora = hora;
 	}
 
 	public String getLocal() {
@@ -93,6 +82,14 @@ public class Evento {
 
 	public void setStatus(StatusEvento status) {
 		this.status = status;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
 	}
 
 }

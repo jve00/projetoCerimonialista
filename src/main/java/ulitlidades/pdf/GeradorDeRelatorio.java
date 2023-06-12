@@ -54,7 +54,7 @@ public class GeradorDeRelatorio {
 			for (Evento evento : eventos) {
 				tabela.addCell(evento.getNome());
 				tabela.addCell(evento.getLocal());
-				tabela.addCell(String.valueOf(evento.getDataHora()));
+				tabela.addCell(String.valueOf(evento.getHora()));
 				tabela.addCell(String.valueOf(evento.getStatus()));
 				tabela.addCell(evento.getClienteAssociado().getNome());
 			}

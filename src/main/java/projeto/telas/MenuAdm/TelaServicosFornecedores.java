@@ -119,7 +119,7 @@ public class TelaServicosFornecedores extends TelaPadrao {
 	}
 
 	private void addLinha(DefaultTableModel modelo, String c) {
-		Object[] linhas = new Object[servicos.size()];
+		Object[] linhas = new Object[1];
 		linhas[0] = c;
 		modelo.addRow(linhas);
 	}
