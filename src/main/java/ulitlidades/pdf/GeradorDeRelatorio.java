@@ -39,7 +39,7 @@ public class GeradorDeRelatorio {
 			Paragraph titulo = new Paragraph("Eventos contratados para o Mês.");
 			titulo.setAlignment(Element.ALIGN_CENTER);
 			Paragraph linhaEmBranco = new Paragraph(" ");
-			ArrayList<Evento> eventos = centralDeInformacoes.getTodosOsEventos();
+			ArrayList<Evento> eventos = null;
 		
 			Image imagem = Image.getInstance("img/logoPj.png");
 			imagem.scaleAbsolute(100,100);

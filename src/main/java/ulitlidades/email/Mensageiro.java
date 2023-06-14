@@ -14,12 +14,12 @@ import ultilidades.reporsitorio.CentralDeInformacoes;
 public class Mensageiro {
 
 	public static void enviarMensagemDados(Cliente c) {
+		String remetente = "pprojetofinal@gmail.com";
+		String senha = "lwagvmikadfgnmgv";
 		Persistencia persistencia = new Persistencia();
 		CentralDeInformacoes central = persistencia.recuperarCentral("central");
+		Reuniao reuniao = central.recuperarReuniao(c.getEmail());
 
-		String remetente = "testeProjeto";
-		String senha = "baelmnbfvbgwhkfc";
-		Reuniao reuniao = null;
 		MultiPartEmail email = new MultiPartEmail();
 		email.setHostName("smtp.gmail.com");
 		email.setSmtpPort(465);
@@ -32,19 +32,17 @@ public class Mensageiro {
 					+ "data " + reuniao.getData());
 			email.addTo(c.getEmail());
 			email.send();
-
 		} catch (Exception e) {
 			FabricaJOptionPane.criarMsgErro("Erro ao enviar os dados");
 		}
-
 	}
 
 	public static int enviarCodigo(String emailCodigo) {
 		Persistencia persistencia = new Persistencia();
 		CentralDeInformacoes central = persistencia.recuperarCentral("central");
 
-		String remetente = "testeProjeto";
-		String senha = "baelmnbfvbgwhkfc";
+		String remetente = "pprojetofinal@gmail.com";
+		String senha = "lwagvmikadfgnmgv";
 		int min = 1239;
 		int max = 9999;
 
@@ -53,6 +51,7 @@ public class Mensageiro {
 		email.setSmtpPort(465);
 		email.setAuthenticator(new DefaultAuthenticator(remetente, senha));
 		email.setSSLOnConnect(true);
+
 		try {
 			email.setFrom(remetente);
 			email.setSubject("Codigo para a mudanca de Senha.");

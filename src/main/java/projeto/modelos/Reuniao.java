@@ -8,11 +8,21 @@ public class Reuniao {
 	private Date data;
 	private LocalTime hora;
 	private String assunto;
+	private String emailDoCliente;
 
-	public Reuniao(Date data, LocalTime hora, String assunto) {
+	public Reuniao(Date data, LocalTime hora, String assunto, String emailDoCliente) {
 		this.data = data;
 		this.hora = hora;
 		this.assunto = assunto;
+		this.emailDoCliente = emailDoCliente;
+	}
+
+	public String getEmailDoCliente() {
+		return emailDoCliente;
+	}
+
+	public void setEmailDoCliente(String emailDoCliente) {
+		this.emailDoCliente = emailDoCliente;
 	}
 
 	public Date getData() {

@@ -1,10 +1,9 @@
 package ultilidades.reporsitorio;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import projeto.exceptions.ClienteJaExisteException;
-import projeto.exceptions.EventoNaoCadastradoException;
+import projeto.exceptions.EsseClienteNaoTemEventoException;
 import projeto.exceptions.FornecedorExixtenteException;
 import projeto.exceptions.OrcamentoJaCadastradoException;
 import projeto.exceptions.PacoteJaExisteException;
@@ -13,7 +12,6 @@ import projeto.exceptions.ServicoJaCadastradoException;
 import projeto.exceptions.UsuarioNaoExisteException;
 import projeto.modelos.Administrador;
 import projeto.modelos.Cliente;
-import projeto.modelos.Evento;
 import projeto.modelos.Fornecedor;
 import projeto.modelos.Orcamento;
 import projeto.modelos.Pacote;
@@ -23,34 +21,28 @@ public class CentralDeInformacoes {
 
 	private ArrayList<Cliente> todosOsCliente = new ArrayList<Cliente>();
 	private ArrayList<Fornecedor> todosOsFornecedores = new ArrayList<Fornecedor>();
-	private ArrayList<Evento> todosOsEventos = new ArrayList<Evento>();
 	private ArrayList<String> servicos = new ArrayList<String>();
 	private ArrayList<Pacote> todosOsPacotes = new ArrayList<Pacote>();
 	private ArrayList<Orcamento> todosOsOrcamentos = new ArrayList<Orcamento>();
 	private ArrayList<Reuniao> todasAsReunioes = new ArrayList<Reuniao>();
 	private Administrador administrador;
 
-	public void adicionarEvento(Evento evento) throws EventoNaoCadastradoException {
-		if (recuperarEventosCliente(evento.getClienteAssociado().getEmail()) == null) {
-			todosOsEventos.add(evento);
-		}
-		throw new EventoNaoCadastradoException();
-	}
-
-	public ArrayList<Evento> recuperarEventosCliente(String email) {
-		ArrayList<Evento> eventoDoCliente = new ArrayList<Evento>();
+	@SuppressWarnings("unlikely-arg-type")
+	public ArrayList<Orcamento> recuperarEventosCliente(String email) throws EsseClienteNaoTemEventoException {
+		ArrayList<Orcamento> eventoDoCliente = new ArrayList<Orcamento>();
 		Cliente c = recuperarClientePorEmail(email);
-		if (c != null) {
-			for (Evento e : todosOsEventos) {
-				if (e.getClienteAssociado().equals(c)) {
-					eventoDoCliente.add(e);
-					return eventoDoCliente;
+		if (c == null) {
+			new EsseClienteNaoTemEventoException();
+		} else {
+			System.out.println("entrou");
+			for (Orcamento o : todosOsOrcamentos) {
+				if (o.getEmailDoCliente().equals(c.getEmail())) {
+					eventoDoCliente.add(o);
 				}
 			}
 		}
-		return null;
+		return eventoDoCliente;
 	}
-
 	public boolean verificarSenha(String senha) {
 		if (getAdministrador().getSenha().equals(senha)) {
 			return true;
@@ -74,9 +66,10 @@ public class CentralDeInformacoes {
 		return true;
 	}
 
+	@SuppressWarnings("unlikely-arg-type")
 	public boolean adicionarReuniao(Reuniao reuniao) throws ReuniaoJaCadastradaException {
 		for (Reuniao r : todasAsReunioes) {
-			if (r.equals(recuperarReuniao(r.getData()))) {
+			if (r.getEmailDoCliente().equals(recuperarReuniao(reuniao.getEmailDoCliente()))) {
 				throw new ReuniaoJaCadastradaException();
 			}
 		}
@@ -84,9 +77,9 @@ public class CentralDeInformacoes {
 		return true;
 	}
 
-	public Reuniao recuperarReuniao(Date data) {
+	public Reuniao recuperarReuniao(String email) {
 		for (Reuniao r : todasAsReunioes) {
-			if (r.getHora().equals(data)) {
+			if (r.getEmailDoCliente().equals(email)) {
 				return r;
 			}
 		}
@@ -176,10 +169,6 @@ public class CentralDeInformacoes {
 
 	public ArrayList<Cliente> getTodosOsCliente() {
 		return todosOsCliente;
-	}
-
-	public ArrayList<Evento> getTodosOsEventos() {
-		return todosOsEventos;
 	}
 
 	public Administrador getAdministrador() {

@@ -13,6 +13,7 @@ public class Orcamento {
 	private String tipoDePagamento;
 	private boolean orcamentoConcluido;
 	private float precoTotal;
+	
 
 
 	public Orcamento(String EmailDoCliente, String evento, String locacao, String tamanho, String data,

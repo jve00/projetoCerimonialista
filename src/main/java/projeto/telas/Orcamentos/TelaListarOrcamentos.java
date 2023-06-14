@@ -3,6 +3,7 @@ package projeto.telas.Orcamentos;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -17,10 +18,12 @@ import javax.swing.table.DefaultTableModel;
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
+import projeto.exceptions.EsseClienteNaoTemEventoException;
 import projeto.modelos.Orcamento;
 import ulitilidades.persistencia.Persistencia;
 import ultilidades.fabricas.FabricaJButton;
 import ultilidades.fabricas.FabricaJLabel;
+import ultilidades.fabricas.FabricaJOptionPane;
 import ultilidades.fabricas.FabricasColors;
 import ultilidades.reporsitorio.CentralDeInformacoes;
 
@@ -35,9 +38,10 @@ public class TelaListarOrcamentos extends TelaPadrao {
 	private JButton btnCadastrar;
 	private JMenuItem itemExportarInfo;
 	private JMenuItem itemGerarFinancas;
-	private JMenuItem itemEditar;
+	private JMenuItem itemDetalhes;
 	private Persistencia persistencia;
 	private CentralDeInformacoes central;
+	private static int linhaselecionada;
 
 	public TelaListarOrcamentos(String titulo) {
 		super(titulo);
@@ -93,31 +97,52 @@ public class TelaListarOrcamentos extends TelaPadrao {
 		}
 
 		public void actionPerformed(ActionEvent e) {
+			Object componente = e.getSource();
+			String emailSelecionado = (String) TelaListarOrcamentos.getTabelaDeOrcamentos()
+					.getValueAt(TelaListarOrcamentos.getLinhaselecionada(), 0);
+
+			if (itemDetalhes == componente) {
+				TelaEditarDadosDoOrcamento telaEditar = new TelaEditarDadosDoOrcamento(
+						"Detalhamento dos dados do orcamento");
+				try {
+					ArrayList<Orcamento> c = central.recuperarEventosCliente(emailSelecionado);
+					Orcamento eventoDoclienteAssociado = c.get(TelaListarOrcamentos.getLinhaselecionada());
+					telaEditar.getTxtEvento().setText(eventoDoclienteAssociado.getEvento());
+					telaEditar.getTxtHora().setText(String.valueOf(eventoDoclienteAssociado.getHora()));
+					telaEditar.getTxtLocacao().setText(eventoDoclienteAssociado.getLocacao());
+					telaEditar.getTxtTamanho().setText(eventoDoclienteAssociado.getTamanho());
+					telaEditar.getChooser().setDateFormatString(eventoDoclienteAssociado.getData());
+					telaEditar.getTxtOrcamento().setText(String.valueOf(eventoDoclienteAssociado.getPrecoTotal()));
+					telaEditar.getChooser().getDate();
+					dispose();
+				} catch (EsseClienteNaoTemEventoException e1) {
+					FabricaJOptionPane.criarMsgErro(e1.getMessage());
+				}
+			}
 
 		}
-
 	}
 
 	private void configMenu() {
 		OuvinteDoMenuTelaListarOrcamento ouvinte = new OuvinteDoMenuTelaListarOrcamento(this);
 
-		JLabel menu = FabricaJLabel.criarJLabel(180, 160, 500, 450, FabricasColors.corLabelBranca, 4);
+		JLabel menu = FabricaJLabel.criarJLabel(10, 160, 500, 450, FabricasColors.corLabelBranca, 4);
 		menu.setBackground(FabricasColors.CorRoxo);
 
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menuOpcoes = new JMenu("Opções");
 		itemExportarInfo = new JMenuItem("Exportar Informacoes");
 		itemGerarFinancas = new JMenuItem("Gerar Financas");
-		itemEditar = new JMenuItem("Editar");
+		itemDetalhes = new JMenuItem("Detalhes do Orcamento");
 
 		itemExportarInfo.addActionListener(ouvinte);
 		itemGerarFinancas.addActionListener(ouvinte);
-		itemEditar.addActionListener(ouvinte);
+		itemDetalhes.addActionListener(ouvinte);
 
 		menuBar.add(menuOpcoes);
 		menuOpcoes.add(itemExportarInfo);
 		menuOpcoes.add(itemGerarFinancas);
-		menuOpcoes.add(itemEditar);
+		menuOpcoes.add(itemDetalhes);
 		setJMenuBar(menuBar);
 	}
 
@@ -174,6 +199,10 @@ public class TelaListarOrcamentos extends TelaPadrao {
 
 	public static JTable getTabelaDeOrcamentos() {
 		return tabelaDeOrcamentos;
+	}
+
+	public static int getLinhaselecionada() {
+		return linhaselecionada;
 	}
 
 }

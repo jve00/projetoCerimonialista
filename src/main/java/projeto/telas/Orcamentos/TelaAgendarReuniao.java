@@ -90,15 +90,15 @@ public class TelaAgendarReuniao extends TelaPadrao {
 			central = p.recuperarCentral("central");
 			String hora = getTxtHora().getText();
 			Date data = getChooser().getDate();
-
+			int linhaSelecionada = TelaListarOrcamentos.tabelaDeOrcamentos.getSelectedRow();
+			String emailSelecionado = (String) TelaListarOrcamentos.tabelaDeOrcamentos.getValueAt(linhaSelecionada, 0);
 			try {
 				boolean horaValida = Validador.validarHora(hora);
 				LocalTime horaAtual = LocalTime.now();
 				LocalTime horaConvertida = LocalTime.parse(hora);
 
 				if (horaValida && data != null) {
-					central.adicionarReuniao(new Reuniao(data, horaConvertida, ""));
-//						Mensageiro.enviarMensagemDados(TelaCadastrarOrcamento.clienteRecuperado);
+					central.adicionarReuniao(new Reuniao(data, horaConvertida, "", emailSelecionado));
 					p.salvarCentral(central, "central");
 					FabricaJOptionPane.criarMsg("Reuniao Cadastrada, Os dados foram enviados para o email do cliente.");
 				} else {
@@ -136,10 +136,11 @@ public class TelaAgendarReuniao extends TelaPadrao {
 			public void actionPerformed(ActionEvent e) {
 				int linhaSelecionada = TelaListarOrcamentos.tabelaDeOrcamentos.getSelectedRow();
 				String emailSelecionado = (String) TelaListarOrcamentos.tabelaDeOrcamentos.getValueAt(linhaSelecionada,
-						1);
+						0);
 				if (linhaSelecionada != -1) {
+					System.out.println(emailSelecionado);
 					Mensageiro.enviarMensagemDados(central.recuperarClientePorEmail(emailSelecionado));
-				}else {
+				} else {
 					FabricaJOptionPane.criarMsgErro("Selecione uma linha");
 				}
 			}
@@ -149,16 +150,18 @@ public class TelaAgendarReuniao extends TelaPadrao {
 			public void actionPerformed(ActionEvent e) {
 				Object componente = e.getSource();
 				String assunto = FabricaJOptionPane.criarInput("digite oque esta sendo tratado na reuniao");
+				int linhaSelecionada = TelaListarOrcamentos.tabelaDeOrcamentos.getSelectedRow();
+				String emailSelecionado = (String) TelaListarOrcamentos.tabelaDeOrcamentos.getValueAt(linhaSelecionada, 0);
 				try {
 					Thread.sleep(1 * 60 * 1000);
 					String hora = getTxtHora().getText();
 					Date data = getChooser().getDate();
-					central.getTodasAsReunioes().remove(central.recuperarReuniao(data));
-					central.adicionarReuniao(new Reuniao(getChooser().getDate(), LocalTime.parse(hora), assunto));
+					central.getTodasAsReunioes().remove(central.recuperarReuniao(emailSelecionado));
+					central.adicionarReuniao(
+							new Reuniao(getChooser().getDate(), LocalTime.parse(hora), assunto, emailSelecionado));
 					p.salvarCentral(central, "central");
 					FabricaJOptionPane.criarMsg("Dados doque foi tratado Salvo com Sucesso.");
 					dispose();
-
 				} catch (ReuniaoJaCadastradaException e1) {
 					System.out.println(e1.getMessage());
 				} catch (InterruptedException e1) {
@@ -169,7 +172,6 @@ public class TelaAgendarReuniao extends TelaPadrao {
 		btnEnviarEmail.addActionListener(ouvinteEnviarEmail);
 		btnEnviarEmail.addMouseListener(ouvinte);
 		btnComecarReuniao.addMouseListener(ouvinte);
-
 		background.add(btnEnviarEmail);
 		background.add(btnComecarReuniao);
 		background.add(lblTitulo);
