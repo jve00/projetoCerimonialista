@@ -151,7 +151,7 @@ public class TelaCadastrarPacotes extends TelaPadrao {
 		
 	}
 
-	public class OuvinteBotaoCadastrarTelaCadastrarPacote implements ActionListener {
+	private class OuvinteBotaoCadastrarTelaCadastrarPacote implements ActionListener {
 		private TelaCadastrarPacotes tela;
 
 		public OuvinteBotaoCadastrarTelaCadastrarPacote(TelaCadastrarPacotes tela) {
@@ -174,6 +174,7 @@ public class TelaCadastrarPacotes extends TelaPadrao {
 				persistencia.salvarCentral(central, "central");
 				FabricaJOptionPane.criarMsg("Cadastro Confirmado.");
 				tela.dispose();
+				TelaMenuADM tela = new TelaMenuADM("Tela Menu");
 			} catch (PacoteJaExisteException erro) {
 				FabricaJOptionPane.criarMsgErro(erro.getMessage());
 			} catch (NumberFormatException floatErro) {
@@ -181,6 +182,7 @@ public class TelaCadastrarPacotes extends TelaPadrao {
 			}
 		}
 	}
+	
 	public static void main(String[] args) {
 		TelaCadastrarPacotes tela = new TelaCadastrarPacotes("TelaCadastro");
 	}

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import projeto.telas.MenuAdm.TelaCadastrarPacotes;
+import projeto.telas.MenuAdm.TelaListarPacotes;
 import projeto.telas.MenuAdm.TelaMenuADM;
 
 public class OuvinteBotaoPacotesTelaMenuADM implements ActionListener {
@@ -16,7 +17,7 @@ public class OuvinteBotaoPacotesTelaMenuADM implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object componente = e.getSource();
 		tela.dispose();
-		new TelaCadastrarPacotes("Cadastrar pacotes de promoções");
+		new TelaListarPacotes("Cadastrar pacotes de promoções");
 
 	}
 
