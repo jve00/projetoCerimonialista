@@ -18,6 +18,7 @@ import com.toedter.calendar.JDateChooser;
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
+import projeto.exceptions.ClienteNaoExisteNoSistemaException;
 import projeto.exceptions.ReuniaoJaCadastradaException;
 import projeto.modelos.Reuniao;
 import ulitilidades.persistencia.Persistencia;
@@ -134,15 +135,10 @@ public class TelaAgendarReuniao extends TelaPadrao {
 
 		btnEnviarEmail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int linhaSelecionada = TelaListarOrcamentos.tabelaDeOrcamentos.getSelectedRow();
-				String emailSelecionado = (String) TelaListarOrcamentos.tabelaDeOrcamentos.getValueAt(linhaSelecionada,
-						0);
-				if (linhaSelecionada != -1) {
-					System.out.println(emailSelecionado);
-					Mensageiro.enviarMensagemDados(central.recuperarClientePorEmail(emailSelecionado));
-				} else {
-					FabricaJOptionPane.criarMsgErro("Selecione uma linha");
-				}
+				int linhaSelecionada = TelaListarOrcamentos.getTabelaDeOrcamentos().getSelectedRow();
+				String emailSelecionado = (String) TelaListarOrcamentos.tabelaDeOrcamentos
+						.getValueAt(linhaSelecionada, 0);
+				Mensageiro.enviarMensagemDados(central.recuperarClientePorEmail(emailSelecionado));
 			}
 		});
 		btnComecarReuniao.addActionListener(new ActionListener() {
@@ -150,8 +146,10 @@ public class TelaAgendarReuniao extends TelaPadrao {
 			public void actionPerformed(ActionEvent e) {
 				Object componente = e.getSource();
 				String assunto = FabricaJOptionPane.criarInput("digite oque esta sendo tratado na reuniao");
-				int linhaSelecionada = TelaListarOrcamentos.tabelaDeOrcamentos.getSelectedRow();
-				String emailSelecionado = (String) TelaListarOrcamentos.tabelaDeOrcamentos.getValueAt(linhaSelecionada, 0);
+				String emailSelecionado = (String) TelaListarOrcamentos.tabelaDeOrcamentos.getValueAt(TelaListarOrcamentos.getLinhaselecionada(), 0);
+			
+				
+				
 				try {
 					Thread.sleep(1 * 60 * 1000);
 					String hora = getTxtHora().getText();

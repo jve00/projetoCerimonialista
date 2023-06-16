@@ -20,6 +20,6 @@ public class Cliente extends UsuarioPadrao {
 
 	public void setSituacaoDaReuniao(boolean situacaoDaReuniao) {
 		this.situacaoDaReuniao = situacaoDaReuniao;
-	}
+	}	
 
 }

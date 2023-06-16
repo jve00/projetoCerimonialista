@@ -20,6 +20,7 @@ import projeto.TelaPadrao;
 import projeto.modelos.Fornecedor;
 import projeto.modelos.FornecedorJuridico;
 import projeto.telas.ListarFornecedores.TelaListarFornecedores;
+import projeto.telas.MenuAdm.TelaMenuADM;
 import servico.permissao.edit.Editar;
 import ulitilidades.persistencia.Persistencia;
 import ulitlidades.validacao.Validador;
@@ -29,6 +30,7 @@ import ultilidades.fabricas.FabricaJOptionPane;
 import ultilidades.fabricas.FabricaJRadionButton;
 import ultilidades.fabricas.FabricaJText;
 import ultilidades.fabricas.FabricasColors;
+import ultilidades.imagens.Imagens;
 import ultilidades.reporsitorio.CentralDeInformacoes;
 
 public class TelaEditarInforFornecedor extends TelaPadrao {
@@ -57,7 +59,7 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 	private JRadioButton rdDesativado;
 	private JRadioButton rdBloqueado;
 	private JLabel lblSituacao;
-
+	private JButton btnSeta;
 	public TelaEditarInforFornecedor(String titulo) {
 		super(titulo);
 		setVisible(true);
@@ -231,6 +233,17 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 
 		lblSituacao = FabricaJLabel.criarJLabel("Situacao do fornecedor: ", 100, 320, 460, 40,
 				FabricasColors.corLabelBranca, 15);
+	
+		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50, "clique aqui para voltar");
+		btnSeta.addMouseListener(ouvinte);
+		btnSeta.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+					dispose();
+					new TelaMenuADM("Tela menu ");
+			}
+		});
+
 
 		btnEditar.addActionListener(ouvinteEditar);
 		btnEditar.addMouseListener(ouvinte);
@@ -239,6 +252,8 @@ public class TelaEditarInforFornecedor extends TelaPadrao {
 		btnAlterar.addActionListener(ouvinteEditar);
 		btnAlterar.addMouseListener(ouvinte);
 
+		
+		background.add(btnSeta);
 		background.add(btnEditar);
 		background.add(lblTitulo);
 		background.add(lblNomeDoFornecedor);

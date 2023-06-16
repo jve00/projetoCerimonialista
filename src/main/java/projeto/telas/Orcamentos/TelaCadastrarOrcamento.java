@@ -5,7 +5,10 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +30,7 @@ import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.exceptions.HoraInvalidaException;
 import projeto.modelos.Cliente;
+import projeto.modelos.Fornecedor;
 import projeto.modelos.Orcamento;
 import projeto.modelos.Pacote;
 import projeto.modelos.enuns.TipoDePagamento;
@@ -149,8 +153,7 @@ public class TelaCadastrarOrcamento extends TelaPadrao {
 		txtOrcamento = FabricaJText.criarJTextField(380, 200, 70, 25, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "valor do orcamento", 16);
 		txtOrcamento.setEditable(false);
-		txtEmailDoCliente = FabricaJText.criarJTextField(265, 70, 282,
-				25, FabricasColors.corTxtField,
+		txtEmailDoCliente = FabricaJText.criarJTextField(265, 70, 282, 25, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o nome do Cliente aqui", 16);
 		txtEvento = FabricaJText.criarJTextField(200, 100, 347, 25, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o nome do Evento aqui", 16);
@@ -166,7 +169,7 @@ public class TelaCadastrarOrcamento extends TelaPadrao {
 		rdContrato = FabricaJRadionButton.criarRadionButton("Contrato", 300, 385, 90, 30, FabricasColors.corLabelBranca,
 				"clique aqui para o pagamento ser via contrato", 15);
 		try {
-			txtHora = FabricaJFormatted.criarJFormatted(165, 195, 80, 30, new MaskFormatter("##:##:##"),
+			txtHora = FabricaJFormatted.criarJFormatted(165, 195, 80, 30, new MaskFormatter("##:##"),
 					FabricasColors.corTxtField, FabricasColors.corLabelBranca, "Digite a hora do Evento aqui");
 		} catch (Exception e) {
 		}
@@ -219,9 +222,9 @@ public class TelaCadastrarOrcamento extends TelaPadrao {
 					: TipoDePagamento.CONTRATO);
 			Date data = tela.getChooser().getDate();
 			String hora = tela.getTxtHora().getText();
-			Cliente c = central.recuperarClientePorEmail(emailDoCliente);
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 			String dataFormatada = dateFormat.format(data);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 			int[] linhasSelecionadas = tabelaFornecedores.getSelectedRows();
 			float soma = 0;
 			List<Object> valores = new ArrayList<>();
@@ -232,22 +235,22 @@ public class TelaCadastrarOrcamento extends TelaPadrao {
 					valores.add(valor);
 					soma += valor;
 				}
-			
+
 			}
 
 			try {
+				LocalTime horaConvertida = LocalTime.parse(hora, formatter);
+				Cliente c = central.recuperarClientePorEmail(emailDoCliente);
 				boolean valido = Validador.validarCadastroOrcamento(emailDoCliente, evento, locacao, tamanho, hora);
-				LocalTime horaConvertida = LocalTime.parse(hora);
 				if (valido) {
-
+					Date dataAtual = new Date();
 					if (c != null) {
-						Date dataAtual = new Date();
 						if (data != null && data.after(dataAtual)) {
 							tela.getRdCliente().setEnabled(tela.getRdContrato().isSelected());
 							if (horaConvertida.isAfter(LocalTime.MIDNIGHT)
 									&& horaConvertida.isBefore(LocalTime.of(23, 59))) {
-								Orcamento o = new Orcamento(emailDoCliente, evento, locacao, tamanho,
-										dataFormatada, horaConvertida, String.valueOf(opcaoDePagamento));
+								Orcamento o = new Orcamento(emailDoCliente, evento, locacao, tamanho, dataFormatada,
+										horaConvertida, String.valueOf(opcaoDePagamento));
 								central.adicionarOrcamento(o);
 								if (getRdContrato().isSelected()) {
 									getTxtOrcamento().setText(String.valueOf(soma));
@@ -256,20 +259,23 @@ public class TelaCadastrarOrcamento extends TelaPadrao {
 								persistencia.salvarCentral(central, "central");
 								FabricaJOptionPane.criarMsg("Orcamento cadastrado com Sucesso.");
 								tela.dispose();
+								new TelaListarOrcamentos("tela de listar orcamento");
 							} else {
-								throw new HoraInvalidaException();
+								throw new HoraInvalidaException("hora invalida");
 							}
 						} else if (data == null || data.before(dataAtual)) {
 							FabricaJOptionPane.criarMsgErro("data Invalida, passe uma data valida");
 						}
 					} else {
-						FabricaJOptionPane.criarMsgErro("esse Cliente nao esta cadastrado no nosso sistema.");
+						FabricaJOptionPane.criarMsgErro("Esse cliente nao existe na nossa central");
 					}
-				} else {
-					FabricaJOptionPane.criarMsgErro("esse cliente nao existe no nosso sistema");
 				}
+			} catch (DateTimeParseException e1) {
+				FabricaJOptionPane.criarMsgErro("Hora Invalida, passe uma hora Valida!");
+
 			} catch (Exception e1) {
 				FabricaJOptionPane.criarMsgErro("Hora Invalida, passe uma hora Valida!");
+
 			}
 		}
 	}

@@ -19,6 +19,7 @@ import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.modelos.Fornecedor;
 import projeto.telas.EditarDados.TelaEditarInforFornecedor;
+import projeto.telas.MenuAdm.TelaMenuADM;
 import servico.permissao.edit.Editar;
 import ulitilidades.persistencia.Persistencia;
 import ultilidades.fabricas.FabricaJButton;
@@ -26,6 +27,7 @@ import ultilidades.fabricas.FabricaJLabel;
 import ultilidades.fabricas.FabricaJOptionPane;
 import ultilidades.fabricas.FabricaJText;
 import ultilidades.fabricas.FabricasColors;
+import ultilidades.imagens.Imagens;
 import ultilidades.reporsitorio.CentralDeInformacoes;
 
 public class TelaListarFornecedores extends TelaPadrao {
@@ -39,6 +41,7 @@ public class TelaListarFornecedores extends TelaPadrao {
 	private CentralDeInformacoes central = p.recuperarCentral("central");
 	private JTextField txtFiltro;
 	private static int linhaSelecionada;
+	private JButton btnSeta;
 
 	public TelaListarFornecedores(String titulo) {
 		super(titulo);
@@ -156,10 +159,20 @@ public class TelaListarFornecedores extends TelaPadrao {
 		btnDetalhes.addActionListener(ouvinteDetalhes);
 		btnDetalhes.addMouseListener(ouvinte);
 
+		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50, "clique aqui para voltar");
+		btnSeta.addMouseListener(ouvinte);
+		btnSeta.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new TelaMenuADM("Tela menu");
+			}
+		});
+
 		background.add(lblInfor);
 		background.add(btnDetalhes);
 		background.add(lblListaDeFornecedores);
-
+		background.add(btnSeta);
 	}
 
 	public class OuvinteBotaoDetalhesTelaListarFornecedores implements ActionListener {
@@ -180,7 +193,7 @@ public class TelaListarFornecedores extends TelaPadrao {
 					1);
 			Fornecedor fornecedor = central.recuperarFornecedorPorEmail(emailSelecionado);
 			TelaEditarInforFornecedor telaEditar = new TelaEditarInforFornecedor("tela de Editar Dados");
-			Editar.desativarComponentes(telaEditar, false);
+			Editar.ativarComponentes(telaEditar, false);
 			if (emailSelecionado.equals(fornecedor.getEmail())) {
 				Fornecedor fornecedorTipo = central.recuperarFornecedorPorEmail(emailSelecionado);
 				telaEditar.getTxtNome().setText(fornecedor.getNome());

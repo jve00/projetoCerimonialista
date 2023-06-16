@@ -3,7 +3,6 @@ package projeto.telas.Orcamentos;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -18,12 +17,11 @@ import javax.swing.table.DefaultTableModel;
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
-import projeto.exceptions.EsseClienteNaoTemEventoException;
 import projeto.modelos.Orcamento;
+import servico.permissao.edit.Editar;
 import ulitilidades.persistencia.Persistencia;
 import ultilidades.fabricas.FabricaJButton;
 import ultilidades.fabricas.FabricaJLabel;
-import ultilidades.fabricas.FabricaJOptionPane;
 import ultilidades.fabricas.FabricasColors;
 import ultilidades.reporsitorio.CentralDeInformacoes;
 
@@ -47,22 +45,17 @@ public class TelaListarOrcamentos extends TelaPadrao {
 		super(titulo);
 		setVisible(true);
 	}
-
 	public void configurarComponentes() {
 		configImagemFundo();
 		configTela();
 		configMenu();
 		configTabelaServicos();
 		popularTabela();
-
 	}
-
 	public void configImagemFundo() {
 		background = super.configImagemFundo("background.png");
 		add(background);
-
 	}
-
 	private void popularTabela() {
 		persistencia = new Persistencia();
 		central = persistencia.recuperarCentral("central");
@@ -98,34 +91,32 @@ public class TelaListarOrcamentos extends TelaPadrao {
 
 		public void actionPerformed(ActionEvent e) {
 			Object componente = e.getSource();
-			String emailSelecionado = (String) TelaListarOrcamentos.getTabelaDeOrcamentos()
-					.getValueAt(TelaListarOrcamentos.getLinhaselecionada(), 0);
 
+			linhaselecionada = TelaListarOrcamentos.getTabelaDeOrcamentos().getSelectedRow();
+			String emailSelecionado = (String) TelaListarOrcamentos.getTabelaDeOrcamentos().getValueAt(linhaselecionada,
+					0);
+
+			System.out.println(emailSelecionado);
 			if (itemDetalhes == componente) {
 				TelaEditarDadosDoOrcamento telaEditar = new TelaEditarDadosDoOrcamento(
 						"Detalhamento dos dados do orcamento");
-				try {
-					ArrayList<Orcamento> c = central.recuperarEventosCliente(emailSelecionado);
-					Orcamento eventoDoclienteAssociado = c.get(TelaListarOrcamentos.getLinhaselecionada());
-					telaEditar.getTxtEvento().setText(eventoDoclienteAssociado.getEvento());
-					telaEditar.getTxtHora().setText(String.valueOf(eventoDoclienteAssociado.getHora()));
-					telaEditar.getTxtLocacao().setText(eventoDoclienteAssociado.getLocacao());
-					telaEditar.getTxtTamanho().setText(eventoDoclienteAssociado.getTamanho());
-					telaEditar.getChooser().setDateFormatString(eventoDoclienteAssociado.getData());
-					telaEditar.getTxtOrcamento().setText(String.valueOf(eventoDoclienteAssociado.getPrecoTotal()));
-					telaEditar.getChooser().getDate();
-					dispose();
-				} catch (EsseClienteNaoTemEventoException e1) {
-					FabricaJOptionPane.criarMsgErro(e1.getMessage());
-				}
+				Orcamento eventoDoclienteAssociado = central.recuperarEventosCliente(emailSelecionado);
+				telaEditar.getTxtEvento().setText(eventoDoclienteAssociado.getEvento());
+				telaEditar.getTxtHora().setText(String.valueOf(eventoDoclienteAssociado.getHora()));
+				telaEditar.getTxtLocacao().setText(eventoDoclienteAssociado.getLocacao());
+				telaEditar.getTxtTamanho().setText(eventoDoclienteAssociado.getTamanho());
+				telaEditar.getTxtOrcamento().setText(String.valueOf(eventoDoclienteAssociado.getPrecoTotal()));
+				dispose();
+				Editar.ativarComponentesOrcamento(telaEditar, false);
+			} else if (itemExportarInfo == componente) {
+				dispose();
+				new TelaGerarRelatorio("Gerar Relatorio");
 			}
-
 		}
 	}
 
 	private void configMenu() {
 		OuvinteDoMenuTelaListarOrcamento ouvinte = new OuvinteDoMenuTelaListarOrcamento(this);
-
 		JLabel menu = FabricaJLabel.criarJLabel(10, 160, 500, 450, FabricasColors.corLabelBranca, 4);
 		menu.setBackground(FabricasColors.CorRoxo);
 
@@ -174,6 +165,7 @@ public class TelaListarOrcamentos extends TelaPadrao {
 
 		btnAgendarReuniao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				linhaselecionada = TelaListarOrcamentos.getTabelaDeOrcamentos().getSelectedRow();
 				dispose();
 				new TelaAgendarReuniao("Agenda de reunioes");
 			}

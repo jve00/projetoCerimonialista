@@ -15,6 +15,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import projeto.ImagemDeFundo;
+import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.exceptions.PacoteJaExisteException;
 import projeto.modelos.Fornecedor;
@@ -26,6 +27,7 @@ import ultilidades.fabricas.FabricaJOptionPane;
 import ultilidades.fabricas.FabricaJText;
 import ultilidades.fabricas.FabricaJTextArea;
 import ultilidades.fabricas.FabricasColors;
+import ultilidades.imagens.Imagens;
 import ultilidades.reporsitorio.CentralDeInformacoes;
 
 public class TelaCadastrarPacotes extends TelaPadrao {
@@ -42,7 +44,7 @@ public class TelaCadastrarPacotes extends TelaPadrao {
 	private ArrayList<String> servicosDoFornecedor;
 	private String[] servicosArray;
 	private Fornecedor[] fornecedoresArray;
-
+	private JButton btnSeta;
 
 	public TelaCadastrarPacotes(String titulo) {
 		super(titulo);
@@ -62,7 +64,7 @@ public class TelaCadastrarPacotes extends TelaPadrao {
 	public void configTela() {
 		Persistencia persistencia = new Persistencia();
 		CentralDeInformacoes central = persistencia.recuperarCentral("central");
-
+		OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
 		OuvinteBotaoCadastrarTelaCadastrarPacote ouvinteCadastro = new OuvinteBotaoCadastrarTelaCadastrarPacote(this);
 
 		// OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
@@ -107,33 +109,41 @@ public class TelaCadastrarPacotes extends TelaPadrao {
 		JScrollPane scrollPaneFornecedores = new JScrollPane(jlfornecedores);
 		scrollPaneFornecedores.setBounds(90, 125, 200, 120);
 
-		
 		ListSelectionListener ouvinteJLFornecedores = new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()) {
 					int indiceSelecionado = jlfornecedores.getSelectedIndex();
-					if (indiceSelecionado>=0) {
-						ArrayList<Fornecedor> fornecedoresSelecionados = new ArrayList<Fornecedor>(jlfornecedores.getSelectedValuesList());
-						for(Fornecedor f: fornecedoresSelecionados) {
-							for(String s: f.getTipoDeServicos()) {
-								if(!servicosDoFornecedor.contains(s)) {
+					if (indiceSelecionado >= 0) {
+						ArrayList<Fornecedor> fornecedoresSelecionados = new ArrayList<Fornecedor>(
+								jlfornecedores.getSelectedValuesList());
+						for (Fornecedor f : fornecedoresSelecionados) {
+							for (String s : f.getTipoDeServicos()) {
+								if (!servicosDoFornecedor.contains(s)) {
 									servicosDoFornecedor.add(s);
 								}
-								
+
 							}
 						}
-						System.out.println("Elemento selecionado: "+servicosDoFornecedor);
+						System.out.println("Elemento selecionado: " + servicosDoFornecedor);
 						jlservicos.repaint();
 					}
-				}else {
+				} else {
 					servicosDoFornecedor = new ArrayList<String>();
 				}
-				
 			}
 		};
 		jlfornecedores.addListSelectionListener(ouvinteJLFornecedores);
-		
-		
+
+		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50, "clique aqui para voltar");
+		btnSeta.addMouseListener(ouvinte);
+		btnSeta.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new TelaListarPacotes("Listagem de pacotes");
+			}
+		});
+
 		btnCadastrar.addActionListener(ouvinteCadastro);
 		// btnCadastrar.addMouseListener(ouvinte);
 		background.add(lblNome);
@@ -147,8 +157,8 @@ public class TelaCadastrarPacotes extends TelaPadrao {
 		background.add(txtpreco);
 		background.add(txtdescricao);
 		background.add(btnCadastrar);
-		
-		
+		background.add(btnSeta);
+
 	}
 
 	private class OuvinteBotaoCadastrarTelaCadastrarPacote implements ActionListener {
@@ -157,16 +167,16 @@ public class TelaCadastrarPacotes extends TelaPadrao {
 		public OuvinteBotaoCadastrarTelaCadastrarPacote(TelaCadastrarPacotes tela) {
 			this.tela = tela;
 		}
+
 		public void actionPerformed(ActionEvent e) {
 			Persistencia persistencia = new Persistencia();
 			CentralDeInformacoes central = persistencia.recuperarCentral("central");
 			String nome = txtNome.getText();
-			 float preco = 0;
+			float preco = 0;
 			String descricao = txtdescricao.getText();
 			ArrayList<String> servicos = new ArrayList<String>(jlservicos.getSelectedValuesList());
 			ArrayList<Fornecedor> fornecedor = new ArrayList<Fornecedor>(jlfornecedores.getSelectedValuesList());
 
-			
 			try {
 				preco = Float.parseFloat(txtpreco.getText());
 				Pacote pacote = new Pacote(nome, fornecedor, servicos, preco, descricao);
@@ -182,7 +192,7 @@ public class TelaCadastrarPacotes extends TelaPadrao {
 			}
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		TelaCadastrarPacotes tela = new TelaCadastrarPacotes("TelaCadastro");
 	}
@@ -231,5 +241,4 @@ public class TelaCadastrarPacotes extends TelaPadrao {
 		return fornecedoresArray;
 	}
 
-	
 }

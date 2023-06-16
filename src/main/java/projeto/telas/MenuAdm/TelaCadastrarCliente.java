@@ -1,5 +1,8 @@
 package projeto.telas.MenuAdm;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -31,6 +34,7 @@ public class TelaCadastrarCliente extends TelaPadrao {
 	private JButton btnCadastrar;
 	private JLabel lblCNPJ;
 	private JLabel lblCPF;
+	private JButton btnSeta;
 
 	public TelaCadastrarCliente(String titulo) {
 		super(titulo);
@@ -62,6 +66,16 @@ public class TelaCadastrarCliente extends TelaPadrao {
 		JLabel lblNome = FabricaJLabel.criarJLabel("Nome", 100, 20, 460, 40, FabricasColors.corLabelBranca, 25);
 		JLabel lblEmail = FabricaJLabel.criarJLabel("Telefone", 100, 100, 460, 40, FabricasColors.corLabelBranca, 25);
 		JLabel lblTelefone = FabricaJLabel.criarJLabel("Email", 100, 180, 460, 40, FabricasColors.corLabelBranca, 25);
+
+		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50, "clique aqui para voltar");
+		btnSeta.addMouseListener(ouvinte);
+		btnSeta.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new TelaMenuADM("Tela menu ");
+			}
+		});
 
 		lblCNPJ = FabricaJLabel.criarJLabel("CNPJ", 100, 280, 460, 40, FabricasColors.corLabelBranca, 20);
 
@@ -116,6 +130,7 @@ public class TelaCadastrarCliente extends TelaPadrao {
 		background.add(txtEmail);
 		background.add(txtTelefone);
 		background.add(btnCadastrar);
+		background.add(btnSeta);
 	}
 
 	public JCheckBox getJcbPessoaFisica() {

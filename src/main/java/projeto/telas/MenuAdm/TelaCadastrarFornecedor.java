@@ -25,6 +25,7 @@ import ultilidades.fabricas.FabricaJLabel;
 import ultilidades.fabricas.FabricaJOptionPane;
 import ultilidades.fabricas.FabricaJText;
 import ultilidades.fabricas.FabricasColors;
+import ultilidades.imagens.Imagens;
 import ultilidades.reporsitorio.CentralDeInformacoes;
 
 public class TelaCadastrarFornecedor extends TelaPadrao {
@@ -45,6 +46,7 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 	private JButton btnAdicionar;
 	private JList<String> jList;
 	private String[] servicosArray;
+	private JButton btnSeta;
 
 	public TelaCadastrarFornecedor(String titulo) {
 		super(titulo);
@@ -140,7 +142,15 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 				FabricasColors.corLabelBranca, "Digite o seu Email aqui", 20);
 		btnAdicionar = FabricaJButton.criarJButton("Adicionar", 135, 420, 75, 30, FabricasColors.corLabelBranca,
 				FabricasColors.CorRoxo, "Clique aqui para adicionar um servico.", 15);
-		
+		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50, "clique aqui para voltar");
+		btnSeta.addMouseListener(ouvinte);
+		btnSeta.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new TelaMenuADM("Tela menu ");
+			}
+		});
 //		adicionando JList na tela
 		servicosDoFornecedor = new ArrayList<String>();
 		ArrayList<String> servicos = central.getServicos();
@@ -174,6 +184,7 @@ public class TelaCadastrarFornecedor extends TelaPadrao {
 		JcbPessoaJuridica.addActionListener(ouvinteCheckBox);
 		JcbPessoaJuridica.addMouseListener(ouvinteBranco);
 
+		background.add(btnSeta);
 		background.add(btnAdicionar);
 		background.add(lblTelefone);
 		background.add(lblEmail);

@@ -1,6 +1,8 @@
- package projeto.telas.MenuAdm;
+package projeto.telas.MenuAdm;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -32,7 +34,7 @@ public class TelaServicosFornecedores extends TelaPadrao {
 	private JButton btnApagar;
 	private JTextField txtServico;
 	private JTable tabelaServicos;
-
+	private JButton btnSeta;
 	private JScrollPane scrol;
 	private DefaultTableModel modelo;
 	private ArrayList<String> servicos;
@@ -68,6 +70,15 @@ public class TelaServicosFornecedores extends TelaPadrao {
 		btnApagar = FabricaJButton.criarJButton("Apagar", 220, 390, 90, 30, FabricasColors.corLabelBranca,
 				FabricasColors.CorRoxo, "clique aqui para apagar o servico", 16);
 
+		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50, "clique aqui para voltar");
+		btnSeta.addMouseListener(ouvinte);
+		btnSeta.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new TelaMenuADM("Tela menu ");
+			}
+		});
 		btnApagar.addActionListener(ouvinteApagar);
 		btnApagar.addMouseListener(ouvinte);
 		btnEditar.addActionListener(ouvinteEditar);
@@ -80,6 +91,7 @@ public class TelaServicosFornecedores extends TelaPadrao {
 		background.add(btnSalvar);
 		background.add(btnEditar);
 		background.add(btnApagar);
+		background.add(btnSeta);
 	}
 
 	private void configTabelaServicos() {
@@ -111,7 +123,7 @@ public class TelaServicosFornecedores extends TelaPadrao {
 		CentralDeInformacoes central = persistencia.recuperarCentral("central");
 
 		servicos = central.getServicos();
-	
+
 		for (String s : servicos) {
 			addLinha(modelo, s);
 		}

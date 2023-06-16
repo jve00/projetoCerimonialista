@@ -4,14 +4,15 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -27,11 +28,13 @@ import projeto.TelaPadrao;
 import projeto.modelos.Cliente;
 import projeto.modelos.Orcamento;
 import projeto.modelos.Pacote;
-import projeto.telas.Orcamentos.TelaCadastrarOrcamento.OuvinteBotaoSalvar;
+import projeto.modelos.enuns.TipoDePagamento;
+import servico.permissao.edit.Editar;
 import ulitilidades.persistencia.Persistencia;
 import ultilidades.fabricas.FabricaJButton;
 import ultilidades.fabricas.FabricaJFormatted;
 import ultilidades.fabricas.FabricaJLabel;
+import ultilidades.fabricas.FabricaJOptionPane;
 import ultilidades.fabricas.FabricaJRadionButton;
 import ultilidades.fabricas.FabricaJText;
 import ultilidades.fabricas.FabricasColors;
@@ -58,6 +61,9 @@ public class TelaEditarDadosDoOrcamento extends TelaPadrao {
 	private JRadioButton rdContrato;
 	private JRadioButton rdCliente;
 	public static Cliente clienteRecuperado;
+	private Persistencia persistencia;
+	private CentralDeInformacoes central;
+	private static int linhaSelecionadaEdit;
 
 	public TelaEditarDadosDoOrcamento(String titulo) {
 		super(titulo);
@@ -91,8 +97,8 @@ public class TelaEditarDadosDoOrcamento extends TelaPadrao {
 	}
 
 	private void popularTabela() {
-		Persistencia persistencia = new Persistencia();
-		CentralDeInformacoes central = persistencia.recuperarCentral("central");
+		persistencia = new Persistencia();
+		central = persistencia.recuperarCentral("central");
 		pacotes = central.getTodosOsPacotes();
 		orcamento = central.getTodosOsOrcamentos();
 
@@ -130,8 +136,8 @@ public class TelaEditarDadosDoOrcamento extends TelaPadrao {
 	}
 
 	public void configTela() {
-		OuvinteBtnSalvar ouvinteSalvar = new OuvinteBtnSalvar(this);
-
+		OuvinteBtnEditarSalvar ouvinteSalvar = new OuvinteBtnEditarSalvar(this);
+		OuvinteBtnEditarSalvar ouvinteEditar = new OuvinteBtnEditarSalvar(this);
 		OuvinteBotaoFundoPreto ouvinte = new OuvinteBotaoFundoPreto();
 
 		JLabel lblTitulo = FabricaJLabel.criarJLabel("Detalhes Do Orcamento.", 180, 10, 460, 40,
@@ -150,7 +156,6 @@ public class TelaEditarDadosDoOrcamento extends TelaPadrao {
 
 		txtOrcamento = FabricaJText.criarJTextField(380, 200, 70, 25, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "valor do orcamento", 16);
-		txtOrcamento.setEditable(false);
 
 		txtEvento = FabricaJText.criarJTextField(200, 100, 347, 25, FabricasColors.corTxtField,
 				FabricasColors.corLabelBranca, "Digite o nome do Evento aqui", 16);
@@ -179,42 +184,9 @@ public class TelaEditarDadosDoOrcamento extends TelaPadrao {
 
 		btnSalvar.addActionListener(ouvinteSalvar);
 		btnSalvar.addMouseListener(ouvinte);
+		btnEditar.addActionListener(ouvinteEditar);
 		btnEditar.addMouseListener(ouvinte);
 
-		btnEditar.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				Object componente = e.getSource();
-				setEnabled(true);
-//				Object componente = e.getSource();
-//				String evento = tela.getTxtEvento().getText();
-//				String locacao = tela.getTxtLocacao().getText();
-//				String tamanho = tela.getTxtTamanho().getText();
-//				String emailSelecionado = (String) TelaListarOrcamentos.getTabelaDeOrcamentos()
-//						.getValueAt(TelaListarOrcamentos.getLinhaselecionada(), 0);
-//				System.out.println(emailSelecionado);
-//				boolean selecionouContrato = tela.getRdCliente().isSelected();
-//				TipoDePagamento opcaoDePagamento = (selecionouContrato ? TipoDePagamento.CLIENTE
-//						: TipoDePagamento.CONTRATO);
-//				ArrayList<Evento> c = central.recuperarEventosCliente(emailSelecionado);
-//				Evento eventoDoclienteAssociado = c.get(TelaListarOrcamentos.getLinhaselecionada());
-//				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-//				getChooser().getDate();
-//				getTxtHora().setText(eventoDoclienteAssociado.getData());
-
-//				int[] linhasSelecionadas = tabelaFornecedores.getSelectedRows();
-//				float soma = 0;
-//				List<Object> valores = new ArrayList<>();
-//				for (int linha : linhasSelecionadas) {
-//					Object valorObj = tabelaFornecedores.getValueAt(linha, 2);
-//					if (valorObj instanceof Float) {
-//						float valor = (float) valorObj;
-//						valores.add(valor);
-//						soma += valor;
-
-			}
-
-		});
 		background.add(lblTitulo);
 		background.add(lblEvento);
 		background.add(lblLocacao);
@@ -235,22 +207,66 @@ public class TelaEditarDadosDoOrcamento extends TelaPadrao {
 		background.add(rdContrato);
 	}
 
-	public class OuvinteBtnSalvar implements ActionListener {
+	public class OuvinteBtnEditarSalvar implements ActionListener {
 
 		private TelaEditarDadosDoOrcamento tela;
 
-		public OuvinteBtnSalvar(TelaEditarDadosDoOrcamento tela) {
+		public OuvinteBtnEditarSalvar(TelaEditarDadosDoOrcamento tela) {
 			this.tela = tela;
-
 		}
 
 		public void actionPerformed(ActionEvent e) {
 			Object componente = e.getSource();
-
+			int linhaSelecionadaEdit = tabelaFornecedores.getSelectedRow();
+			central = persistencia.recuperarCentral("central");
+			String evento = tela.getTxtEvento().getText();
+			String locacao = tela.getTxtLocacao().getText();
+			String tamanho = tela.getTxtTamanho().getText();
+			Date data = tela.getChooser().getDate();
+			String hora = tela.getTxtHora().getText();
+			LocalTime horaConvertida = LocalTime.parse(hora);
+			String emailSelecionado = (String) TelaListarOrcamentos.getTabelaDeOrcamentos()
+					.getValueAt(TelaListarOrcamentos.getLinhaselecionada(), 0);
+			boolean selecionouContrato = tela.getRdCliente().isSelected();
+			Orcamento orcamentoRecuperado = central.recuperarOrcamento(emailSelecionado);
+			TipoDePagamento opcaoDePagamento = (selecionouContrato ? TipoDePagamento.CLIENTE
+					: TipoDePagamento.CONTRATO);
+			int[] linhasSelecionadas = tabelaFornecedores.getSelectedRows();
+			float soma = 0;
+			List<Object> valores = new ArrayList<>();
+			for (int linha : linhasSelecionadas) {
+				Object valorObj = tabelaFornecedores.getValueAt(linha, 2);
+				if (valorObj instanceof Float) {
+					float valor = (float) valorObj;
+					valores.add(valor);
+					soma += valor;
+				}
+			}
+			if (btnEditar == componente) {
+				Editar.ativarComponentesOrcamento(tela, true);
+			} else if (btnSalvar == componente) {
+				Date dataAtual = new Date();
+				if (data != null && data.after(dataAtual)) {
+					if (horaConvertida.isAfter(LocalTime.MIDNIGHT) && horaConvertida.isBefore(LocalTime.of(23, 59))) {
+						orcamentoRecuperado.setEvento(evento);
+						orcamentoRecuperado.setLocacao(locacao);
+						orcamentoRecuperado.setTamanho(tamanho);
+						orcamentoRecuperado.setData(String.valueOf(data));
+						orcamentoRecuperado.setHora(LocalTime.parse(hora));
+						orcamentoRecuperado.setTipoDePagamento(String.valueOf(opcaoDePagamento));
+						orcamentoRecuperado.setPrecoTotal(soma);
+						FabricaJOptionPane.criarMsg("Dados editados com sucesso.");
+						dispose();
+						persistencia.salvarCentral(central, "central");
+					} else {
+						FabricaJOptionPane.criarMsgErro("esse hora e invalida.");
+					}
+				} else if (data == null || data.before(dataAtual)) {
+					FabricaJOptionPane.criarMsgErro("Passe uma data Valida.");
+				}
+			}
 		}
-
 	}
-
 	public static void main(String[] args) {
 		new TelaEditarDadosDoOrcamento("");
 	}
@@ -301,6 +317,10 @@ public class TelaEditarDadosDoOrcamento extends TelaPadrao {
 
 	public void setTxtOrcamento(JTextField txtOrcamento) {
 		this.txtOrcamento = txtOrcamento;
+	}
+
+	public static int getLinhaSelecionadaEdit() {
+		return linhaSelecionadaEdit;
 	}
 
 }

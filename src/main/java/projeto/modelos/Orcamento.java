@@ -1,6 +1,7 @@
 package projeto.modelos;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class Orcamento {
 
@@ -11,6 +12,7 @@ public class Orcamento {
 	private String data;
 	private LocalTime hora;
 	private String tipoDePagamento;
+	private ArrayList<Fornecedor> fornecedoresDoOrcamento;
 	private boolean orcamentoConcluido;
 	private float precoTotal;
 	
@@ -97,6 +99,14 @@ public class Orcamento {
 
 	public void setOrcamentoConcluido(boolean orcamentoConcluido) {
 		this.orcamentoConcluido = orcamentoConcluido;
+	}
+
+	public ArrayList<Fornecedor> getFornecedoresDoOrcamento() {
+		return fornecedoresDoOrcamento;
+	}
+
+	public void setFornecedoresDoOrcamento(ArrayList<Fornecedor> fornecedoresDoOrcamento) {
+		this.fornecedoresDoOrcamento = fornecedoresDoOrcamento;
 	}
 
 }

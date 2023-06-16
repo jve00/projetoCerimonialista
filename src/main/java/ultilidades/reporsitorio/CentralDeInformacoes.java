@@ -27,22 +27,6 @@ public class CentralDeInformacoes {
 	private ArrayList<Reuniao> todasAsReunioes = new ArrayList<Reuniao>();
 	private Administrador administrador;
 
-	@SuppressWarnings("unlikely-arg-type")
-	public ArrayList<Orcamento> recuperarEventosCliente(String email) throws EsseClienteNaoTemEventoException {
-		ArrayList<Orcamento> eventoDoCliente = new ArrayList<Orcamento>();
-		Cliente c = recuperarClientePorEmail(email);
-		if (c == null) {
-			new EsseClienteNaoTemEventoException();
-		} else {
-			System.out.println("entrou");
-			for (Orcamento o : todosOsOrcamentos) {
-				if (o.getEmailDoCliente().equals(c.getEmail())) {
-					eventoDoCliente.add(o);
-				}
-			}
-		}
-		return eventoDoCliente;
-	}
 	public boolean verificarSenha(String senha) {
 		if (getAdministrador().getSenha().equals(senha)) {
 			return true;
@@ -55,6 +39,15 @@ public class CentralDeInformacoes {
 			return true;
 		}
 		return false;
+	}
+
+	public Orcamento recuperarEventosCliente(String c) {
+		for (Orcamento o : todosOsOrcamentos) {
+			if (o.getEmailDoCliente().equals(c)) {
+				return o;
+			}
+		}
+		return null;
 	}
 
 	public boolean adicionarServico(String servico) throws ServicoJaCadastradoException {
@@ -94,7 +87,6 @@ public class CentralDeInformacoes {
 		}
 		return null;
 	}
-
 	public Orcamento recuperarOrcamento(String emailDoCliente) {
 		for (Orcamento o : todosOsOrcamentos) {
 			if (o.getEmailDoCliente().contains(emailDoCliente)) {
@@ -103,7 +95,6 @@ public class CentralDeInformacoes {
 		}
 		return null;
 	}
-
 	@SuppressWarnings("unlikely-arg-type")
 	public boolean adicionarOrcamento(Orcamento o) throws OrcamentoJaCadastradoException {
 		for (Orcamento orcamento : todosOsOrcamentos) {
@@ -114,7 +105,6 @@ public class CentralDeInformacoes {
 		todosOsOrcamentos.add(o);
 		return true;
 	}
-
 	public boolean adicionarFornecedor(Fornecedor fornecedor) throws FornecedorExixtenteException {
 		for (Fornecedor f : todosOsFornecedores) {
 			if (f.equals(recuperarFornecedorPorEmail(fornecedor.getEmail()))) {
@@ -124,7 +114,6 @@ public class CentralDeInformacoes {
 		todosOsFornecedores.add(fornecedor);
 		return true;
 	}
-
 	public boolean adicionarCliente(Cliente cliente) throws ClienteJaExisteException {
 		for (Cliente c : todosOsCliente) {
 			if (c.equals(recuperarClientePorEmail(cliente.getEmail()))) {
@@ -134,7 +123,6 @@ public class CentralDeInformacoes {
 		todosOsCliente.add(cliente);
 		return true;
 	}
-
 	public Cliente recuperarClientePorEmail(String email) {
 		for (Cliente c : todosOsCliente) {
 			if (c.getEmail().equals(email)) {
@@ -143,7 +131,6 @@ public class CentralDeInformacoes {
 		}
 		return null;
 	}
-
 	public Pacote recuperarPacote(String nome) {
 		for (Pacote p : todosOsPacotes) {
 			if (p.getNome().equals(nome)) {
