@@ -27,10 +27,10 @@ public class TelaListarPacotes extends TelaPadrao{
 	private ImagemDeFundo background;
 	private DefaultTableModel modelo;
 	private JScrollPane scrol;
-	private JTable tabelaPacotes;
+	private static JTable tabelaPacotes;
 	private Persistencia persistencia;
 	private CentralDeInformacoes central;
-	private int linhaSelecionada;
+	private static int linhaSelecionada;
 	
 	
 	public TelaListarPacotes(String titulo) {
@@ -101,6 +101,7 @@ public class TelaListarPacotes extends TelaPadrao{
 					linhaSelecionada = tela.getTabelaPacotes().getSelectedRow();
 					String nome = (String)(tela.getTabelaPacotes().getValueAt(linhaSelecionada,0));
 					Pacote pacote = central.recuperarPacote(nome);
+					new TelaDetalhesPacote("Detalhes do Pacote");
 					
 				}				
 			}
@@ -172,23 +173,49 @@ public class TelaListarPacotes extends TelaPadrao{
 		return modelo;
 	}
 
+	public void setModelo(DefaultTableModel modelo) {
+		this.modelo = modelo;
+	}
+
 	public JScrollPane getScrol() {
 		return scrol;
+	}
+
+	public void setScrol(JScrollPane scrol) {
+		this.scrol = scrol;
+	}
+
+	public static JTable getTabelaPacotes() {
+		return tabelaPacotes;
+	}
+
+	public static void setTabelaPacotes(JTable tabelaPacotes) {
+		TelaListarPacotes.tabelaPacotes = tabelaPacotes;
 	}
 
 	public Persistencia getPersistencia() {
 		return persistencia;
 	}
 
+	public void setPersistencia(Persistencia persistencia) {
+		this.persistencia = persistencia;
+	}
+
 	public CentralDeInformacoes getCentral() {
 		return central;
 	}
 
-	public  int getLinhaSelecionada() {
+	public void setCentral(CentralDeInformacoes central) {
+		this.central = central;
+	}
+
+	public static int getLinhaSelecionada() {
 		return linhaSelecionada;
 	}
 
-	public JTable getTabelaPacotes() {
-		return tabelaPacotes;
+	public static void setLinhaSelecionada(int linhaSelecionada) {
+		TelaListarPacotes.linhaSelecionada = linhaSelecionada;
 	}
+
+	
 }
